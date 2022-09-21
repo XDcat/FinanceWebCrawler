@@ -9,12 +9,10 @@ class ExtractInfFromPage:
 
     @staticmethod
     def extract_message_from_article(article_url):
-        """
-        提取文章信息
+        """ 提取文章信息
         :param article_url: 文章的网址
         :return:提取的信息
         """
-
         response = Connector.connectToUrl(article_url)
         data = BeautifulSoup(response.content, "html.parser")
         # 拿到标题
