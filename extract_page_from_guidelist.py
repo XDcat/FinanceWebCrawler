@@ -1,7 +1,4 @@
 from bs4 import BeautifulSoup
-from connector import Connector
-from mylogger import MyLogger
-from bs4 import BeautifulSoup
 
 from connector import Connector
 from mylogger import MyLogger
@@ -30,6 +27,7 @@ class DetectGuideList:
         #查找htm数据的网址
         htm_url = html.find('div', class_="bisobj_document_list").get('data-document_list_url')
         htm_url="https://www.bis.org"+htm_url
+        ml = MyLogger()
         #时间选择模块
         if use_date is True:
             #按照body结构体的参数格式传
@@ -48,7 +46,7 @@ class DetectGuideList:
                 for html_label in article_url_list:
                     href = html_label.find('a').get('href')
                     record.append(pre + href)
-            print(f'共收集了{len(record)}篇文章')
+            ml.writeIntoLog(f"readPagefromList success,url={list_page_url},{len(record)} in all.")
             return record
 
         else:
@@ -62,6 +60,5 @@ class DetectGuideList:
                 for html_label in article_url_list:
                     href = html_label.find('a').get('href')
                     record.append(pre + href)
-            ml=MyLogger()
             ml.writeIntoLog(f"readPagefromList success,url={list_page_url},{len(record)} in all.")
             return record
