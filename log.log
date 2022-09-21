@@ -1,0 +1,44 @@
+2022-09-21 12:19:48,495 - logger - INFO - whathappened?
+2022-09-21 12:21:08,266 - logger - INFO - whathappened?
+2022-09-21 12:21:08,266 - logger - INFO - whathappened?
+2022-09-21 12:21:08,266 - logger - INFO - whathappened?
+2022-09-21 12:37:40,355 - logger - INFO - read and write article information successfully
+2022-09-21 12:38:08,677 - logger - INFO - read and write article information successfully
+2022-09-21 12:40:23,031 - logger - INFO - read and write article information successfully
+2022-09-21 12:40:46,384 - logger - INFO - read and write article information successfully
+2022-09-21 12:40:55,526 - logger - INFO - read and write article information successfully
+2022-09-21 12:41:05,715 - logger - INFO - read and write article information successfully
+2022-09-21 12:45:06,569 - logger - INFO - read and write article information successfully
+2022-09-21 12:45:31,955 - logger - INFO - read and write article information successfully
+2022-09-21 12:46:34,529 - logger - INFO - read and write article information successfully
+2022-09-21 12:47:01,925 - logger - INFO - read and write article information successfully
+2022-09-21 12:49:27,996 - logger - INFO - read and write article information successfully
+2022-09-21 12:49:40,709 - logger - INFO - read and write article information successfully
+2022-09-21 13:00:23,459 - logger - INFO - read and write article information successfully
+2022-09-21 13:04:09,779 - logger - INFO - read and write article information successfully
+2022-09-21 13:07:33,751 - logger - INFO - read and write article information successfully
+2022-09-21 13:08:30,749 - logger - INFO - read and write article information successfully
+2022-09-21 13:10:45,212 - logger - INFO - read and write article information successfully
+2022-09-21 13:11:36,932 - logger - INFO - read and write article information successfully
+2022-09-21 13:12:05,588 - logger - INFO - read and write article information successfully
+2022-09-21 13:16:24,393 - logger - INFO - read and write article information successfully
+2022-09-21 13:18:16,346 - logger - INFO - read and write article information successfully
+2022-09-21 13:18:34,256 - logger - INFO - read and write article information successfully
+2022-09-21 14:13:51,985 - logger - INFO - read and write article information successfully
+2022-09-21 14:15:20,876 - logger - INFO - read and write article information successfully
+2022-09-21 14:15:39,059 - logger - INFO - read and write article information successfully
+2022-09-21 14:18:11,125 - logger - INFO - read and write article information successfully
+2022-09-21 14:27:50,914 - logger - INFO - readPagefromList success,url=https://www.bis.org/wpapers/index.htm?m=1026,50 in all.
+2022-09-21 14:31:05,496 - logger - INFO - readPagefromList success,url=https://www.bis.org/wpapers/index.htm?m=102,50 in all.
+2022-09-21 14:31:28,529 - logger - INFO - readPagefromList success,url=https://www.bis.org/wpapers/index.htm?m=1026,50 in all.
+2022-09-21 14:32:42,782 - logger - INFO - readPagefromList success,url=https://www.bis.org/wpapers/index.htm?m=1026,50 in all.
+2022-09-21 14:32:56,371 - logger - INFO - readPagefromList success,url=https://www.bis.org/wpapers/index.htm?m=1026,50 in all.
+2022-09-21 14:34:10,092 - logger - INFO - readPagefromList success,url=https://www.bis.org/wpapers/index.htm?m=1026,50 in all.
+2022-09-21 14:34:20,654 - logger - INFO - readPagefromList success,url=https://www.bis.org/wpapers/index.htm?m=1026,50 in all.
+2022-09-21 14:34:47,950 - logger - INFO - readPagefromList success,url=https://www.bis.org/wpapers/index.htm?m=1026,50 in all.
+2022-09-21 14:35:02,873 - logger - INFO - readPagefromList success,url=https://www.bis.org/wpapers/index.htm?m=1026,50 in all.
+2022-09-21 14:36:05,884 - logger - INFO - readPagefromList success,url=https://www.bis.org/wpapers/index.htm?m=1026,50 in all.
+2022-09-21 14:37:34,925 - logger - INFO - readPagefromList success,url=https://www.bis.org/wpapers/index.htm?m=1026,50 in all.
+2022-09-21 14:40:29,154 - logger - INFO - readPagefromList success,url=https://www.bis.org/wpapers/index.htm?m=1026,50 in all.
+2022-09-21 14:40:31,454 - logger - INFO - read and write article information successfully
+2022-09-21 14:40:31,454 - logger - INFO - read and write article information successfully
