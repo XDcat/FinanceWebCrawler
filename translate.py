@@ -11,13 +11,13 @@ class Translator:
 
     @staticmethod
     def translate(input_text, appid, key):
-        '''
+        """
         翻译模块，调用百度翻译
         :param input_text: 待翻译的文本
         :param appid: APPID，注册后查看
         :param key: 密钥，注册后在控制台查看
         :return:中文文本
-        '''
+        """
         # id，随机数，密钥
         appid, salt, key = appid, f'{random.randint(1, 1e5)}', key
         # 用于验证的签名
@@ -32,7 +32,8 @@ class Translator:
             "salt": salt,
             "sign": md5.hexdigest()
         }
-        response=Connector.connectToUrl('https://fanyi-api.baidu.com/api/trans/vip/translate',method="post",data=data)
+        response = Connector.connectToUrl('https://fanyi-api.baidu.com/api/trans/vip/translate', method="post",
+                                          data=data)
         text = response.json()  # 返回的为json格式用json接收数据
         translated_text = '\n'.join([text['trans_result'][i]['dst'] for i in range(len(text['trans_result']))])
         return translated_text

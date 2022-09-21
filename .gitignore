@@ -5,4 +5,5 @@ out
 gen
 log
 tmp
+__pycache__
 *.pem
