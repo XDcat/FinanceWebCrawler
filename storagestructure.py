@@ -10,6 +10,7 @@ class ArticleStructure:
         :param author: 作者
         :param keyword: 关键词
         :param attachment: 附件url
+        :param id:生成id
         '''
         self._body=body
         self._publish_date=publish_date
@@ -18,6 +19,14 @@ class ArticleStructure:
         self._author=author
         self._keyword=keyword
         self._attachment=attachment
+        self._id=self._generateID()
+
+    def _generateID(self):
+        '''
+        待定
+        :return:
+        '''
+        pass
 
     def getBody(self):
         '''
