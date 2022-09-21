@@ -1,8 +1,4 @@
 from bs4 import BeautifulSoup
-from storagestructure import ArticleStructure
-from mylogger import MyLogger
-from connector import Connector
-from bs4 import BeautifulSoup
 
 from connector import Connector
 from mylogger import MyLogger
@@ -48,9 +44,3 @@ class ExtractInfFromPage:
         mL=MyLogger()
         mL.writeIntoLog("read and write article information successfully")
         return Saved_data
-
-if __name__=='__main__':
-    url="https://www.bis.org/publ/work1039.htm"
-    eifp=ExtractInfFromPage()
-    data=eifp.extractMessagefromArticle(article_url=url)
-    print(data.describe())

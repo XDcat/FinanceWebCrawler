@@ -20,10 +20,3 @@ class MyLogger:
         :return:
         '''
         self._logger.info(information)
-
-
-if __name__=='__main__':
-    mylogger=MyLogger()
-    mylogger.writeIntoLog('whathappened?')
-    mylogger.writeIntoLog('whathappened?')
-    mylogger.writeIntoLog('whathappened?')
