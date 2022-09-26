@@ -1,15 +1,15 @@
 # -*- coding:utf-8 -*-
-'''
+"""
 __author__ = 'XD'
 __mtime__ = 2022/9/21
 __project__ = FinanceWebCrawler
 Fix the Problem, Not the Blame.
-'''
+"""
 import requests
 from bs4 import BeautifulSoup
-from common.base_runner import BaseRunner
+from crawler.base_runner import BaseRunner
 from common.Logger import logger
-from common.article import Article
+from model.article import Article
 
 
 class BISWorkingPaperRunner(BaseRunner):
