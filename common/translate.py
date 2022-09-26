@@ -6,16 +6,15 @@ import requests
 
 class Translator:
 
-
     @staticmethod
     def translate(input_text, appid, key):
-        '''
+        """
         翻译模块，调用百度翻译
         :param input_text: 待翻译的文本
         :param appid: APPID，注册后查看
         :param key: 密钥，注册后在控制台查看
         :return:中文文本
-        '''
+        """
         # id，随机数，密钥
         appid, salt, key = appid, f'{random.randint(1, 1e5)}', key
         # 用于验证的签名

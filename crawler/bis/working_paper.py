@@ -1,15 +1,8 @@
-# -*- coding:utf-8 -*-
-"""
-__author__ = 'XD'
-__mtime__ = 2022/9/21
-__project__ = FinanceWebCrawler
-Fix the Problem, Not the Blame.
-"""
 import requests
 from bs4 import BeautifulSoup
-from crawler.base_runner import BaseRunner
-from common.Logger import logger
-from model.article import Article
+from FinanceWebCrawler.crawler.base_runner import BaseRunner
+from FinanceWebCrawler.common.Logger import logger
+from FinanceWebCrawler.model.article import Article
 
 
 class BISWorkingPaperRunner(BaseRunner):

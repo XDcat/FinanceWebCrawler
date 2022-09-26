@@ -1,7 +1,7 @@
 from abc import abstractmethod
 import requests
 
-from common import Logger
+from FinanceWebCrawler.common.Logger import logger
 
 from loguru import logger
 
