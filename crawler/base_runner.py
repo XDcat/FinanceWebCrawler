@@ -8,24 +8,29 @@ Fix the Problem, Not the Blame.
 from abc import abstractmethod
 from common.Logger import logger
 import time
-
+import requests
 
 class BaseRunner:
     def __init__(self, name, home_url):
         self.name = name
         self.home_url = home_url
+        self.session = requests.Session()
 
     @abstractmethod
-    def get_page_numer(self):
+    def get_page_num(self):
         pass
 
     @abstractmethod
-    def get_one_list(self):
+    def get_one_list(self, page:int):
         pass
 
-    @abstractmethod
-    def get_list(self):
-        pass
+    def get_list(self, start_from=0):
+        page_num = self.get_page_num()
+        res = []
+        for i in range(start_from, page_num + start_from):
+            res.append(self.get_page_num(i))
+        return res
+
 
     @abstractmethod
     def parse_page(self, url):
