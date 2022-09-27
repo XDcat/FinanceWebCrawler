@@ -1,6 +1,6 @@
 from unittest import TestCase
-from FinanceWebCrawler.crawler.bis.working_paper import BISWorkingPaperRunner
-from FinanceWebCrawler.common.Logger import logger
+from crawler.bis.working_paper import BISWorkingPaperRunner
+from common.Logger import logger
 
 
 class TestWorkingPaper(TestCase):
