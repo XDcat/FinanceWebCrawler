@@ -1,13 +1,10 @@
 import hashlib  # 用来计算MD5码
 import random
 
-from connector import Connector
+import requests
 
 
 class Translator:
-
-    def __init__(self):
-        pass
 
     @staticmethod
     def translate(input_text, appid, key):
@@ -32,8 +29,10 @@ class Translator:
             "salt": salt,
             "sign": md5.hexdigest()
         }
-        response = Connector.connectToUrl('https://fanyi-api.baidu.com/api/trans/vip/translate', method="post",
-                                          data=data)
+        # 建立查询
+        session = requests.session()
+        response = session.post('https://fanyi-api.baidu.com/api/trans/vip/translate', data=data)
+        response.encoding = 'utf-8'
         text = response.json()  # 返回的为json格式用json接收数据
         translated_text = '\n'.join([text['trans_result'][i]['dst'] for i in range(len(text['trans_result']))])
         return translated_text

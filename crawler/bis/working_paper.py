@@ -1,17 +1,8 @@
-# -*- coding:utf-8 -*-
-'''
-__author__ = 'XD'
-__mtime__ = 2022/9/21
-__project__ = FinanceWebCrawler
-Fix the Problem, Not the Blame.
-'''
 import requests
 from bs4 import BeautifulSoup
-
-from connector import Connector
-from crawler.base_runner import BaseRunner
-from common.Logger import logger
-from model.article import Article
+from FinanceWebCrawler.crawler.base_runner import BaseRunner
+from FinanceWebCrawler.common.Logger import logger
+from FinanceWebCrawler.model.article import Article
 
 
 class BISWorkingPaperRunner(BaseRunner):
@@ -20,15 +11,26 @@ class BISWorkingPaperRunner(BaseRunner):
             "BIS working paper",
             "https://www.bis.org/wpapers/index.htm?m=1026"
         )
+
     def get_page_num(self):
         """
-        获取导航页最多页数
-        :param url: 导航页网址
-        :return:
+        从List页面寻找到Page页面的URL,直接找htm,针对BIS网站
+        :param url:导航页面的Url
+        :return: 所有Page页面的url
         """
         # 建立查询
-        session = requests.session()
-        response1 = session.get(self.home_url)
+        response = self.session.get(self.home_url)
+        response.encoding = 'utf-8'
+
+        html = BeautifulSoup(response.content, "html.parser")
+        # 查找htm数据的网址
+        htm_url = html.find('div', class_="bisobj_document_list").get('data-document_list_url')
+        htm_url = "https://www.bis.org" + htm_url
+
+        # 获取导航页最多页数
+
+        # 建立查询
+        response1 = self.session.get(htm_url)
         response1.encoding = 'utf-8'
         # 查找页码
         first_page_html = BeautifulSoup(response1.content, "html.parser")
@@ -38,27 +40,51 @@ class BISWorkingPaperRunner(BaseRunner):
         logger.info("complete max pages num search,outcome is {}", int(lst[2]))
         return int(lst[2])
 
-    def get_one_list(self, page):
-        # TODO: 获取单页的 url list
-        # page: 页码
-        pass
+    def get_one_list(self, page_num):
+        """
+        从List页面寻找到Page页面的URL,直接找htm,针对BIS网站
+        :param page_num:导航页面的Url
+        :return: 所有Page页面的url
+        """
+        # 建立查询
+        response = self.session.get(self.home_url)
 
+        html = BeautifulSoup(response.content, "html.parser")
+        # 查找htm数据的网址
+        htm_url = html.find('div', class_="bisobj_document_list").get('data-document_list_url')
+        htm_url = "https://www.bis.org" + htm_url
+
+        pagenums = self.get_page_num()
+
+        urls = []
+        logger.info(f"reading page{page_num} now,totally {pagenums} in all.")
+
+        response1 = self.session.get(htm_url, params={"page": page_num})
+        response1.encoding = 'utf-8'
+        article_list = BeautifulSoup(response1.content, "html.parser")
+        article_url_list = article_list.find_all("div", class_='title')
+        # 构建指向page的网址
+        pre = 'https://www.bis.org'
+        for html_label in article_url_list:
+            href = html_label.find('a').get('href')
+            urls.append(pre + href)
+        logger.info(f"get urls successfully,url={self.home_url}, get {len(urls)} urls in all.")
+        return urls
 
     def parse_page(self, url):
         """
         提取文章信息
-        :param article_url: 文章的网址
+        :param url: 文章的网址
         :return:提取的信息
         """
         # 建立查询
-        session = requests.session()
-        response = session.get(url)
+        response = self.session.get(url)
         response.encoding = 'utf-8'
         data = BeautifulSoup(response.content, "html.parser")
         # 拿到标题
-        title = data.find("title")
+        title = data.find("title").text
         # 拿到时间
-        publish_date = data.find("div", class_="date")
+        publish_date = data.find("div", class_="date").text
 
         # 拿到正文html源码
         body = data.find("div", id="cmsContent")
