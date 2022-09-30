@@ -34,7 +34,7 @@ class FEDSWorkingPaperRunner(BaseRunner):
         # 嵌套拿取网址
         # pagenums = self.get_page_num()
 
-        logger.info(f"reading articels of {year} now,totally {1996}~{datetime.datetime.now().year} in all.")
+        logger.info(f"reading urls of {year} now,totally {1996}~{datetime.datetime.now().year} in all.")
 
         guide_url=f"https://www.federalreserve.gov/econres/feds/{year}.htm"
 
@@ -43,34 +43,21 @@ class FEDSWorkingPaperRunner(BaseRunner):
         html = BeautifulSoup(response.content, "html.parser")
 
         # 查找htm数据的网址
-        htm_url = html.find('div', class_="bisobj_document_list").get('data-document_list_url')
+        htm_urls = html.select("div div h5 a")
 
         pagenums = self.get_page_num()
+        urls=[]
 
-        urls = []
-        logger.info(f"reading page of year {year} now,totally {pagenums} in all.")
-
-        response1.encoding = 'utf-8'
-        article_list = BeautifulSoup(response1.content, "html.parser")
-        article_url_list = article_list.find_all("div", class_='title')
         # 构建指向page的网址
-        pre = 'https://www.bis.org'
-        for html_label in article_url_list:
-            href = html_label.find('a').get('href')
+        pre = 'https://www.federalreserve.gov'
+        for html_label in htm_urls:
+            href = html_label.get('href')
             urls.append(pre + href)
-        logger.info(f"get urls successfully,url={self.home_url}, get {len(urls)} urls in all.")
-        return urls
-
-
-        # 构建指向page的网址
-        return [htm_url]
+        logger.info(f"get urls from {guide_url} successfully, get {len(urls)-1} urls in all.")
+        # 第一个是原网址
+        return urls[1:]
 
     def parse_page(self, url):
-        """
-        提取文章信息
-        :param url: 文章的网址
-        :return:提取的信息
-        """
         """
         提取文章信息
         :param article_url: 文章的网址
@@ -80,47 +67,53 @@ class FEDSWorkingPaperRunner(BaseRunner):
         response = self.session.get(url)
         response.encoding = 'utf-8'
         data = BeautifulSoup(response.content, "html.parser")
-        # 这个page集合了一整年的文章，但是html结构规整，分成两块
-        part1 = data.find("dt")
-        part2 = part1.next_sibling
-        pagenums = (len(list(part1.next_siblings)) + 1) // 2
-        logger.info(f"reading {url} now,get {pagenums} articles in all.")
-        count = 1
-        while count <= pagenums:
-            logger.info(f"reading number {count} article now,have {pagenums} articles in all!")
-            # 获取出版日期
-            publish_date = part1.text
-            # 拿到标题
-            title = part2.select('div[class=title]')[0].text
-            # 拿到附件
-            attachment_url = "https://www.ecb.europa.eu/" + part2.select('div[class=title]')[0].find("a").get("href")
-            # 拿到作者
-            authors = part2.find("div", class_="authors").text
-            # 拿到正文html
-            body = part2.find("div", class_="content-box")
-            # keywords网站中并没有，需要到attachment中的pdf查看
-            keywords = None
-            # url就是某年份的页面
-            art_url = url
-            # 存储到结构体
-            saved_data = Article(publish_date, body, title, art_url, authors, keywords, attachment_url)
-            # todo 保存到数据库，发现重复的就可以停止函数
-            # logger.info(saved_data.display())
-            # 更新part1,part2
-            part1 = part2.next_sibling
-            if part1 is None:
-                break
-            part2 = part1.next_sibling
-            if part2 is None:
-                break
-            count += 1
-            logger.info("get  article information successfully")
+        # 拿到标题
+        title = data.find('div', id="page-title")
+        if title is not None:
+            title=title.text.strip()
+        # 拿到正文html源码
+        html_data_part = data.select("div[class=row] div[class='col-lg-8 col-md-8 col-sm-12 col-xs-12'] p")
+
+        body=html_data_part[3]
+        # 有文章没有Summary，直接空着了
+        if len(body.text)<20:
+            body=None
+
+
+        # 拿到url
+        art_url = url
+
+        #作者
+        authors=html_data_part[1].text.strip()
+
+        # 日期的class标签都是pub-desc hide
+        publish_date =html_data_part[0].text.strip()
+
+        # 拿到keywords,该网站并没有
+        keywords = None
+
+        # 附件
+        pre="https://www.federalreserve.gov"
+        for i in range(3,len(html_data_part)):
+            if html_data_part is not None:
+                textt=html_data_part[i].text
+                if "PDF" in textt:
+                    attachment_url = html_data_part[i].find("a")
+
+        if attachment_url:
+            attachment_url=pre+attachment_url.get("href")
+
+        # 存储到结构体
+        saved_data = Article(publish_date, body, title, art_url, authors, keywords, attachment_url)
+        logger.info(saved_data.display())
+        # 中文文本
+        # ch_text = saved_data.get_ch_text
+        logger.info("get temp article information successfully")
         return saved_data
 
-    def get_list(self, start_from=1999):
+    def get_list(self, start_from=1996):
         total_page_num = self.get_page_num()
         res = []
         for i in range(start_from, start_from+total_page_num ):
             res.extend(self.get_one_list(i))
         return res
-
