@@ -1,11 +1,11 @@
 from unittest import TestCase
-from crawler.imf.working_paper import IMFWorkingPaperRunner
+from crawler.ecb.working_paper import ECBWorkingPaperRunner
 from common.Logger import logger
 
 
 class TestWorkingPaper(TestCase):
     def setUp(self) -> None:
-        self.runner = IMFWorkingPaperRunner()
+        self.runner = ECBWorkingPaperRunner()
 
     def test_run(self):
         res = self.runner.run()
