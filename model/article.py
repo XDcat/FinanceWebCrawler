@@ -1,4 +1,4 @@
-from FinanceWebCrawler.common.translate import Translator
+from common.translate import Translator
 
 
 class Article:

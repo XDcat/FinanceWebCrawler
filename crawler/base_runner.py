@@ -1,9 +1,8 @@
 from abc import abstractmethod
 import requests
 
-from FinanceWebCrawler.common.Logger import logger
+from common.Logger import logger
 
-from loguru import logger
 
 
 class BaseRunner:
