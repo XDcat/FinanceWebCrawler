@@ -1,8 +1,8 @@
 import requests
 from bs4 import BeautifulSoup
-from FinanceWebCrawler.crawler.base_runner import BaseRunner
-from FinanceWebCrawler.common.Logger import logger
-from FinanceWebCrawler.model.article import Article
+from crawler.base_runner import BaseRunner
+from common.Logger import logger
+from model.article import Article
 
 
 class BISWorkingPaperRunner(BaseRunner):

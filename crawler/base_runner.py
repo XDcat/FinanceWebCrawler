@@ -1,9 +1,8 @@
 from abc import abstractmethod
 import requests
 
-from FinanceWebCrawler.common.Logger import logger
+from common.Logger import logger
 
-from loguru import logger
 
 
 class BaseRunner:
@@ -38,26 +37,28 @@ class BaseRunner:
         """
         pass
 
-    def get_list(self, start_from=1):
-        total_page_num = self.get_page_num()
+    def get_list(self, start_from=1,end_at=None):
+        if end_at is None:
+            end_at=self.get_page_num()+1
+
         res = []
-        for i in range(start_from, total_page_num + 1):
+        for i in range(start_from,end_at):
             res.extend(self.get_one_list(i))
         return res
 
-    def run(self):
+    def run(self,start_from=1,end_at=None,file_name="output.txt"):
         """
         把上面两个函数跑通
         :return:
         """
         logger.info("开始爬取 {}: {}", self.name, self.home_url)
 
-        urls = self.get_list()
+        urls = self.get_list(start_from=start_from,end_at=end_at)
         logger.info("获取列表 {}", len(urls))
 
         articles = []
         n_articles = len(urls)
-        f = open("output.txt", "a", encoding="utf-8")
+        f = open(file_name, "a", encoding="utf-8")
         for i, url in enumerate(urls):
             logger.info("({}/{}) 爬取文章: {}", i + 1, n_articles, url)
             article = self.parse_page(url)
