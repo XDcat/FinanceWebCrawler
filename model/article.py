@@ -16,3 +16,14 @@ class Article(BaseModel):
     class Meta:
         # 表名
         table_name = 'Article'
+
+    @property
+    def ch_text(self):
+        """
+        property属性构造
+        :param html_code: 正文部分的html源码
+        :param appid: 翻译API账号
+        :param key: 翻译API密码
+        :return: 中文文本
+        """
+        return Translator.translate(self.body, appid='20220914001342952', key='Q_SNAXetAkmZq2yaV4o_')

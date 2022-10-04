@@ -1,6 +1,7 @@
 from model.article import Article
 from utils import ormutils
 
+from common.Logger import logger
 class TestArticle:
     def test_article(self):
         ormutils.create_table(Article)
@@ -13,3 +14,6 @@ class TestArticle:
             attachment="https://www.baidu.com"
         )
         article.save()
+        logger.info(article.ch_text)
+        
+        
