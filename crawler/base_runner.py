@@ -2,7 +2,7 @@ from abc import abstractmethod
 import requests
 
 from common.Logger import logger
-
+from model.article import Article
 
 
 class BaseRunner:
@@ -58,17 +58,10 @@ class BaseRunner:
 
         articles = []
         n_articles = len(urls)
-        f = open(file_name, "a", encoding="utf-8")
         for i, url in enumerate(urls):
             logger.info("({}/{}) 爬取文章: {}", i + 1, n_articles, url)
             article = self.parse_page(url)
             articles.append(article)
-            f.write("-" * 100)
-            f.write("\n\n\n")
-            f.write(article.__str__())
-            f.write("\n\n\n")
-            f.write("-" * 100)
-        f.close()
-        # TODO: save article
+            Article.save(article)
 
         return articles

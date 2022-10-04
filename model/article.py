@@ -27,3 +27,16 @@ class Article(BaseModel):
         :return: 中文文本
         """
         return Translator.translate(self.body, appid='20220914001342952', key='Q_SNAXetAkmZq2yaV4o_')
+
+    def display(self):
+        """
+        展示所有信息
+        :return:
+        """
+        name = ["body", 'publishdata', 'title', 'url', 'author', 'keyword', 'attachment']
+        inform = [self.body, self.publish_date, self.title, self.url, self.author, self.keyword, self.attachment]
+        return dict(zip(name, inform))
+
+    def __str__(self):
+        res = str(self.display())
+        return res
