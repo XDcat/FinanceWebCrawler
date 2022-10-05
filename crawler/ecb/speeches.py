@@ -3,13 +3,15 @@ import datetime
 from bs4 import BeautifulSoup
 from common.Logger import *
 from model.article import Article
+from common.timetransformer import TimeTransformer
 
 
 class ECBSpeechesRunner(BaseRunner):
     def __init__(self):
         super(ECBSpeechesRunner, self).__init__(
-            "ECB speeches",
-            "https://www.ecb.europa.eu/press/key/speaker/pres/html/index.en.html"
+            website="ECB",
+            type="speech",
+            home_url="https://www.ecb.europa.eu/press/key/speaker/pres/html/index.en.html"
         )
 
     def get_page_num(self):
@@ -68,12 +70,16 @@ class ECBSpeechesRunner(BaseRunner):
 
         # 拿到标题
         title = data.find("title").text
-        # 拿到时间
-        publish_date = data.select("meta[name='citation_online_date']")
-        if len(publish_date) > 0:
-            publish_date = publish_date[0].get("content")
+
+        pubdata = data.find(class_="ecb-publicationDate")
+        if len(pubdata) > 0:
+            # 拿到时间
+            pubdata = pubdata.text.split(",")
+            publish_date = pubdata[-1].strip()
+
+            publish_date = TimeTransformer.strtimeformat(publish_date, "%d %B %Y")
         else:
-            publish_date = None
+            pubdata = None
 
         # 拿到正文html源码
         body = data.select("main div[class=section]")
@@ -84,7 +90,7 @@ class ECBSpeechesRunner(BaseRunner):
         art_url = url
 
         # 拿到作者
-        authors = data.select("meta[name=author]")[0].get("content")
+        authors = ",".join(pubdata[:-1]).strip()
 
         # 拿到keywords
         keywords = None
@@ -99,9 +105,18 @@ class ECBSpeechesRunner(BaseRunner):
             attachment_url = None
 
         # 存储到结构体
-        saved_data = Article(publish_date, body, title, art_url, authors, keywords, attachment_url)
-        # 中文文本
-        # ch_text = saved_data.get_ch_text
-        logger.info(saved_data.display())
+        saved_data = Article.create(
+            website=self.website,
+            type=self.type,
+            publish_date=publish_date,
+            body=body,
+            title=title,
+            url=art_url,
+            author=authors,
+            keyword=keywords,
+            attachment=attachment_url
+        )
+
+        # logger.info(saved_data.display())
         logger.info("get temp article information successfully")
         return saved_data
