@@ -8,5 +8,5 @@ class TestWorkingPaper(TestCase):
         self.runner = FEDSpeechesRunner()
 
     def test_run(self):
-        res = self.runner.run(file_name="output_speech.txt")
+        res = self.runner.run(end_at=5)
         logger.info(res)
