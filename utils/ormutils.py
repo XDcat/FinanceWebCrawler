@@ -8,3 +8,4 @@ def create_table(table):
 def drop_table(table):
     if table.table_exists():
         table.drop_table()
+

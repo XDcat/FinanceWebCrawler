@@ -4,14 +4,16 @@ from .base_model import BaseModel
 
 
 class Article(BaseModel):
+    website = CharField(max_length=10)
+    type = CharField(max_length=20)
     id = IntegerField(primary_key=True)
-    body = CharField()
-    publish_date = CharField(max_length=20)
+    body = CharField(null=True)
+    publish_date = CharField(max_length=20, null=True)
     title = CharField(max_length=50)
     url = CharField(max_length=100)
-    author = CharField(max_length=30)
-    keyword = CharField(max_length=30)
-    attachment = CharField(max_length=100)
+    author = CharField(max_length=30, null=True)
+    keyword = CharField(max_length=30, null=True)
+    attachment = CharField(max_length=100, null=True)
 
     class Meta:
         # 表名
@@ -40,3 +42,4 @@ class Article(BaseModel):
     def __str__(self):
         res = str(self.display())
         return res
+
