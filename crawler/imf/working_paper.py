@@ -12,7 +12,7 @@ class IMFWorkingPaperRunner(BaseRunner):
     def __init__(self):
         super(IMFWorkingPaperRunner, self).__init__(
             website="IMF",
-            type="working_paper",
+            kind="working_paper",
             home_url="https://www.imf.org/en/publications/search?when=After&series=IMF%20Working%20Papers"
         )
 
@@ -123,7 +123,7 @@ class IMFWorkingPaperRunner(BaseRunner):
         # 存储到结构体
         saved_data = Article.create(
             website=self.website,
-            type=self.type,
+            kind=self.kind,
             publish_date=publish_date,
             body=body,
             title=title,
@@ -142,7 +142,7 @@ class IMFWorkingPaperRunner(BaseRunner):
         :return:
         """
         create_table(Article)
-        logger.info("开始爬取 {}: {}", self.website + self.type, self.home_url)
+        logger.info("开始爬取 {}: {}", self.website + self.kind, self.home_url)
 
         urls = self.get_list(start_from=start_from, end_at=end_at)
         logger.info("获取列表 {}", len(urls))

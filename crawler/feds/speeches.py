@@ -11,7 +11,7 @@ class FEDSpeechesRunner(BaseRunner):
     def __init__(self):
         super(FEDSpeechesRunner, self).__init__(
             website="FED",
-            type="speech",
+            kind="speech",
             home_url="https://www.federalreserve.gov/newsevents/speeches.htm"
         )
 
@@ -98,7 +98,7 @@ class FEDSpeechesRunner(BaseRunner):
         # 存储到结构体
         saved_data = Article.create(
             website=self.website,
-            type=self.type,
+            kind=self.kind,
             publish_date=publish_date,
             body=body,
             title=title,

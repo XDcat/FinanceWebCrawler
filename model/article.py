@@ -4,9 +4,9 @@ from .base_model import BaseModel
 
 
 class Article(BaseModel):
+    aid = IntegerField(primary_key=True)
     website = CharField(max_length=10)
-    type = CharField(max_length=20)
-    id = IntegerField(primary_key=True)
+    kind = CharField(max_length=20)
     body = CharField(null=True)
     publish_date = CharField(max_length=20, null=True)
     title = CharField(max_length=50)

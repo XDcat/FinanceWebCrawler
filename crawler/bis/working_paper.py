@@ -10,7 +10,7 @@ class BISWorkingPaperRunner(BaseRunner):
     def __init__(self):
         super(BISWorkingPaperRunner, self).__init__(
             website="BIS",
-            type="working_paper",
+            kind="working_paper",
             home_url="https://www.bis.org/wpapers/index.htm?m=1026"
         )
 
@@ -121,7 +121,7 @@ class BISWorkingPaperRunner(BaseRunner):
         # 存储到结构体
         saved_data = Article.create(
             website=self.website,
-            type=self.type,
+            kind=self.kind,
             publish_date=publish_date,
             body=body,
             title=title,

@@ -9,7 +9,7 @@ class NEBRWorkingPaperRunner(BaseRunner):
     def __init__(self):
         super(NEBRWorkingPaperRunner, self).__init__(
             website="NEBR",
-            type="working_paper",
+            kind="working_paper",
             home_url="https://www.nber.org/papers?page=1&perPage=50&sortBy=public_date"
         )
 
@@ -104,7 +104,7 @@ class NEBRWorkingPaperRunner(BaseRunner):
         # 存储到结构体
         saved_data = Article.create(
             website=self.website,
-            type=self.type,
+            kind=self.kind,
             publish_date=publish_date,
             body=body,
             title=title,

@@ -11,7 +11,7 @@ class ECBWorkingPaperRunner(BaseRunner):
     def __init__(self):
         super(ECBWorkingPaperRunner, self).__init__(
             website="ECB",
-            type="working_paper",
+            kind="working_paper",
             home_url="https://www.ecb.europa.eu/pub/research/working-papers/html/index.en.html"
         )
 
@@ -83,7 +83,7 @@ class ECBWorkingPaperRunner(BaseRunner):
             # 存储到结构体
             saved_data = Article.create(
                 website=self.website,
-                type=self.type,
+                type=self.kind,
                 publish_date=publish_date,
                 body=body,
                 title=title,
@@ -118,7 +118,7 @@ class ECBWorkingPaperRunner(BaseRunner):
         :return:
         """
         create_table(Article)
-        logger.info("开始爬取 {}: {}", self.website + self.type, self.home_url)
+        logger.info("开始爬取 {}: {}", self.website + self.kind, self.home_url)
 
         urls = self.get_list(start_from=start_from, end_at=end_at)
         logger.info("获取列表 {}", len(urls))

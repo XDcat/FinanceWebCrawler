@@ -10,7 +10,7 @@ class BISSpeechesRunner(BaseRunner):
     def __init__(self):
         super(BISSpeechesRunner, self).__init__(
             website="BIS",
-            type="speech",
+            kind="speech",
             home_url="https://www.bis.org/mgmtspeeches/index.htm?m=1039"
         )
 
@@ -122,7 +122,7 @@ class BISSpeechesRunner(BaseRunner):
         # 存储到结构体
         saved_data = Article.create(
             website=self.website,
-            type=self.type,
+            kind=self.kind,
             publish_date=publish_date,
             body=body,
             title=title,

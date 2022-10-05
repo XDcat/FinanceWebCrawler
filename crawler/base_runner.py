@@ -8,9 +8,9 @@ from utils.ormutils import create_table
 
 class BaseRunner:
 
-    def __init__(self, website, type, home_url):
+    def __init__(self, website, kind, home_url):
         self.website = website
-        self.type = type
+        self.kind = kind
         self.home_url = home_url
         self.session = requests.Session()
 
@@ -54,7 +54,7 @@ class BaseRunner:
         :return:
         """
         create_table(Article)
-        logger.info("开始爬取 {}: {}", self.website + self.type, self.home_url)
+        logger.info("开始爬取 {}: {}", self.website + self.kind, self.home_url)
 
         urls = self.get_list(start_from=start_from, end_at=end_at)
         logger.info("获取列表 {}", len(urls))

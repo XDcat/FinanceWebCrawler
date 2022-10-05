@@ -10,7 +10,7 @@ class ECBSpeechesRunner(BaseRunner):
     def __init__(self):
         super(ECBSpeechesRunner, self).__init__(
             website="ECB",
-            type="speech",
+            kind="speech",
             home_url="https://www.ecb.europa.eu/press/key/speaker/pres/html/index.en.html"
         )
 
@@ -107,7 +107,7 @@ class ECBSpeechesRunner(BaseRunner):
         # 存储到结构体
         saved_data = Article.create(
             website=self.website,
-            type=self.type,
+            kind=self.kind,
             publish_date=publish_date,
             body=body,
             title=title,
