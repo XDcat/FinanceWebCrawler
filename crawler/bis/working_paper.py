@@ -3,13 +3,15 @@ from bs4 import BeautifulSoup
 from crawler.base_runner import BaseRunner
 from common.Logger import logger
 from model.article import Article
+from common.timetransformer import TimeTransformer
 
 
 class BISWorkingPaperRunner(BaseRunner):
     def __init__(self):
         super(BISWorkingPaperRunner, self).__init__(
-            "BIS working paper",
-            "https://www.bis.org/wpapers/index.htm?m=1026"
+            website="BIS",
+            type="working_paper",
+            home_url="https://www.bis.org/wpapers/index.htm?m=1026"
         )
 
     def get_page_num(self):
@@ -85,6 +87,7 @@ class BISWorkingPaperRunner(BaseRunner):
         title = data.find("title").text
         # 拿到时间
         publish_date = data.find("div", class_="date").text
+        publish_date = TimeTransformer.strtimeformat(publish_date, "%d %B %Y")
 
         # 拿到正文html源码
         body = data.find("div", id="cmsContent")
@@ -116,8 +119,16 @@ class BISWorkingPaperRunner(BaseRunner):
         # 合并
         attachment_url = "https://www.bis.org" + attachment_url
         # 存储到结构体
-        saved_data = Article(publish_date, body, title, art_url, authors, keywords, attachment_url)
-        # 中文文本
-        # ch_text = saved_data.get_ch_text
+        saved_data = Article.create(
+            website=self.website,
+            type=self.type,
+            publish_date=publish_date,
+            body=body,
+            title=title,
+            url=url,
+            author=authors,
+            keyword=keywords,
+            attachment=attachment_url
+        )
         logger.info("get temp article information successfully")
         return saved_data

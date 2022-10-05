@@ -3,13 +3,15 @@ from bs4 import BeautifulSoup
 from crawler.base_runner import BaseRunner
 from common.Logger import logger
 from model.article import Article
+from common.timetransformer import TimeTransformer
 
 
 class BISSpeechesRunner(BaseRunner):
     def __init__(self):
         super(BISSpeechesRunner, self).__init__(
-            "BIS speeches",
-            "https://www.bis.org/mgmtspeeches/index.htm?m=1039"
+            website="BIS",
+            type="speech",
+            home_url="https://www.bis.org/mgmtspeeches/index.htm?m=1039"
         )
 
     def get_page_num(self):
@@ -84,6 +86,7 @@ class BISSpeechesRunner(BaseRunner):
         title = data.find("title").text
         # 拿到时间
         publish_date = data.find("div", class_="date").text
+        publish_date = TimeTransformer.strtimeformat(publish_date, "%d %B %Y")
 
         # 拿到正文html源码
         body = data.find("div", id="cmsContent")
@@ -109,7 +112,6 @@ class BISSpeechesRunner(BaseRunner):
 
         # 拿到附件
         attachment_url = data.select("div[class=pdftxt] div[class=pdftitle] a")
-        print(attachment_url)
         if len(attachment_url) > 0:
             attachment_url = attachment_url[0].get("href")
             # 合并
@@ -118,9 +120,17 @@ class BISSpeechesRunner(BaseRunner):
             attachment_url = None
 
         # 存储到结构体
-        saved_data = Article(publish_date, body, title, art_url, authors, keywords, attachment_url)
-        # 中文文本
-        # ch_text = saved_data.get_ch_text
-        logger.info(saved_data.display())
+        saved_data = Article.create(
+            website=self.website,
+            type=self.type,
+            publish_date=publish_date,
+            body=body,
+            title=title,
+            url=url,
+            author=authors,
+            keyword=keywords,
+            attachment=attachment_url
+        )
+        # logger.info(saved_data.display())
         logger.info("get temp article information successfully")
         return saved_data
