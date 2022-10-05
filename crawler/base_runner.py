@@ -41,7 +41,7 @@ class BaseRunner:
 
     def get_list(self, start_from=1, end_at=None):
         if end_at is None:
-            end_at = self.get_page_num() + 1
+            end_at = self.get_page_num() + start_from
 
         res = []
         for i in range(start_from, end_at):
