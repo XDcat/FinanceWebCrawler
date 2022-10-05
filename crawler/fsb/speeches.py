@@ -3,13 +3,16 @@ from bs4 import BeautifulSoup
 from crawler.base_runner import BaseRunner
 from common.Logger import logger
 from model.article import Article
+from utils.ormutils import create_table
+from common.timetransformer import TimeTransformer
 
 
 class FSBSpeechesRunner(BaseRunner):
     def __init__(self):
         super(FSBSpeechesRunner, self).__init__(
-            "FSB speeches",
-            "https://www.fsb.org/press/speeches-and-statements/"
+            website="FSB",
+            type="speech",
+            home_url="https://www.fsb.org/press/speeches-and-statements/"
         )
 
     def get_page_num(self):
@@ -69,6 +72,7 @@ class FSBSpeechesRunner(BaseRunner):
             title = art.find("a").text
             # 拿到时间
             publish_date = art.find("span", class_="media-date pull-right").text
+            publish_date = TimeTransformer.strtimeformat(publish_date, "%d %B %Y")
             # 拿到正文html源码
             body = art.find("span", class_="media-excerpt").text.strip()
 
@@ -96,8 +100,41 @@ class FSBSpeechesRunner(BaseRunner):
                     attachment_url = None
 
             # 存储到结构体
-            saved_data = Article(publish_date, body, title, art_url, authors, keywords, attachment_url)
+            saved_data = Article.create(
+                website=self.website,
+                type=self.type,
+                publish_date=publish_date,
+                body=body,
+                title=title,
+                url=art_url,
+                author=authors,
+                keyword=keywords,
+                attachment=attachment_url
+            )
+            saved_data.save()
             logger.info("get temp article information successfully")
-            # 中文文本
-            # ch_text = saved_data.get_ch_text
-            logger.info(saved_data.display())
+            # logger.info(saved_data.display())
+
+    def get_list(self, start_from=1, end_at=None):
+        if end_at is None:
+            end_at = self.get_page_num() + start_from
+        res = []
+        for i in range(start_from, end_at):
+            res.extend(self.get_one_list(i))
+        return res
+
+    def run(self, start_from=1, end_at=None):
+        """
+        把上面两个函数跑通
+        :return:
+        """
+        create_table(Article)
+        logger.info("开始爬取 {}: {}", self.website + self.type, self.home_url)
+
+        urls = self.get_list(start_from=start_from, end_at=end_at)
+        logger.info("获取列表 {}", len(urls))
+
+        n_articles = len(urls)
+        for i, url in enumerate(urls):
+            logger.info("({}/{}) 爬取文章: {}", i + 1, n_articles, url)
+            self.parse_page(url)
