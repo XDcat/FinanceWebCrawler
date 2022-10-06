@@ -150,6 +150,6 @@ class IMFWorkingPaperRunner(BaseRunner):
         n_articles = len(urls)
         for i, url in enumerate(urls):
             logger.info("({}/{}) 爬取文章: {}", i + 1, n_articles, url)
-            time.sleep(1)
+            time.sleep(0.1)
             article = self.parse_page(url)
             Article.save(article)
