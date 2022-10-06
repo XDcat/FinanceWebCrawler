@@ -4,6 +4,8 @@ from bs4 import BeautifulSoup
 from common.Logger import *
 from model.article import Article
 from common.timetransformer import TimeTransformer
+from utils.ormutils import create_table
+import time
 
 
 class ECBSpeechesRunner(BaseRunner):
@@ -72,25 +74,37 @@ class ECBSpeechesRunner(BaseRunner):
         title = data.find("title").text
 
         pubdata = data.find(class_="ecb-publicationDate")
-        if len(pubdata) > 0:
+        if pubdata is not None:
             # 拿到时间
             pubdata = pubdata.text.split(",")
             publish_date = pubdata[-1].strip()
-
+            # 拿到作者
+            authors = ",".join(pubdata[:-1]).strip()
             publish_date = TimeTransformer.strtimeformat(publish_date, "%d %B %Y")
         else:
-            pubdata = None
+            # 另一种格式的
+            pubdata = data.find(class_="ecb-pressContentSubtitle")
+            if pubdata is not None:
+                pubdata = pubdata.text.split(",")
+                publish_date = pubdata[-1].strip()
+                try:
+                    publish_date = TimeTransformer.strtimeformat(publish_date, "%d %B %Y")
+                except ValueError as v:
+                    publish_date = None
+                authors = pubdata[0].strip()
+            else:
+                publish_date = None
+                authors = None
 
         # 拿到正文html源码
         body = data.select("main div[class=section]")
-        if body is None:
-            raise Exception("hmtl code lost")
+        if len(body) > 0:
+            body = body[0]
+        else:
+            body = None
 
         # 拿到url
         art_url = url
-
-        # 拿到作者
-        authors = ",".join(pubdata[:-1]).strip()
 
         # 拿到keywords
         keywords = None
@@ -117,6 +131,25 @@ class ECBSpeechesRunner(BaseRunner):
             attachment=attachment_url
         )
 
-        # logger.info(saved_data.display())
+        logger.info(saved_data.display())
         logger.info("get temp article information successfully")
         return saved_data
+
+
+    def run(self, start_from=1, end_at=None):
+        """
+        把上面两个函数跑通
+        :return:
+        """
+        create_table(Article)
+        logger.info("开始爬取 {}: {}", self.website + self.kind, self.home_url)
+
+        urls = self.get_list(start_from=start_from, end_at=end_at)
+        logger.info("获取列表 {}", len(urls))
+
+        n_articles = len(urls)
+        for i, url in enumerate(urls):
+            logger.info("({}/{}) 爬取文章: {}", i + 1, n_articles, url)
+            time.sleep(1)
+            article = self.parse_page(url)
+            Article.save(article)

@@ -83,7 +83,7 @@ class ECBWorkingPaperRunner(BaseRunner):
             # 存储到结构体
             saved_data = Article.create(
                 website=self.website,
-                type=self.kind,
+                kind=self.kind,
                 publish_date=publish_date,
                 body=body,
                 title=title,
