@@ -64,7 +64,8 @@ class BISSpeechesRunner(BaseRunner):
         pre = 'https://www.bis.org'
         for html_label in article_url_list:
             href = html_label.get('href')
-            urls.append(pre + href)
+            if "pdf"  not in href:
+                urls.append(pre + href)
         logger.info(f"get urls successfully,url={self.home_url}, get {len(urls)} urls in all.")
         return urls
 
@@ -126,7 +127,7 @@ class BISSpeechesRunner(BaseRunner):
             publish_date=publish_date,
             body=body,
             title=title,
-            url=url,
+            url=art_url,
             author=authors,
             keyword=keywords,
             attachment=attachment_url
