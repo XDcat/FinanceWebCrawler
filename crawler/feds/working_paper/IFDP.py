@@ -4,6 +4,7 @@ from bs4 import BeautifulSoup
 from common.Logger import *
 from model.article import Article
 from common.timetransformer import TimeTransformer
+from utils.ormutils import create_table
 
 
 class IFDPWorkingPaperRunner(BaseRunner):
@@ -120,10 +121,29 @@ class IFDPWorkingPaperRunner(BaseRunner):
         logger.info("get temp article information successfully")
         return saved_data
 
-    def get_list(self, start_from=1971, end_at=None):
+    def get_list(self, start_from=2000, end_at=None):
         if end_at is None:
             end_at = self.get_page_num() + start_from
         res = []
         for i in range(start_from, end_at):
             res.extend(self.get_one_list(i))
         return res
+
+    def run(self, start_from=2000, end_at=None):
+        """
+        把上面两个函数跑通
+        :return:
+        """
+        create_table(Article)
+        logger.info("开始爬取 {}: {}", self.website + self.kind, self.home_url)
+
+        urls = self.get_list(start_from=start_from, end_at=end_at)
+        logger.info("获取列表 {}", len(urls))
+
+        n_articles = len(urls)
+        for i, url in enumerate(urls):
+            logger.info("({}/{}) 爬取文章: {}", i + 1, n_articles, url)
+            article = self.parse_page(url)
+            Article.save(article)
+
+

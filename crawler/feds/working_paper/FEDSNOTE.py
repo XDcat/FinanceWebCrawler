@@ -5,6 +5,7 @@ from common.Logger import *
 from model.article import Article
 import re
 from common.timetransformer import TimeTransformer
+from utils.ormutils import create_table
 
 
 class FEDSNOTESWorkingPaperRunner(BaseRunner):
@@ -108,7 +109,10 @@ class FEDSNOTESWorkingPaperRunner(BaseRunner):
 
             # 日期
             publish_date = lst[0]
-            publish_date = TimeTransformer.strtimeformat(publish_date, "%B %d, %Y")
+            try:
+                publish_date = TimeTransformer.strtimeformat(publish_date, "%B %d, %Y")
+            except:
+                publish_date=None
 
             # 拿到keywords,该网站并没有
             keywords = None
@@ -177,7 +181,7 @@ class FEDSNOTESWorkingPaperRunner(BaseRunner):
             # 存储到结构体
             saved_data = Article.create(
                 website=self.website,
-                type=self.kind,
+                kind=self.kind,
                 publish_date=publish_date,
                 body=body,
                 title=title,
@@ -210,3 +214,22 @@ class FEDSNOTESWorkingPaperRunner(BaseRunner):
         for i in range(start_from,  end_at):
             res.extend(self.get_one_list(i))
         return res
+
+    def run(self, start_from=2013, end_at=None):
+        """
+        把上面两个函数跑通
+        :return:
+        """
+        create_table(Article)
+        logger.info("开始爬取 {}: {}", self.website + self.kind, self.home_url)
+
+        urls = self.get_list(start_from=start_from, end_at=end_at)
+        logger.info("获取列表 {}", len(urls))
+
+        n_articles = len(urls)
+        for i, url in enumerate(urls):
+            logger.info("({}/{}) 爬取文章: {}", i + 1, n_articles, url)
+            article = self.parse_page(url)
+            Article.save(article)
+
+
