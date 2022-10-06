@@ -8,5 +8,5 @@ class TestWorkingPaper(TestCase):
         self.runner = FEDSWorkingPaperRunner()
 
     def test_run(self):
-        res = self.runner.run(start_from=2020, end_at=2021)
+        res = self.runner.run()
         logger.info(res)

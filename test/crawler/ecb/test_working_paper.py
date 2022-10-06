@@ -8,5 +8,5 @@ class TestWorkingPaper(TestCase):
         self.runner = ECBWorkingPaperRunner()
 
     def test_run(self):
-        res = self.runner.run(start_from=2018,end_at=2020)
+        res = self.runner.run()
         logger.info(res)
