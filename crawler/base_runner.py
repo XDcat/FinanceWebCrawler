@@ -2,13 +2,15 @@ from abc import abstractmethod
 import requests
 
 from common.Logger import logger
-
+from model.article import Article
+from utils.ormutils import create_table
 
 
 class BaseRunner:
 
-    def __init__(self, name, home_url):
-        self.name = name
+    def __init__(self, website, kind, home_url):
+        self.website = website
+        self.kind = kind
         self.home_url = home_url
         self.session = requests.Session()
 
@@ -37,38 +39,28 @@ class BaseRunner:
         """
         pass
 
-    def get_list(self, start_from=1,end_at=None):
+    def get_list(self, start_from=1, end_at=None):
         if end_at is None:
-            end_at=self.get_page_num()+1
+            end_at = self.get_page_num() + start_from
 
         res = []
-        for i in range(start_from,end_at):
+        for i in range(start_from, end_at):
             res.extend(self.get_one_list(i))
         return res
 
-    def run(self,start_from=1,end_at=None,file_name="output.txt"):
+    def run(self, start_from=1, end_at=None):
         """
         把上面两个函数跑通
         :return:
         """
-        logger.info("开始爬取 {}: {}", self.name, self.home_url)
+        create_table(Article)
+        logger.info("开始爬取 {}: {}", self.website + self.kind, self.home_url)
 
-        urls = self.get_list(start_from=start_from,end_at=end_at)
+        urls = self.get_list(start_from=start_from, end_at=end_at)
         logger.info("获取列表 {}", len(urls))
 
-        articles = []
         n_articles = len(urls)
-        f = open(file_name, "a", encoding="utf-8")
         for i, url in enumerate(urls):
             logger.info("({}/{}) 爬取文章: {}", i + 1, n_articles, url)
             article = self.parse_page(url)
-            articles.append(article)
-            f.write("-" * 100)
-            f.write("\n\n\n")
-            f.write(article.__str__())
-            f.write("\n\n\n")
-            f.write("-" * 100)
-        f.close()
-        # TODO: save article
-
-        return articles
+            Article.save(article)

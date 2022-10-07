@@ -3,13 +3,16 @@ import datetime
 from bs4 import BeautifulSoup
 from common.Logger import *
 from model.article import Article
+from utils.ormutils import create_table
+from common.timetransformer import TimeTransformer
 
 
 class ECBWorkingPaperRunner(BaseRunner):
     def __init__(self):
         super(ECBWorkingPaperRunner, self).__init__(
-            "ECB working papers",
-            "https://www.ecb.europa.eu/pub/research/working-papers/html/index.en.html"
+            website="ECB",
+            kind="working_paper",
+            home_url="https://www.ecb.europa.eu/pub/research/working-papers/html/index.en.html"
         )
 
     def get_page_num(self):
@@ -19,8 +22,8 @@ class ECBWorkingPaperRunner(BaseRunner):
         :return: 所有Page页面的url
         """
         new_year = datetime.datetime.now().year
-        old_year=1999
-        return new_year-old_year+1
+        old_year = 1999
+        return new_year - old_year + 1
 
     def get_one_list(self, year):
         """
@@ -64,6 +67,7 @@ class ECBWorkingPaperRunner(BaseRunner):
             logger.info(f"reading number {count} article now,have {pagenums} articles in all!")
             # 获取出版日期
             publish_date = part1.text
+            publish_date = TimeTransformer.strtimeformat(publish_date, "%d %B %Y")
             # 拿到标题
             title = part2.select('div[class=title]')[0].text
             # 拿到附件
@@ -77,8 +81,18 @@ class ECBWorkingPaperRunner(BaseRunner):
             # url就是某年份的页面
             art_url = url
             # 存储到结构体
-            saved_data = Article(publish_date, body, title, art_url, authors, keywords, attachment_url)
-            # todo 保存到数据库，发现重复的就可以停止函数
+            saved_data = Article.create(
+                website=self.website,
+                kind=self.kind,
+                publish_date=publish_date,
+                body=body,
+                title=title,
+                url=art_url,
+                author=authors,
+                keyword=keywords,
+                attachment=attachment_url
+            )
+            saved_data.save()
             # logger.info(saved_data.display())
             # 更新part1,part2
             part1 = part2.next_sibling
@@ -89,12 +103,27 @@ class ECBWorkingPaperRunner(BaseRunner):
                 break
             count += 1
             logger.info("get  article information successfully")
-        return saved_data
 
-    def get_list(self, start_from=1999):
-        total_page_num = self.get_page_num()
+    def get_list(self, start_from=1999, end_at=None):
+        if end_at is None:
+            end_at = self.get_page_num() + start_from
         res = []
-        for i in range(start_from, start_from+total_page_num ):
+        for i in range(start_from, end_at):
             res.extend(self.get_one_list(i))
         return res
 
+    def run(self, start_from=1999, end_at=None):
+        """
+        把上面两个函数跑通
+        :return:
+        """
+        create_table(Article)
+        logger.info("开始爬取 {}: {}", self.website + self.kind, self.home_url)
+
+        urls = self.get_list(start_from=start_from, end_at=end_at)
+        logger.info("获取列表 {}", len(urls))
+
+        n_articles = len(urls)
+        for i, url in enumerate(urls):
+            logger.info("({}/{}) 爬取文章: {}", i + 1, n_articles, url)
+            self.parse_page(url)

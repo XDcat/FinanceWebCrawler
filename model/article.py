@@ -1,29 +1,26 @@
+from peewee import *
 from common.translate import Translator
+from .base_model import BaseModel
 
 
-class Article:
-    def __init__(self, publish_date, body, title, url, author, keyword, attachment):
-        """
-        # 规定爬取的文章存储结构类
-        :param publish_date: 出版日期
-        :param body: 摘要的html源码
-        :param title: 标题
-        :param url: 网址
-        :param author: 作者
-        :param keyword: 关键词
-        :param attachment: 附件url
-        """
-        self.body = body
-        self.publish_date = publish_date
-        self.title = title
-        self.url = url
-        self.author = author
-        self.keyword = keyword
-        self.attachment = attachment
-        self.id = None
+class Article(BaseModel):
+    aid = IntegerField(primary_key=True)
+    website = CharField(max_length=10)
+    kind = CharField(max_length=20)
+    body = CharField(null=True)
+    publish_date = CharField(max_length=20, null=True)
+    title = CharField(max_length=50)
+    url = CharField(max_length=100)
+    author = CharField(max_length=30, null=True)
+    keyword = CharField(max_length=30, null=True)
+    attachment = CharField(max_length=100, null=True)
+
+    class Meta:
+        # 表名
+        table_name = 'Article'
 
     @property
-    def get_ch_text(self):
+    def ch_text(self):
         """
         property属性构造
         :param html_code: 正文部分的html源码
@@ -31,15 +28,16 @@ class Article:
         :param key: 翻译API密码
         :return: 中文文本
         """
-        return Translator.translate(self.body.text, appid='20220914001342952', key='Q_SNAXetAkmZq2yaV4o_')
+        return Translator.translate(self.body, appid='20220914001342952', key='Q_SNAXetAkmZq2yaV4o_')
 
     def display(self):
         """
         展示所有信息
         :return:
         """
-        name = ["body", 'publishdata', 'title', 'url', 'author', 'keyword', 'attachment']
-        inform = [self.body, self.publish_date, self.title, self.url, self.author, self.keyword, self.attachment]
+        name = ["aid", 'website', 'kind', 'publish_date', 'title', 'url', 'author', 'keyword', 'attachment', 'body']
+        inform = [self.aid, self.website, self.kind, self.publish_date, self.title, self.url, self.author, self.keyword,
+                  self.attachment, self.body]
         return dict(zip(name, inform))
 
     def __str__(self):

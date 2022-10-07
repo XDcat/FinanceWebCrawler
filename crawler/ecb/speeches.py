@@ -3,13 +3,17 @@ import datetime
 from bs4 import BeautifulSoup
 from common.Logger import *
 from model.article import Article
+from common.timetransformer import TimeTransformer
+from utils.ormutils import create_table
+import time
 
 
 class ECBSpeechesRunner(BaseRunner):
     def __init__(self):
         super(ECBSpeechesRunner, self).__init__(
-            "ECB speeches",
-            "https://www.ecb.europa.eu/press/key/speaker/pres/html/index.en.html"
+            website="ECB",
+            kind="speech",
+            home_url="https://www.ecb.europa.eu/press/key/speaker/pres/html/index.en.html"
         )
 
     def get_page_num(self):
@@ -68,23 +72,39 @@ class ECBSpeechesRunner(BaseRunner):
 
         # 拿到标题
         title = data.find("title").text
-        # 拿到时间
-        publish_date = data.select("meta[name='citation_online_date']")
-        if len(publish_date) > 0:
-            publish_date = publish_date[0].get("content")
+
+        pubdata = data.find(class_="ecb-publicationDate")
+        if pubdata is not None:
+            # 拿到时间
+            pubdata = pubdata.text.split(",")
+            publish_date = pubdata[-1].strip()
+            # 拿到作者
+            authors = ",".join(pubdata[:-1]).strip()
+            publish_date = TimeTransformer.strtimeformat(publish_date, "%d %B %Y")
         else:
-            publish_date = None
+            # 另一种格式的
+            pubdata = data.find(class_="ecb-pressContentSubtitle")
+            if pubdata is not None:
+                pubdata = pubdata.text.split(",")
+                publish_date = pubdata[-1].strip()
+                try:
+                    publish_date = TimeTransformer.strtimeformat(publish_date, "%d %B %Y")
+                except ValueError as v:
+                    publish_date = None
+                authors = pubdata[0].strip()
+            else:
+                publish_date = None
+                authors = None
 
         # 拿到正文html源码
         body = data.select("main div[class=section]")
-        if body is None:
-            raise Exception("hmtl code lost")
+        if len(body) > 0:
+            body = body[0]
+        else:
+            body = None
 
         # 拿到url
         art_url = url
-
-        # 拿到作者
-        authors = data.select("meta[name=author]")[0].get("content")
 
         # 拿到keywords
         keywords = None
@@ -99,9 +119,37 @@ class ECBSpeechesRunner(BaseRunner):
             attachment_url = None
 
         # 存储到结构体
-        saved_data = Article(publish_date, body, title, art_url, authors, keywords, attachment_url)
-        # 中文文本
-        # ch_text = saved_data.get_ch_text
+        saved_data = Article.create(
+            website=self.website,
+            kind=self.kind,
+            publish_date=publish_date,
+            body=body,
+            title=title,
+            url=art_url,
+            author=authors,
+            keyword=keywords,
+            attachment=attachment_url
+        )
+
         logger.info(saved_data.display())
         logger.info("get temp article information successfully")
         return saved_data
+
+
+    def run(self, start_from=1, end_at=None):
+        """
+        把上面两个函数跑通
+        :return:
+        """
+        create_table(Article)
+        logger.info("开始爬取 {}: {}", self.website + self.kind, self.home_url)
+
+        urls = self.get_list(start_from=start_from, end_at=end_at)
+        logger.info("获取列表 {}", len(urls))
+
+        n_articles = len(urls)
+        for i, url in enumerate(urls):
+            logger.info("({}/{}) 爬取文章: {}", i + 1, n_articles, url)
+            time.sleep(1)
+            article = self.parse_page(url)
+            Article.save(article)

@@ -1,0 +1,371 @@
+----------------------------------------------------------------------------------------------------
+
+
+{'body': <div id="cmsContent">
+<h3>Summary</h3>
+<h4>Focus</h4>
+<p>Which are the key determinants of oil prices, and what role do financial factors play in Brent price formation? This paper sheds a new light on these fundamental questions relying on a widely used machine learning technique (random forests, based on 1,000 regression trees). As the article shows, the use of this technique leads to very large gains in oil price forecasting performance.</p>
+<h4>Contribution</h4>
+<p>Besides strong forecasting performance, this powerful data-driven method also uncovers how economic and financial variables relate to oil prices. The benchmark model relies on 11 explanatory variables, which are firmly grounded on economic theory and measured on a daily frequency. The analysis reveals that financial factors play a very significant role in Brent oil price formation, underscoring that oil prices are ultimately an asset price.</p>
+<h4>Findings</h4>
+<p>The analysis attests the strong performance of the random forest model in predicting oil prices. This is likely due to its ability to capture non-linearities, as well as complex interactions between explanatory variables. The out-of-sample root mean square errors (RMSEs) of the random forest model are between 51% and 68% lower than those of standard OLS models that use exactly the same set of explanatory variables. US interest rates, the value of the US dollar and the CBOE VIX market volatility index together account for 39% of the models' RMSE reduction, highlighting the importance of incorporating financial variables in an oil pricing model. The clear inverse relation between Brent price and the value of the US dollar is also made evident.</p>
+<hr/>
+<h4>Abstract</h4>
+<p>This study analyses oil price movements through the lens of an agnostic random forest model, which is based on 1,000 regression trees. It shows that this highly disciplined, yet flexible computational model reduces in-sample root mean square errors (RMSEs) by 65% relative to a standard linear least square model that uses the same set of 11 explanatory factors. In forecasting exercises the RMSE reduction ranges between 51% and 68%, highlighting the relevance of non-linearities in oil markets. The results underscore the importance of incorporating financial factors into oil models: US interest rates, the dollar and the VIX together account for 39% of the models' RMSE reduction in the post-2010 sample, rising to 48% in the post-2020 sample. If Covid-19 is also considered as a risk factor, these shares become even larger.</p>
+<p>JEL classification: C40, F30, Q40, Q41, Q47.</p>
+<p>Keywords: dollar, forecasting, machine learning, oil, risk. </p> </div>, 'publishdata': '23 September 2022', 'title': 'Quantifying the role of interest rates, the Dollar and Covid in oil prices', 'url': 'https://www.bis.org/publ/work1040.htm', 'author': 'Emanuel Kohlscheen', 'keyword': 'risk, dollar, forecasting, machine learning, oil', 'attachment': 'https://www.bis.org/publ/work1040.pdf'}
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+{'body': <div id="cmsContent">
+<h3>Summary</h3>
+<h4>Focus</h4>
+<p>Cyber attacks are becoming ever more frequent and sophisticated, and firms and policymakers list cyber risk as a major concern. Financial institutions and financial market infrastructures are especially at risk, and the financial industry ranks consistently as one of the most-attacked industries. While there have been several studies and surveys on cyber threats for the private sector – and firms in the financial sector in particular – little is known about central banks' assessment of cyber risk.</p>
+<h4>Contribution</h4>
+<p>We use a survey conducted in 2021 among the members of the Global Cyber Resilience Group to provide an overview on cyber risk in the central bank community. The survey contains responses from 21 central banks from all regions of the world. It examines the following questions: What are central banks' main cyber concerns, and how do they see the threat landscape? What measures do they take to pre-empt or counter cyber attacks? And how do they assess the risks to and the readiness of the financial sector at large?</p>
+<h4>Findings</h4>
+<p>We uncover four main insights. First, central banks from advanced economies and emerging market economies assess the frequency and costs of different cyber attacks differently. Second, central banks actively discuss and develop policy responses to cyber attacks and have significantly increased their cyber security-related investments. Third, central banks deem the potential losses from a systemically relevant cyber attack in the financial sector to be large, especially if it targets a big tech providing critical cloud infrastructures. Only a few central banks fully agree that the financial sector is adequately prepared for cyber attacks, and over half of the respondents think that the sector's investment in cyber security has been inadequate over the past year. And fourth, central banks already cooperate widely on a range of topics related to cyber risk, for example in developing sound principles for cyber resilience, creating a specific coordination centre for knowledge-sharing and developing common projects to limit cyber threats.</p>
+<hr/>
+<h4>Abstract</h4>
+<p>The rising number of cyber attacks in the financial sector poses a threat to financial stability and makes cyber risk a key concern for policy makers. This paper presents the results of a survey among members of the Global Cyber Resilience Group on cyber risk and its challenges for central banks. The survey reveals that central banks have notably increased their cyber security-related investments since 2020, giving technical security control and resiliency priority. Central banks see phishing and social engineering as the most common methods of attack, and the potential losses from a systemically relevant cyber attack are deemed to be large, especially if the target is a big tech providing critical cloud infrastructures. Generally, respondents judge the preparedness of the financial sector for cyber attacks to be inadequate. While central banks in most emerging market economies provide a framework for the collection of information on cyber attacks on financial institutions, less than half of those in advanced economies do. Cooperation among public authorities, especially in the international context, could improve central banks' ability to respond to cyber attacks.</p>
+<p>JEL classification: E5, E58, G20, G28. </p>
+<p>Keywords: cyber risk, central banks, financial institutions, cloud services, cyber regulation. </p> </div>, 'publishdata': '14 September 2022', 'title': 'Cyber risk in central banking', 'url': 'https://www.bis.org/publ/work1039.htm', 'author': 'Sebastian Doerr, Leonardo Gambacorta, Thomas Leach, Bertrand Legros, David Whyte', 'keyword': 'central banks, financial institutions, cyber risk, cloud services, cyber regulation', 'attachment': 'https://www.bis.org/publ/work1039.pdf'}
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+{'body': <div id="cmsContent">
+<h3>Summary</h3>
+<h4>Focus</h4>
+<p>We propose a strategy to build a "net zero" portfolio of sovereign securities that delivers progressively declining carbon footprints. Passive investors could use it as a new benchmark that is consistent with the Paris Climate Accords while keeping the portfolio's financial characteristics as close as possible to a business-as-usual benchmark.</p>
+<h4>Contribution</h4>
+<p>Our research is among the first to propose a decarbonisation strategy for sovereign securities portfolios. It is easy to implement and suitable for passive investors given the limited impact on the net zero portfolio's financial performance. However, it is a powerful tool to encourage sovereign governments to keep up their commitments in the Paris Climate Accords because of potentially large weight shifts for sovereign issuers after portfolio rebalancing relative to the business-as-usual benchmark.</p>
+<h4>Findings</h4>
+<p>Our strategy rewards sovereign issuers that have made stronger efforts to reduce the carbon intensity of economic activity in their jurisdiction, measured by total domestic emissions per capita. The net zero portfolio we propose could reduce carbon intensity by 41% between 2014 and 2019 without affecting the portfolio's financial performance. The reduction in carbon intensity is achieved by assigning higher weights to countries with lower carbon emissions. Among advanced economies, portfolio rebalancing increases the shares of France, Italy and Spain while reducing that of the United States. Among emerging market economies, the weights of Chile, the Philippines and Romania would increase at the expense of China. Even when changes in country weights in the net zero portfolio are capped, the portfolio can still achieve a 30% cumulative reduction in carbon intensity, much higher than the business-as-usual benchmark could achieve (14%).</p>
+<hr/>
+<h4>Abstract</h4>
+<p>We propose a strategy to build portfolios of sovereign securities with progressively declining carbon footprints. Passive investors could use it as a new Paris-consistent benchmark to construct a "net zero" (NZ) portfolio while tracking closely the risk-adjusted returns of a business-as-usual (BAU) benchmark. Our strategy rewards sovereign issuers that have made stronger efforts in reducing carbon intensity, measured by total domestic emissions per capita. The NZ portfolio would have reduced carbon intensity by 41% between 2014 and 2019, by assigning higher weights to countries that have had lower carbon emissions. Among advanced economies, rebalancing leads to raising shares of France, Italy and Spain in the portfolio at the expense of the United States. And among emerging market economies, this leads to higher shares for Chile, the Philippines and Romania at the expense of China. Importantly, the NZ portfolio retains the same creditworthiness as the BAU benchmark without entailing materially higher foreign exchange risks.</p>
+<p>JEL classification: G11, G24, Q56. </p>
+<p>Keywords: carbon footprints, sovereign debt, portfolio rebalancing, portfolio optimisation, active share, tracking error. </p> </div>, 'publishdata': '01 September 2022', 'title': 'Building portfolios of sovereign securities with decreasing carbon footprints', 'url': 'https://www.bis.org/publ/work1038.htm', 'author': 'Gong Cheng, Eric Jondeau, Benoit Mojon', 'keyword': 'sovereign debt, portfolio rebalancing, tracking error, carbon footprints, active share, portfolio optimisation, Green Finance', 'attachment': 'https://www.bis.org/publ/work1038.pdf'}
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+{'body': <div id="cmsContent">
+<h3>Summary</h3>
+<h4>Focus</h4>
+<p>Large technology firms ("big techs") have access to massive amounts of data about firms that operate on their online platforms or use their QR-code payment systems. While this information can be harnessed to improve the assessment of a firm's credit risk, it may also lead to "data dominance", when the big tech can extract rents from the firm and reduce its profits to the minimum. In the case of e-commerce platforms, data dominance is compounded by the fact that firms are somewhat captive in the big tech ecosystem. In fact, defaulting on a big tech loan could cause a firm not only to be excluded from future loans (as in the traditional case of bank lending) but also to be shut out from the e-commerce platform and its payment services.</p>
+<h4>Contribution</h4>
+<p>This paper studies the lending business model of big techs, comparing it with the traditional bank intermediation process based on collecting deposits at cheaper rates but making do with more limited information on clients. In particular, we develop a theoretical model to study an economy in which big techs compete with traditional banks by lending to firms that operate on their platforms. We focus on two advantages that big techs have with respect to banks: better information on their clients and better enforcement of credit repayment, since big techs can exclude a defaulting firm from their ecosystem. For their part, banks have more varied and cheaper forms of funding.</p>
+<h4>Findings</h4>
+<p>We find that, when banks and big techs compete for borrowers, this can lead to greater privacy for borrowers as big techs have an incentive to temper their drive to collect information about firm characteristics. In other words, to win the loyalty of client firms, big techs must exercise restraint on their capacity to extract rents. At the same time, greater privacy has a cost. If big techs limit their capacity to recognise a firm's type, this may increase the number of costly defaults and reduce investment in profitable opportunities. One way to mitigate these inefficiencies is for big techs and banks to focus on their comparative advantages: big techs can share processed information (rather than simply the raw data) with banks, while the latter can finance the loans using their cheaper and more ample sources of funding.</p>
+<hr/>
+<h4>Abstract</h4>
+<p>We study an economy in which large technology companies, big techs, provide credit to firms operating on their platforms. We focus on two advantages that big techs have with respect to banks: better information on their clients and better enforcement of credit repayment since big techs can exclude a defaulting firm from their ecosystem. While big techs have both superior enforcement and complete and private information of the firm type big techs can encroach on banks' turf only if they guarantee some privacy to firms by tempering their drive to collect information about firm characteristics and leaving some rents to them. The way big techs share information i.e. by providing information publicly or in a private way entails different outcomes in terms of efficiency.</p>
+<p>JEL classification: E51, G23, O31. </p>
+<p>Keywords: big techs, credit markets, privacy, information sharing. </p> </div>, 'publishdata': '31 August 2022', 'title': 'Big Techs vs Banks', 'url': 'https://www.bis.org/publ/work1037.htm', 'author': 'Leonardo Gambacorta, Fahad Khalil, Bruno Maria Parigi', 'keyword': 'information sharing, credit markets, privacy, big techs', 'attachment': 'https://www.bis.org/publ/work1037.pdf'}
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+{'body': <div id="cmsContent">
+<h3>Summary</h3>
+<h4>Focus</h4>
+<p>Business turnover, the process by which entrepreneurs create new firms and dissolve old ones, is a key feature of modern economies. Structural factors, such as barriers to entry or an inefficient insolvency process, play a considerable role in either slowing down or speeding up the entry and exit of firms.</p>
+<h4>Contribution</h4>
+<p>In addition to structural factors, cyclical developments also matter. History would suggest that more firms are created in upturns and more liquidated in downturns. Yet the recent Covid-19 recession is somewhat at odds with this simple view. While most countries suffered a deep economic contraction, firm entry followed very different patterns across countries. In Europe for instance, Spain experienced a sudden stop in new firm creation while France had a boom, even if output fell by comparable amounts in both countries.</p>
+<h4>Findings</h4>
+<p>This paper argues that growth expectations are the key driver for firm entry. Based on a sample of euro area countries, it shows that more firms are created in response to past exits when the economy is expected to grow faster. Similarly, a drop in past entry weighs less on subsequent entry when the economy is expected to expand quickly. In addition, it finds that the economic outlook affects firm entry mainly through expectations of public and private investment. This suggests that policies focused on increasing private and public investment can often help to strengthen the economy's supply side, by increasing firm entry and business dynamism.</p>
+<hr/>
+<h4>Abstract</h4>
+<p>How do aggregate conditions affect the dynamics of firm entry? Do recessions force more firms out, allowing for more firms to enter subsequently? Or does this process require other circumstances to thrive? I look into these questions using sectoral data on firm entry and exit for the main economies of the Euro Area over 2009-2019. My main finding is that expected, rather than current, GDP growth shapes the dynamics of firm entry. Specifically, I find that entry increases with past exits at the sector-level, but only when aggregate GDP growth is forecasted to be strong. Also, with strong growth forecasts, past entry developments weight less on the subsequent sectoral entry dynamics. Periods of low entry and high exit, can therefore be followed by strong entry subsequently, when the economy is expected to grow strongly. These findings are robust to the inclusion of several controls. This includes the quality of insolvency proceedings, firms' ability to obtain credit or the presence of barriers to entry. Finally, I show that expectations of private and public investment drive the impact of growth expectations on the dynamics of firm entry.</p>
+<p>JEL classification: D25, D84, E32, E62, H32, M13. </p>
+<p>Keywords: firm entry, exit, growth expectations, private and public investment. </p> </div>, 'publishdata': '24 August 2022', 'title': 'Growth expectations and the dynamics of firm entry ', 'url': 'https://www.bis.org/publ/work1036.htm', 'author': 'Enisse Kharroubi', 'keyword': 'firm entry, exit, growth expectations, private and public investment', 'attachment': 'https://www.bis.org/publ/work1036.pdf'}
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+{'body': <div id="cmsContent">
+<h3>Summary</h3>
+<h4>Focus</h4>
+<p class="FirstParagraph">When monitoring capital flows and analysing international interconnectedness, it is useful to distinguish financial centres that specialise in cross-border financial activity from other countries. Such centres are a channel for international investment, as opposed to an ultimate source or final destination for funds. Also, their external assets and liabilities are exceptionally large compared with their domestic economy. As a result, they account for a small share of the global economy but a large share of international financial activity. We propose a quantitative, transparent and replicable method for identifying cross-border financial centres.</p>
+<h4>Contribution</h4>
+<p class="FirstParagraph">Our method improves on previous classifications of financial centres, first, by focusing on the entrepôt nature of activity in cross-border financial centres. Second, we adjust for the high degree of dispersion in external positions when setting the threshold to distinguish between cross-border centres and other countries. Finally, we pool many years of data to capture longer-term trends in countries' financial activity.</p>
+<h4>Findings</h4>
+<p>We find that the group of countries identified as cross-border financial centres varies over time and with different measures of financial intermediation. In 2020, we identify a core set of seven countries as cross-border centres: the British Virgin Islands, Bermuda, the Cayman Islands, Guernsey, Jersey, Luxembourg and the Marshall Islands. Another five countries were included in this set at one point or another over the 1995–2020 period: The Bahamas, Curaçao, Gibraltar, Liberia and Mauritius. A somewhat different set of countries is identified when the focus is narrowed to intermediation through the interbank channel.</p>
+<hr/>
+<h4>Abstract</h4>
+<p>Financial centres that cater predominantly to non-residents – which we refer to as cross-border financial centres (XFCs) –are important intermediaries of cross-border financial flows. For analysing capital flows and international interconnectedness, it can be useful to distinguish countries that are home to XFCs from other countries. We improve on previous methodologies for identifying such centres by constructing a measure focussed on the intermediation activity inherent to XFCs and explicitly taking into account the non-normal distribution of this measure across countries when detecting outliers. We also minimise volatility in the set of countries identified as XFCs over time by de-trending the data and pooling years. Our methodology identifies a core set of 12 countries as XFCs over the 1995-2020 period, but the countries vary with time and different measures of activity.</p>
+<p>JEL classification: F21, F36, G15.</p>
+<p>Keywords: international financial centres, offshore banks, outlier detection.</p>
+<div class="bisobjboxbulletpoints bisobjboxbulletpoints" data-bisobj="box_bulletpoints" id="Related%2Binformation">
+<ul>
+<li><a href="/publ/work1035_data.xlsx">Data file</a></li>
+</ul>
+</div> </div>, 'publishdata': '25 July 2022', 'title': 'Cross-border financial centres', 'url': 'https://www.bis.org/publ/work1035.htm', 'author': 'Pamela Pogliani, Philip Wooldridge', 'keyword': 'international financial centres, offshore banks, outlier detection', 'attachment': 'https://www.bis.org/publ/work1035.pdf'}
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+{'body': <div id="cmsContent">
+<h3>Summary</h3>
+<h4>Focus</h4>
+<p><span>We study how unconventional monetary policy affects sovereign debt dynamics in a debt sustainability analysis (DSA). We estimate the impact of the ECB's pandemic emergency purchase programme (PEPP) - and its unwinding - on sovereign spreads and how this affects debt trajectories. We also look at the effect of inflation under different central bank responses. </span></p>
+<h4>Contribution</h4>
+<p>We incorporate conventional and unconventional monetary policy into a stochastic DSA. The model optimises debt financing, trading off financing cost and refinancing risk. Sovereign spreads depend on the debt level, which pushes up credit risk premia. The PEPP withdraws debt from the market; we calibrate the spread suppression as a function of the asset purchases. The model also evaluates the effects of the central bank balance sheet reduction once the debt matures (passive quantitative tightening (QT)). </p>
+<h4>Findings</h4>
+<p>We find that the PEPP substantially improves debt dynamics and that the effects last well beyond the end of the programme. Without PEPP, the debt level would probably be unsustainable. With PEPP, public debt is generally sustainable and returns to below pre-pandemic levels by 2030. Passive QT puts upward pressure on spreads – more intensely the earlier the unwinding – but debt does not return to the pre-PEPP levels. The effect of an inflation surprise depends on the monetary policy reaction, but the impact on debt dynamics is small in the medium term. The model also shows the implications for debt management. PEPP makes it possible for maturities to be lengthened to reduce refinancing risks without increasing financing costs.</p>
+<hr/>
+<h4>Abstract</h4>
+<p>We incorporate monetary policy into a model of stochastic debt sustainability analysis and evaluate the impact of unconventional policies on sovereign debt dynamics. The model optimizes debt financing to trade off financing cost with refinancing risk. We show that the ECB pandemic emergency-purchase programme (PEPP) substantially improves debt sustainability for euro area sovereigns with a high debt stock. Without PEPP, debt would be on an increasing (unsustainable) trajectory with high probability, while, with asset purchases, it is sustainable and the debt ratio is expected to return to pre-pandemic levels by about 2030. The improvement in debt dynamics extends beyond the PEPP and is larger for more gradual unwinding of the Central Bank balance sheet. Optimal financing under PEPP induces an extension of maturities reducing the risk without increasing costs. The analysis also shows that inflation surprises have relatively little impact on debt dynamics, with the direction and magnitude of the effect depending on the monetary policy response.</p>
+<p>JEL classification: E52, H63, H68.</p>
+<p>Keywords: debt sustainability analysis, risk management, unconventional monetary policy, monetary-fiscal mix, PEPP, CVaR optimisation. </p> </div>, 'publishdata': '19 July 2022', 'title': 'Debt sustainability and monetary policy: the case of ECB asset purchases', 'url': 'https://www.bis.org/publ/work1034.htm', 'author': 'Enrique Alberola-Ila, Gong Cheng, Andrea Consiglio, Stavros A. Zenios', 'keyword': 'risk management, unconventional monetary policy, monetary-fiscal mix, PEPP, CVaR optimisation, debt sustainability analysis', 'attachment': 'https://www.bis.org/publ/work1034.pdf'}
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+{'body': <div id="cmsContent">
+<h3>Summary</h3>
+<h4>Focus</h4>
+<p>The Hodrick-Prescott (HP) filter is heavily used in economics and by policymakers. In many cases, the two-sided, full sample version is applied to determine trends. But the one-sided filter that is estimated recursively also has important applications. Most notably, it is embedded in the Basel III framework for the countercyclical capital buffer. In this paper, we show that the trend of the one-sided HP filter has a very close correspondence with the trend of the Holt-Winters (HW) filter.</p>
+<h4>Contribution</h4>
+<p>We draw on the literature to show that the trend of the one-sided HP filter can be approximated by the HW filter. This implies an elegant, moving average representation. And it makes the computation of trends so simple that it can be implemented by any spreadsheet user. We also provide results how to apply the HW filter in practice.</p>
+<h4>Findings</h4>
+<p>In addition to showing that the one-sided HP filter can be very closely approximated by the HW filter, we highlight three further results. First, we derive a mapping between the smoothing parameter of the HP filter (typically called lambda) and the key parameters of the HW filter. Second, we provide an exact formula for the weights of the HW filter. Third, we discuss different ways to set the initial values for the HW filter.</p>
+<p>We illustrate our approach by generating credit-to-GDP gaps using the different filters. We find that the HW filter closely approximates trends generated by the one-sided HP filter, independent of the starting point chosen for the HW filter.</p>
+<hr/>
+<h4>Abstract</h4>
+<p>We show that the trend of the one-sided HP filter can be asymptotically approx-imated by the Holt-Winters (HW) filter. The later is an elegant, moving average representation and facilitates the computation of trends tremendously. We confirm the accuracy of this approximation empirically by comparing the one-sided HP filter with the HW filter for generating credit-to-GDP gaps. We find negligible differences, most of them concentrated at the beginning of the sample.</p> </div>, 'publishdata': '18 July 2022', 'title': 'The Holt-Winters filter and the one-sided HP filter: A close correspondence', 'url': 'https://www.bis.org/publ/work1033.htm', 'author': 'Rodrigo Alfaro, Mathias Drehmann', 'keyword': None, 'attachment': 'https://www.bis.org/publ/work1033.pdf'}
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+{'body': <div id="cmsContent">
+<h3>Summary</h3>
+<h4>Focus</h4>
+<p>Emerging market economies (EMEs) commonly combine inflation targeting monetary policy regimes with macroprudential tools, capital flow management measures and FX intervention, to meet the challenges they face from swings in capital flows. These swings raise difficult trade-offs for monetary policy and require policymakers to resort to complementary policy tools to enhance macro-financial stability. We provide a characterisation of these trade-offs, distinguishing between times of stress and normal times when vulnerabilities build up, and assess how complementary policy tools can address them.</p>
+<h4>Contribution</h4>
+<p>We set out a small open-economy model incorporating key features of EMEs' economic and financial structure: a high exchange rate pass-through to import prices, low pass-through to export prices and shallow domestic financial markets in the form of occasionally binding leverage constraints. As a consequence of the latter, large capital outflows induced by a sudden tightening in global financial conditions give rise to sudden stops. We analyse monetary policy trade-offs and derive the optimal conduct of monetary policy as well as of macroprudential policy, capital flow management policy and central bank bond market and foreign exchange (FX) intervention.</p>
+<h4>Findings</h4>
+<p>During a sudden stop, the central bank faces an intratemporal trade-off as output declines while inflation rises. In normal times, there is an intertemporal trade-off as the risk of a future sudden stop forces the central bank to factor financial stability considerations into its policy conduct. Leaning against capital flows and domestic leverage is a key feature of optimal monetary policy aimed at medium-term macroeconomic stability. Macroprudential policy, capital flow management measures and FX intervention mitigate both intra- and intertemporal trade-offs. Bond market interventions can further alleviate constraints in a sudden stop. Fiscal policy also plays a key role. A higher level of public debt and a weaker fiscal policy imply greater leverage and hence greater tail risk for the economy. This worsens the intertemporal trade-off and induces a tighter monetary policy stance, with the aim of leaning against these effects.</p>
+<hr/>
+<h4>Abstract</h4>
+<p>We lay out a small open economy model incorporating key features of EME economic and financial structure: high exchange rate pass-through to import prices, low pass-through to export prices and shallow domestic financial markets giving rise to occasionally binding leverage constraints. As a consequence of the latter, a sudden stop with large capital outflows can give rise to a financial crisis. In the sudden stop, the central bank faces an intratemporal trade-off as output declines while inflation rises. In normal times, there is an intertemporal trade-off as the risk of a future sudden stop forces the central bank to factor financial stability considerations into its policy conduct. The optimal monetary policy leans against capital flows and domestic leverage. Macroprudential, capital flow management and central bank balance sheet policies can help to mitigate both intra- and intertemporal trade-offs. Fiscal policy also plays a key role. A higher level of public debt and a weaker fiscal policy imply greater leverage and hence greater tail risk for the economy.</p>
+<p>JEL classification: E5, F3, F4. </p>
+<p>Keywords: capital flows, monetary policy trade-offs, emerging market economies. </p> </div>, 'publishdata': '18 July 2022', 'title': 'Capital flows and monetary policy trade-offs in emerging market economies', 'url': 'https://www.bis.org/publ/work1032.htm', 'author': 'Paolo Cavallino, Boris Hofmann', 'keyword': 'emerging market economies., capital flows, monetary policy trade-offs', 'attachment': 'https://www.bis.org/publ/work1032.pdf'}
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+{'body': <div id="cmsContent">
+<h3>Summary</h3>
+<h4>Focus</h4>
+<p>Fluctuations in the risk sentiment of global portfolio investors can lead to shifts in portfolio holdings, even without changes in fundamentals or currency mismatches on the part of the borrower. Such shifts in risk sentiment can occur when the investor's risk constraint is relaxed or tightened in reaction to market events. The focus is on how exchange rate changes affect risk constraints and hence the investor portfolios of sovereign bonds issued in the local currencies of emerging market economies (EMEs).</p>
+<h4>Contribution</h4>
+<p>We develop a theory of a global investor who holds a diversified portfolio of EME bonds in different currencies, but who evaluates gains and losses in dollar terms and is subject to a risk constraint. Any broad-based EME currency appreciation increases the investor's risk capacity by relaxing the risk constraint and increasing the investor's economic capital. We empirically assess the link between risk capacity, portfolio choice and exchange rates based on a panel of EMEs using fund-level bond purchases, bond spreads and high-frequency exchange rate shocks. </p>
+<h4>Findings</h4>
+<p>The key prediction of the theory is that a broad-based weakening of the dollar leads to larger portfolio inflows (and a larger compression in spreads) in the local currency bond market of a particular EME than an equivalent percentage depreciation of the dollar against the EME's currency. Empirical evidence strongly supports the key predictions of our theory.</p>
+<hr/>
+<h4>Abstract</h4>
+<p>We lay out a model of risk capacity for global portfolio investors in which swings in exchange rates can affect their risk-taking capacity in a Value-at-Risk framework. Exchange rate fluctuations induce shifts in portfolio holdings of global investors, even in the absence of currency mismatches on the part of the borrowers. A currency appreciation for an emerging market borrower that is part of a broad-based appreciation of emerging market currencies leads to larger bond portfolio inflows than the equivalent appreciation in the absence of a broad-based appreciation. As such, the broad dollar index emerges as a global factor in bond portfolio flows. The empirical evidence strongly supports the predictions of the model.</p>
+<p>JEL classification: G12, G15, G23. </p>
+<p>Keywords: bond spread, capital flow, credit risk, emerging market, exchange rate. </p> </div>, 'publishdata': '15 July 2022', 'title': 'Risk capacity, portfolio choice and exchange rates', 'url': 'https://www.bis.org/publ/work1031.htm', 'author': 'Boris Hofmann, Ilhyock Shim, Hyun Song Shin', 'keyword': 'credit risk, exchange rate, emerging market, bond spread, capital flow', 'attachment': 'https://www.bis.org/publ/work1031.pdf'}
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+{'body': <div id="cmsContent">
+<h3>Summary</h3>
+<h4>Focus</h4>
+<p>Are conglomerate firms highly productive? Or do they suffer from internal quarrels and squander investment opportunities? An established observation in the trade literature is that conglomerate firms are more productive than single-product firms. By contrast, the finance literature has established that multi-segment firms trade at a discount to single-product firms, with a lower valuation ("Tobin's Q"), because funds are misallocated across their divisions through the internal capital market.</p>
+<h4>Contribution</h4>
+<p>Reconciling these two conflicting views, we develop a novel theory of misallocation within firms due to managerial empire-building. We introduce an internal capital market into a two-factor model of multi-segment firms. The combination of these features lets us investigate the interplay between internal capital markets and international competition, thus opening up the black box of multi-product firms for a closer inspection.</p>
+<h4>Findings</h4>
+<p>First, we find that informational frictions between headquarters and divisional managers can lead to the over-reporting of divisions' costs, resulting in an inefficient allocation of capital across a firm's divisions. This misallocation results in the conglomerate discount, ie a situation in which the market values a diversified firm at less than the sum of its parts. Second, our model shows that international trade reduces capital misallocation through competition. Tougher competition lowers the cost level at which firms and their divisions can survive in the market and reduces managers' scope for misreporting. By reducing capital misallocation within firms, this shrinks the conglomerate discount. We test our model's key predictions with data on US companies and find strong support. Our findings imply that more market competition can go a long way towards curbing division managers' empire-building behaviour, because it intensifies pressure on headquarters to allocate funds toward the most efficient projects.</p>
+<hr/>
+<h4>Abstract</h4>
+<p>This paper develops a novel theory of capital mis-allocation within firms that stems from managers' empire building and informational frictions within the organization. Introducing an internal capital market into a two-factor model of multi-segment firms, we show that competition imposes discipline on managers and reduces capital mis-allocation across divisions, thereby lowering the conglomerate discount. The theory can explain why exporters exhibit a lower conglomerate discount than non-exporters (a new fact we establish). We then exploit the China shock as an exogenous shock to competition to test the model's predictions with data on US companies. Results show that tougher competition significantly reduces managers' over-reporting of costs and improves the allocation of capital within firms.</p>
+<p>JEL classification: F12, G30, L22, D23. </p>
+<p>Keywords: multi-product firms, trade and organisation, internal capital markets, conglomerate discount, China shock. </p> </div>, 'publishdata': '14 July 2022', 'title': 'Mis-allocation within firms: internal finance and international trade', 'url': 'https://www.bis.org/publ/work1030.htm', 'author': 'Sebastian Doerr, Dalia Marin, Davide Suverato, Thierry Verdier', 'keyword': 'internal capital market, trade and organisation, China shock, conglomerate discount, multi-product firms', 'attachment': 'https://www.bis.org/publ/work1030.pdf'}
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+{'body': <div id="cmsContent">
+<h3>Summary</h3>
+<h4>Focus</h4>
+<p>We study the effects of the Bank of Japan's (BOJ) exchange-traded fund (ETF) purchase programme on equity risk premia. Constructing a unique panel data set of the amount of individual stocks that the BOJ has indirectly purchased in the programme, we see significant cross-sectional and time series variations among individual stocks due to their different weights in ETFs and the BOJ's policy changes on its share of purchases across ETFs. Using these cross-sectional and time series variations, we study whether the ETF programme changed the risk premia of Japanese stocks based on the Capital Asset Pricing Model.</p>
+<h4>Contribution</h4>
+<p>We reveal the mechanism by which the ETF purchasing programme affects stock prices. In our paper, it is shown that the BOJ purchasing programme changes the risk perception of market participants by intervening in the market when the market is hit by adverse shocks. This result suggests what the policy implications might be when the BOJ exits its ETF purchase policy. To avoid any adverse effects on stock prices, the exit policy should be designed so that it does not change the correlation structure of stock returns.</p>
+<h4>Findings</h4>
+<p>Our empirical analysis reveals, first, that BOJ's ETF purchases instantaneously support stock prices on the day of purchase. In other words, daily purchases have a "flow effect". Second, the instantaneous positive effects on stock prices, combined with the countercyclical nature of the BOJ's purchases, have persistently reduced the market beta for Japanese stocks. According to our back-of-the-envelope calculation, the BOJ's programme has resulted in an economically significant decline in risk premia.</p>
+<hr/>
+<h4>Abstract</h4>
+<p>In this paper, we investigate the eﬀects of the Bank of Japan's (BOJ) exchange-traded fund (ETF) purchase program on equity risk premia. We ﬁrst construct a unique panel dataset for the amount of individual stock that the BOJ has indirectly purchased in the program. Then, utilizing the cross-sectional and time-series variations in purchases associated with the BOJ's policy changes, the empirical analysis reveals that: (i) the BOJ's ETF purchases instantaneously support stock prices on the days of purchases, and (ii) the instantaneous positive eﬀects on stock prices, combined with the countercyclical nature of the BOJ's purchases, have decreased the market beta and coskewness of Japanese stocks, thus leading to an economically signiﬁcant decline in risk premia.</p>
+<p>JEL classification: E58, G12, G14.</p>
+<p>Keywords: large-scale asset purchases (LSAP), ETF purchase program, capital asset pricing model (CAPM), Bank of Japan.</p> </div>, 'publishdata': '13 July 2022', 'title': "Bank of Japan's ETF purchase program and equity risk premium: a CAPM interpretation", 'url': 'https://www.bis.org/publ/work1029.htm', 'author': 'Mitsuru Katagiri, Koji Takahashi, Junnosuke Shino', 'keyword': 'large-scale asset purchases, Bank of Japan, ETF purchase program, capital asset pricing model', 'attachment': 'https://www.bis.org/publ/work1029.pdf'}
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+{'body': <div id="cmsContent">
+<h3>Summary</h3>
+<h4>Focus</h4>
+<p>The massive wave of fiscal stimulus unleashed by governments in the wake of the Covid-19 pandemic has sparked an intense debate about the inflationary consequences of current fiscal policies. Is higher inflation after the pandemic a fiscal phenomenon? Will the need to manage high public debt levels result in fiscal dominance over monetary policy, posing a risk to price stability?</p>
+<h4>Contribution</h4>
+<p>To investigate the contribution of fiscal deficits to the recent increase in inflation, we estimate an open-economy Phillips curve augmented with the fiscal balance using data from 21 advanced economies over four decades. Apart from the econometric specification, what distinguishes our analysis from previous research is that we carefully consider the fiscal-monetary policy regimes in place. Furthermore, we examine the effects of higher deficits not only on average inflation but also on the "tail risks" to future inflation outcomes.</p>
+<h4>Findings</h4>
+<p>We find that the strength of the deficit-inflation link crucially depends on what kind of fiscal-monetary policy regime is in place. A higher deficit is least inflationary under "monetary dominance", defined as the regime in which the fiscal authority acts prudently to stabilise public debt and the central bank is highly independent (and faces strong legal limitations on its ability to lend to the public sector). By contrast, the greatest inflationary effect is found under "fiscal dominance", defined as a regime in which fiscal policy is profligate and the central bank is constrained only in a limited way from lending to the public sector. Higher deficits increase the inflation risks on the upside (ie the probability of high inflationary outcomes), and these effects are larger in the fiscal dominance regime. Finally, given the size of the fiscal stimulus and other macroeconomic variables observed in 2020, forecasts from our model suggest that the high inflation of 2021 and 2022 appears more consistent with a regime of fiscal rather than monetary dominance.</p>
+<hr/>
+<h4>Abstract</h4>
+<p>Using data from a panel of advanced economies over four decades, we show that the inflationary effect of fiscal deficits crucially depends on the prevailing fiscal-monetary policy regime. Under fiscal dominance, defined as a regime in which the government does not adjust the primary balance to stabilise debt and the central bank is less independent or puts less emphasis on price stability, the average effect on inflation of higher deficits is found to be up to five times larger than under monetary dominance. Under fiscal dominance, higher deficits also increase the dispersion of possible future inflationary outcomes, especially the probability of high inflation. Based on forecasts from our model, the high inflation experienced by many countries during the recovery from the Covid-19 pandemic appears more consistent with a regime of fiscal dominance than monetary dominance.</p>
+<p>JEL classification: E31, E52, E62, E63.</p>
+<p>Keywords: fiscal deficit, inflation, fiscal policy regime, monetary policy regime, monetary policy independence.</p> </div>, 'publishdata': '07 July 2022', 'title': 'Fiscal deficits and inflation risks: the role of fiscal and monetary policy regimes', 'url': 'https://www.bis.org/publ/work1028.htm', 'author': 'Ryan Niladri Banerjee, Valerie Boctor, Aaron Mehrotra, Fabrizio Zampolli', 'keyword': 'inflation, fiscal deficit, monetary policy independence, fiscal policy regime, monetary policy regime', 'attachment': 'https://www.bis.org/publ/work1028.pdf'}
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+{'body': <div id="cmsContent">
+<h3>Summary</h3>
+<h4>Focus</h4>
+<p>Contract terms are rarely disclosed in repo markets, except for repo financed by US Treasury securities. As a result, we still know relatively little about the market-wide relationships between haircuts, collateral and counterparty characteristics. This is especially true of the European repo market, where there is a shortage of high-quality collateral since government bonds are of heterogeneous quality. Our paper fills this gap in the literature by estimating these relationships using a transaction-level UK data set and, importantly, by showing what types of market friction (eg adverse selection) are relevant for repo haircuts in general.</p>
+<h4>Contribution</h4>
+<p>We focus on the factors that drive repo haircuts using a unique trade-level repo database. To our knowledge, this is the only database that covers transaction-level haircut information for collateral with a wide range of qualities and a rich set of counterparties. The dataset also allows us to gain a market-wide view of how UK banks use bilateral repo contracts to intermediate liquidity and to study how the supply of this liquidity is affected by collateral quality, counterparty characteristics, bilateral relationships and contract terms.</p>
+<h4>Findings</h4>
+<p>First, we find that only 60% of collateral used in the UK market can be categorised as high-quality cash-like securities. This is in contrast to the US repo market, where high-quality securities such as US Treasuries are predominately used as collateral. Second, we find that banks obtain liquidity from asset managers, while providing liquidity to hedge funds. We also show that central counterparty (CCP) trades are significantly different from non-CCP ones. Third, we find evidence for collateral rehypothecation – on average, about 30% of collaterals are rehypothecated. Fourth, we find that more than a third of bilateral contracts have zero haircut. We also show that counterparties matter in haircut determination. Hedge funds are charged significantly higher haircuts, whereas larger borrowers with higher ratings receive lower haircuts. We also find that borrower-lender relationships affect haircuts significantly.</p>
+<hr/>
+<h4>Abstract</h4>
+<p>Using a unique transaction-level data, we document that only 60% of bilateral repos held by UK banks are backed by high-quality collateral. Banks intermediate repo liquidity among different counterparties and use central counterparties to reallocate high-quality collateral among themselves. Furthermore, maturity, collateral rating and asset liquidity have important effects on repo liquidity via haircuts. Counterparty types also matter: non-hedge funds, large borrowers, and borrowers with repeated bilateral relationships receive lower (or zero) haircuts. The evidence supports an adverse selection explanation of haircuts, but does not find significant roles for mechanisms related to lenders' liquidity position or default probabilities.</p>
+<p>JEL classification: G01, G12, G21, G23.</p>
+<p>Keywords: repurchase agreement, systemic risk, repo market, margin, haircut.</p> </div>, 'publishdata': '06 July 2022', 'title': 'What drives repo haircuts? Evidence from the UK market', 'url': 'https://www.bis.org/publ/work1027.htm', 'author': 'Christian Julliard, Gabor Pinter, Karamfil Todorov, Kathy Yuan', 'keyword': 'systemic risk, repo market, repurchase agreement, margin, haircut', 'attachment': 'https://www.bis.org/publ/work1027.pdf'}
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+{'body': <div id="cmsContent">
+<p><em>This paper was produced as part of the <a href="/events/ccaresearchconf2021/overview.htm">Final Conference of the BIS-CCA Research Network on "Monetary policy frameworks and communication (2019-2022)"</a>.</em></p>
+<h3>Summary</h3>
+<h4>Focus</h4>
+<p>Under inflation targeting regime, the effectiveness of monetary policy depends on public understanding of central banks' decisions, since expectations are a key channel of the transmission mechanism from policy actions to the economy. Here, private sector analysts play an important role and they shape their expectations in response to central bank announcements and data releases. Thus, it is important to study how private analysts' expectations react to new data and monetary policy decisions.</p>
+<h4>Contribution</h4>
+<p>We study the effects of Mexico's Central Bank monetary policy decisions on the expectations about inflation and monetary policy rate of private forecasters. We used a novel survey with economic variables expectations such as inflation and the policy rate from economic analysts and we estimate a fixed effect model at analyst level using a panel. We study the differences in expectations before and after a monetary policy announcement.</p>
+<h4>Findings</h4>
+<p>We find that professional forecasters <span>''</span>listen'' to the central bank. In other words, the changes in their short-run expectations are different when there are monetary policy announcements. Inflation surprises affect short-term inflation expectations but do not affect long-term inflation expectations suggesting anchored inflation expectations. Additionally, monetary policy surprises have an impact on end-of-the-year inflation expectations and reference rate expectations.</p>
+<hr/>
+<h4>Abstract</h4>
+<p>In this paper we study the effects of Mexico's Central Bank monetary policy decisions on the expectations about inflation and monetary policy rate expectations of private forecasters. We estimate a fixed effect model at analyst level using a panel of professional forecasters from 2010 to 2017. We study the differences in expectations before and after a monetary policy announcement and we compare them when there are no announcements. We find that professional forecasters "listen" to the central bank, i.e. the changes in their short-run expectations are different when there are monetary policy announcements. Also, we find that analysts' surprises in realized inflation affect short-term inflation expectations but do not affect long-term inflation expectations suggesting anchored inflation expectations. Aditionally, monetary policy surprises have an impact on end-of-the-year inflation expectations and reference rate expectations.</p>
+<p>JEL classification: E43, E59, D84, C83.</p>
+<p>Keywords: central bank communication, survey microdata, monetary policy interest rate expectations.</p> </div>, 'publishdata': '14 June 2022', 'title': 'Monetary policy announcements and expectations: the case of Mexico', 'url': 'https://www.bis.org/publ/work1026.htm', 'author': 'Ana Aguilar, Carlo Alcaraz Pribaz, Victoria Nuguer, Jessica Roldán-Peña', 'keyword': 'central bank communication, survey microdata, monetary policy interest rate expectations', 'attachment': 'https://www.bis.org/publ/work1026.pdf'}
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+{'body': <div id="cmsContent">
+<p><em>This paper was produced as part of the <a href="/events/ccaresearchconf2021/overview.htm">Final Conference of the BIS-CCA Research Network on "Monetary policy frameworks and communication (2019-2022)"</a>.</em></p>
+<h3>Summary</h3>
+<h4>Focus</h4>
+<p>All modern central banks have moved to a strategy that includes better communication tools, more transparency and accountability. Associated with this trend, in the last few decades the literature has substantially increased. The recent development of intensive computational tools that can transform text into data, provides additional ways to analyse and corroborate the benefits of greater communication and central banks' sentiment. Textual analysis has become itself a source of information and feedback for central banks.</p>
+<h4>Contribution</h4>
+<p>We use unsupervised Natural Language Processing (NLP) techniques to turn the text that private banks send to their clients about the Mexican economy into vectors of topics. Then, we use NLP to determine the issues that the economic analysts discuss the day before and the day after of the Monetary Policy Announcement (MPA), and also the day before and the day after of the Monetary Policy Minutes in Mexico.</p>
+<h4>Findings</h4>
+<p>We find that every time, private banks cover a large diversity of topics and words before the MPA with no evident consensus of topics, and that almost always the quantities of terms and topics are reduced and repeated by almost every bank after the MPA indicating some surprise, and that the topics vary depending on the date of the MPA. We also found weak evidence that a measure of the size of the changes in the private bank's communication with their clients is positively correlated to changes in the long-term yields but negatively correlated to the size of exchange rate movements.</p>
+<hr/>
+<h4>Abstract</h4>
+<p>We determine if the communication of private banks to their clients with financial interests in Mexico changes or not after Mexico's Central Bank communicates its monetary policy decision (MPD) and also two weeks later, with the publication of the minutes of Mexico's Central Bank monetary policy decision (MMPD) between 2011 and 2019. We use unsupervised Natural Language Processing (NLP) techniques to turn the text that private banks send to their clients about the Mexican economy into vectors of topics. We find that every time, private banks cover a large diversity of topics and words before the MMPD with no evident consensus of topics, and that almost always the quantities of terms and topics are reduced and repeated by almost every bank after the MMPD indicating some surprise (notable exception: the liftoff in December 2015), and that the topics vary depending on the date of the MMPD. The fact that private banks discuss the same topics and write to their clients with sentences that contain the exact same words indicates that the private banks react to the MMPD, independent of their opinion about the Central Bank's statements. We also found weak evidence that a measure of the size of the changes in the private bank's communication with their clients is positively correlated to changes in the long-term yields but negatively correlated to the size of exchange rate movements.</p>
+<p>JEL classification: C6, E5, E6.</p>
+<p>Keywords: natural language processing, unsupervised sentence embedding, central bank communication, Mexico.</p> </div>, 'publishdata': '14 June 2022', 'title': 'Communication, monetary policy, and financial markets in Mexico', 'url': 'https://www.bis.org/publ/work1025.htm', 'author': 'Ana Aguilar, Fernando Pérez-Cervantes', 'keyword': 'Mexico, central bank communication, natural language processing, unsupervised sentence embedding', 'attachment': 'https://www.bis.org/publ/work1025.pdf'}
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+{'body': <div id="cmsContent">
+<p><em>This paper was produced as part of the <a href="/events/ccaresearchconf2021/overview.htm">Final Conference of the BIS-CCA Research Network on "Monetary policy frameworks and communication (2019-2022)"</a>.</em></p>
+<h3>Summary</h3>
+<h4>Focus</h4>
+<p>Forward guidance is a central bank statement that provides direct information about the probable state of monetary policy in the future. Its purpose is to influence interest rate expectations. But how exactly does it do so? This is not yet fully understood.</p>
+<h4>Contribution</h4>
+<p>To study this issue, I construct central bank data that includes forward guidance and its attributes, central bank projections, and quantitative easing, which I then combine with survey data.  I describe how, when, and where forward guidance works and provide the first empirical evidence of the effects of forward guidance when a central bank makes a commitment.</p>
+<h4>Findings</h4>
+<p>I find that forecasters revise their interest rate forecasts in the intended direction by five basis points on average following a change in forward guidance. I provide country estimates for The Federal Reserve, European Central Bank, Bank of England, Bank of Canada, Reserve Bank of Australia, Reserve Bank of New Zealand, Sveriges Riksbank, and Norges Bank. I also provide preliminary evidence that commitment-based forward guidance is exceedingly rare, but can strongly amplify forward guidance. Finally, I provide estimates of the extent to which this effect may be attributable to central bank information effects.</p>
+<hr/>
+<h4>Abstract</h4>
+<p>How forward guidance influences expectations is not yet fully understood. To study this issue, I construct central bank data that includes forward guidance and its attributes, central bank projections, and quantitative easing, which I combine with survey data. I describe how, when, and where forward guidance has worked. I find that forecasters revise their interest rate forecasts in the intended direction by five basis points on average following a change in forward guidance. I provide country estimates for The Federal Reserve, European Central Bank, Bank of England, Bank of Canada, Reserve Bank of Australia, Reserve Bank of New Zealand, Sveriges Riksbank, and Norges Bank. I offer preliminary evidence that commitment-based forward guidance is exceedingly rare, but can strongly amplify forward guidance. Finally, I provide estimates of the extent to which this effect may be attributable to central bank information effects.</p>
+<p>JEL classification: D83, D84, E37, E52, E58.</p>
+<p>Keywords: forward guidance, central bank communication, information effects, expectations, survey data.</p> </div>, 'publishdata': '14 June 2022', 'title': 'Forward guidance and expectation formation: A narrative approach', 'url': 'https://www.bis.org/publ/work1024.htm', 'author': 'Christopher S Sutherland', 'keyword': 'forward guidance, Survey data, expectations, central bank communication, information effects', 'attachment': 'https://www.bis.org/publ/work1024.pdf'}
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+{'body': <div id="cmsContent">
+<p><em>This paper was produced as part of the <a href="/events/ccaresearchconf2021/overview.htm">Final Conference of the BIS-CCA Research Network on "Monetary policy frameworks and communication (2019-2022)"</a>.</em></p>
+<h3>Summary</h3>
+<h4>Focus</h4>
+<p>Central banks around the world distribute press releases detailing their monetary policy decisions. Central banks also include in those publications rationalizations for the policy choices and information about the central bank's economic projections. These documents may help guide the evolution of the policy rates by examining the discussions about future economic conditions.</p>
+<h4>Contribution</h4>
+<p>We examine the central bank press releases of inflation-targeting countries with a relatively long set of document releases. We conduct Latent Dirichlet Allocation to build custom dictionaries for each country, which allows us to account for the way central banks use certain terms and descriptions for their policy decisions and projections. We use an algorithmic Sentiment Analysis with the custom dictionary to calculate sentiment indices. We examine how these sentiment scores help predict future policy rate movements and evaluate how these indices co-move over time. Lastly, we evaluate the average impact of the sentiment index of the Federal Reserve press releases on the projections of sentiment scores of future press releases of other central banks.</p>
+<h4>Findings</h4>
+<p>For a significant majority of inflation-targeting countries, the sentiment indices help predict the monetary policy changes in the short and medium term. Central banks can use the sentiment index to further refine their monetary policy press releases and more effectively convey information about their policy expectations. Moreover, many of the sentiment indices we evaluated have strong co-movements, especially during turbulent economic episodes, such as the Great Financial Crisis. This reflects the similarity in what central banks focus on as they make decisions about optimal monetary policy.</p>
+<hr/>
+<h4>Abstract</h4>
+<p>Around the world, several countries have adopted inflation targeting as their monetary policy framework. These institutions set their target interest rates in monetary policy meetings. These decisions are then circulated through press releases that explain the policy rationale. The information contained in the press releases includes current policies, economic outlook, and signals about likely future policies. In this paper, using linguistic methods, such as Latent Dirichlet Allocation (LDA) and semi-automated content analysis, we examine the information contained in the monetary press releases of inflation targeting countries. In addition, we build a custom dictionary for analyzing monetary policy press releases. Using Semi-automated Content Analysis, we then develop a measure, which we refer to as the Sentiment Score index, that quantifies the policy tilt implied in the information provided in the press releases. We find that for a significant majority of the in flation targeting countries, the index provides additional information that helps predict monetary policy rate movements.</p>
+<p>JEL classification: E44, E52, E58.</p>
+<p>Keywords: central bank, financial market, monetary policy, communication.</p> </div>, 'publishdata': '14 June 2022', 'title': 'Monetary policy press releases: an international comparison', 'url': 'https://www.bis.org/publ/work1023.htm', 'author': 'Mario Gonzalez, Raul Cruz Tadle', 'keyword': 'monetary policy, central bank, communication, financial market', 'attachment': 'https://www.bis.org/publ/work1023.pdf'}
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+{'body': <div id="cmsContent">
+<p><em>This paper was produced as part of the <a href="/events/ccaresearchconf2021/overview.htm">Final Conference of the BIS-CCA Research Network on "Monetary policy frameworks and communication (2019-2022)"</a>.</em></p>
+<h3>Summary</h3>
+<h4>Focus</h4>
+<p>Communication is nowadays an essential instrument in the conduct of monetary policy. Consequently, central banks are interested in assessing their communications strategies in order to determine whether or not information is disseminated with clarity and in such a way that they contribute to the effectiveness of monetary policy.</p>
+<h4>Contribution</h4>
+<p>We analyze Banco de la Republica's (Colombian Central Bank) communication by studying the effect on interest rates at different terms (i.e. the yield curve) of the delivery of information to the public through two different outlets, the minutes of the monetary policy committee's meetings and inflation reports. We analyze both numeric and textual information (from 2011-Q2 to 2018-Q4) to determine whether or not there is a significant impact of Banco de la Republica's communication on the yield curve. The methodology also allows us to determine the specific types of information that explain such an impact.</p>
+<h4>Findings</h4>
+<p>We find no evidence that numeric information, namely the inflation and output growth forecasts contained in the inflation reports, has an impact on market rates. Regarding narrative information, we find that: (i) for inflation reports, there is evidence that it has a significant effect on just some of the market rates, and (ii) for the minutes, there is a significant impact on all the market rates analyzed. We also find that topics such as "domestic demand and economic sectors" and "inflation: target and inflation expectations" are the most relevant ones in the case of the minutes.</p>
+<hr/>
+<h4>Abstract</h4>
+<p>We analyze the effect on the yield curve of Banco de la Republica's communication through two specific outlets, the minutes of the monetary policy meetings and the inflation reports during the period 2011-Q2 to 2018-Q4. We extract numeric information from the inflation reports' fan charts, and narrative information -using Latent Dirichlet Allocation, a computational linguistics tool- from the text of both outlets. We use an event-study approach to analyze the impact on four specific maturities: one-year spot, three-year forward, five-year forward and five-year ahead five-year forward rates. We find no evidence that numeric information has any effect on market yields. Regarding narrative variables we find that (i) for the inflation report, there is a significant effect on just two yields (one-year spot and five-year forward), and (ii) for the minute, there is a significant effect on all yields. We believe that these results may be explained by the publication lag of the inflation report during the period of analysis.</p>
+<p>JEL classification: E52, E58, C40, G14.</p>
+<p>Keywords: communication, monetary policy, text mining, event study, yield curve.</p> </div>, 'publishdata': '14 June 2022', 'title': "Effects of Banco de la Republica's communication on the yield curve", 'url': 'https://www.bis.org/publ/work1022.htm', 'author': 'Luis Fernando Melo, Juan J Ospina-Tejeiro, Julian A Parra-Polania', 'keyword': 'monetary policy, event study, communication, yield curve, text mining', 'attachment': 'https://www.bis.org/publ/work1022.pdf'}
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+{'body': <div id="cmsContent">
+<p><em>This paper was produced as part of the <a href="/events/ccaresearchconf2021/overview.htm">Final Conference of the BIS-CCA Research Network on "Monetary policy frameworks and communication (2019-2022)"</a>.</em></p>
+<h3>Summary</h3>
+<h4>Focus</h4>
+<p>There is a widespread consensus that central bank communication influences the expectations of economic agents, and that increasing transparency enhances the effectiveness of monetary policy. Central bank communication has moved beyond simply informing agents on the perceived current and future state of the economy to becoming a key instrument to anchor inflation expectations. Therefore, it is essential to assess whether the central bank is efficiently communicating the intended signals to market and economic agents.</p>
+<h4>Contribution</h4>
+<p>We use computational linguistic techniques to analyze the content and tone of the statements and minutes of the Monetary Policy Committee (Copom) of the Banco Central do Brasil. We construct sentiment indexes that measure the perception of the Copom on inflation, economic activity and uncertainty, based on dictionary methods applied to a hierarchical Latent Dirichlet Allocation (hLDA) model combined with feature selection techniques. This assures that every topic in the tree contains meaningful words for proper analysis, favors interpretability, and provides relations between themes without intervention by the researcher. The resulting sentiment indexes are compared with actual data to assess whether the Copom documents reflect the state of the economy. The model also allows for evaluating the coherence between statements and minutes.  </p>
+<h4>Findings</h4>
+<p>The Copom statements and minutes properly communicate the actual state of the economy, although the correlation between sentiment indexes and economic variables was affected by significant changes in Banco Central do Brasil's communication in July 2016. This event affected the correlation between the indexes and observables and their volatility, which can be partially attributed to changes in the average number of words dedicated to topics associated with a specific subject. Even though statements do not share the same information with all details present in minutes, they both deliver the same message.</p>
+<hr/>
+<h4>Abstract</h4>
+<p>Central bank communication is a key tool in managing inflation expectations. This paper proposes a hierarchical Latent Dirichlet Allocation (hLDA) model combined with feature selection techniques to allow an endogenous selection of topic structures associated with documents published by Banco Central do Brasil's Monetary Policy Committee (Copom). These computational linguistic techniques allow building measures of the content and tone of Copom's minutes and statements. The effects of the tone are measured in different dimensions such as inflation, inflation expectations, economic activity, and economic uncertainty. Beyond the impact on the economy, the hLDA model is used to evaluate the coherence between the statements and the minutes of Copom's meetings.</p>
+<p>JEL classification: E02, E21, E22.</p>
+<p>Keywords: communication, monetary policy, latent dirichlet allocation, Brazil, Central Bank.</p> </div>, 'publishdata': '14 June 2022', 'title': 'Seeing the forest for the trees: Using hLDA models to evaluate communication in Banco Central do Brasil', 'url': 'https://www.bis.org/publ/work1021.htm', 'author': 'Angelo M Fasolo, Flávia M Graminho, Saulo B Bastos', 'keyword': 'monetary policy, central bank, communication, Brazil, latent dirichlet allocation', 'attachment': 'https://www.bis.org/publ/work1021.pdf'}
+
+
+----------------------------------------------------------------------------------------------------

@@ -4,13 +4,16 @@ from bs4 import BeautifulSoup
 from common.Logger import *
 from model.article import Article
 import re
+from common.timetransformer import TimeTransformer
+from utils.ormutils import create_table
 
 
 class FEDSNOTESWorkingPaperRunner(BaseRunner):
     def __init__(self):
         super(FEDSNOTESWorkingPaperRunner, self).__init__(
-            "FEDSNOTES working papers",
-            "https://www.federalreserve.gov/econres/notes/feds-notes/default.htm"
+            website="FEDSNOTES",
+            kind="working_paper",
+            home_url="https://www.federalreserve.gov/econres/notes/feds-notes/default.htm"
         )
 
     def get_page_num(self):
@@ -106,18 +109,29 @@ class FEDSNOTESWorkingPaperRunner(BaseRunner):
 
             # 日期
             publish_date = lst[0]
+            try:
+                publish_date = TimeTransformer.strtimeformat(publish_date, "%B %d, %Y")
+            except:
+                publish_date=None
 
             # 拿到keywords,该网站并没有
             keywords = None
 
             # 附件,没有对应的pdf
             attachment_url = None
-
             # 存储到结构体
-            saved_data = Article(publish_date, body, title, art_url, authors, keywords, attachment_url)
-            logger.info(saved_data.display())
-            # 中文文本
-            # ch_text = saved_data.get_ch_text
+            saved_data = Article.create(
+                website=self.website,
+                kind=self.kind,
+                publish_date=publish_date,
+                body=body,
+                title=title,
+                url=art_url,
+                author=authors,
+                keyword=keywords,
+                attachment=attachment_url
+            )
+            # logger.info(saved_data.display())
             logger.info("get temp article information successfully")
             return saved_data
 
@@ -156,6 +170,7 @@ class FEDSNOTESWorkingPaperRunner(BaseRunner):
 
             # 日期的class标签都是pub-desc hide
             publish_date = html_data_p[0].text.strip()
+            publish_date = TimeTransformer.strtimeformat(publish_date, "%B %d, %Y")
 
             # 拿到keywords,该网站并没有
             keywords = None
@@ -164,16 +179,24 @@ class FEDSNOTESWorkingPaperRunner(BaseRunner):
             attachment_url = None
 
             # 存储到结构体
-            saved_data = Article(publish_date, body, title, art_url, authors, keywords, attachment_url)
-            logger.info(saved_data.display())
-            # 中文文本
-            # ch_text = saved_data.get_ch_text
+            saved_data = Article.create(
+                website=self.website,
+                kind=self.kind,
+                publish_date=publish_date,
+                body=body,
+                title=title,
+                url=art_url,
+                author=authors,
+                keyword=keywords,
+                attachment=attachment_url
+            )
+            # logger.info(saved_data.display())
             logger.info("get temp article information successfully")
             return saved_data
 
-        pattern = r"\d{4}"
-        # 获取年份信息
-        year = int(re.findall(pattern, url)[0])
+        # pattern = r"\d{4}"
+        # # 获取年份信息
+        # year = int(re.findall(pattern, url)[0])
 
         to_save = parse_page_style1(url)
         if to_save is not None:
@@ -184,14 +207,29 @@ class FEDSNOTESWorkingPaperRunner(BaseRunner):
                 raise Exception
             return to_save2
 
-        # if year <= 2016:
-        #     return parse_page_style1(url)
-        # else:
-        #     return parse_page_style2(url)
-
-    def get_list(self, start_from=2013):
-        total_page_num = self.get_page_num()
+    def get_list(self, start_from=2013, end_at=None):
+        if end_at is None:
+            end_at = self.get_page_num() + start_from
         res = []
-        for i in range(start_from, start_from + total_page_num):
+        for i in range(start_from,  end_at):
             res.extend(self.get_one_list(i))
         return res
+
+    def run(self, start_from=2013, end_at=None):
+        """
+        把上面两个函数跑通
+        :return:
+        """
+        create_table(Article)
+        logger.info("开始爬取 {}: {}", self.website + self.kind, self.home_url)
+
+        urls = self.get_list(start_from=start_from, end_at=end_at)
+        logger.info("获取列表 {}", len(urls))
+
+        n_articles = len(urls)
+        for i, url in enumerate(urls):
+            logger.info("({}/{}) 爬取文章: {}", i + 1, n_articles, url)
+            article = self.parse_page(url)
+            Article.save(article)
+
+

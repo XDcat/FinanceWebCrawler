@@ -4,13 +4,15 @@ from bs4 import BeautifulSoup
 from common.Logger import *
 from model.article import Article
 import json
+from common.timetransformer import TimeTransformer
 
 
 class FEDSpeechesRunner(BaseRunner):
     def __init__(self):
         super(FEDSpeechesRunner, self).__init__(
-            "FED Speeches",
-            "https://www.federalreserve.gov/newsevents/speeches.htm"
+            website="FED",
+            kind="speech",
+            home_url="https://www.federalreserve.gov/newsevents/speeches.htm"
         )
 
     def get_page_num(self):
@@ -78,6 +80,9 @@ class FEDSpeechesRunner(BaseRunner):
         publish_date = data.select("p[class='article__time']")
         if len(publish_date) > 0:
             publish_date = publish_date[0].text
+            publish_date = TimeTransformer.strtimeformat(publish_date, "%B %d, %Y")
+        else:
+            publish_date = None
 
         # 拿到keywords,该网站并没有
         keywords = None
@@ -87,11 +92,22 @@ class FEDSpeechesRunner(BaseRunner):
         attachment_url = data.select("div[class=shareDL]>a")
         if len(attachment_url) > 0:
             attachment_url = pre + attachment_url[0].get("href")
+        else:
+            attachment_url = None
 
         # 存储到结构体
-        saved_data = Article(publish_date, body, title, art_url, authors, keywords, attachment_url)
-        logger.info(saved_data.display())
-        # 中文文本
-        # ch_text = saved_data.get_ch_text
+        saved_data = Article.create(
+            website=self.website,
+            kind=self.kind,
+            publish_date=publish_date,
+            body=body,
+            title=title,
+            url=art_url,
+            author=authors,
+            keyword=keywords,
+            attachment=attachment_url
+        )
+        # logger.info(saved_data.display())
+
         logger.info("get temp article information successfully")
         return saved_data

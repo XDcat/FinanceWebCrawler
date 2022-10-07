@@ -3,13 +3,17 @@ from bs4 import BeautifulSoup
 from crawler.base_runner import BaseRunner
 from common.Logger import logger
 from model.article import Article
+import time
+from common.timetransformer import TimeTransformer
+from utils.ormutils import create_table
 
 
 class IMFWorkingPaperRunner(BaseRunner):
     def __init__(self):
         super(IMFWorkingPaperRunner, self).__init__(
-            "IMF working paper",
-            "https://www.imf.org/en/publications/search?when=After&series=IMF%20Working%20Papers"
+            website="IMF",
+            kind="working_paper",
+            home_url="https://www.imf.org/en/publications/search?when=After&series=IMF%20Working%20Papers"
         )
 
     def get_page_num(self):
@@ -46,8 +50,6 @@ class IMFWorkingPaperRunner(BaseRunner):
         # 建立查询
         response = self.session.get(self.home_url)
         response.encoding = 'utf-8'
-
-        html = BeautifulSoup(response.content, "html.parser")
         pagenums=self.get_page_num()
         logger.info(f"reading page{page_num} now,totally {pagenums} in all.")
         # 访问htm数据，这也是个html,采用post方法,将参数传给body
@@ -97,7 +99,9 @@ class IMFWorkingPaperRunner(BaseRunner):
         # 这个网站作者和日期的class标签都是pub-desc hide
         author_list, publish_date = data.find_all('p', class_="pub-desc hide")
         authors = "".join([author_div.text.strip() for author_div in author_list])
+
         publish_date = publish_date.text.strip()
+        publish_date = TimeTransformer.strtimeformat(publish_date, "%B %d, %Y")
 
         # 拿到keywords
         keywords = data.find("meta", attrs={"name": "Keywords"})
@@ -107,19 +111,45 @@ class IMFWorkingPaperRunner(BaseRunner):
         # 拿到附件
         attachment_url1 = data.select("section p[class=pub-desc] a")[0]
         if attachment_url1 is None:
-            attachment_url2 = data.find("a", class_="piwik_download").get("href")
+            attachment_url2 = data.find("a", class_="piwik_download")
             if attachment_url2 is None:
                 raise Exception("url not found")
             else:
-                attachment_url = attachment_url2.get("content")
+                attachment_url = attachment_url2.get("href")
         else:
             attachment_url = attachment_url1.get("href")
         # 合并
         attachment_url = "https://www.imf.org" + attachment_url
         # 存储到结构体
-        saved_data = Article(publish_date, body, title, art_url, authors, keywords, attachment_url)
-        logger.info(saved_data.display())
-        # 中文文本
-        # ch_text = saved_data.get_ch_text
+        saved_data = Article.create(
+            website=self.website,
+            kind=self.kind,
+            publish_date=publish_date,
+            body=body,
+            title=title,
+            url=art_url,
+            author=authors,
+            keyword=keywords,
+            attachment=attachment_url
+        )
         logger.info("get temp article information successfully")
         return saved_data
+
+
+    def run(self, start_from=1, end_at=None):
+        """
+        把上面两个函数跑通
+        :return:
+        """
+        create_table(Article)
+        logger.info("开始爬取 {}: {}", self.website + self.kind, self.home_url)
+
+        urls = self.get_list(start_from=start_from, end_at=end_at)
+        logger.info("获取列表 {}", len(urls))
+
+        n_articles = len(urls)
+        for i, url in enumerate(urls):
+            logger.info("({}/{}) 爬取文章: {}", i + 1, n_articles, url)
+            time.sleep(0.1)
+            article = self.parse_page(url)
+            Article.save(article)

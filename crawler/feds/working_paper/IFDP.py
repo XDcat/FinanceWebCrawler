@@ -3,13 +3,16 @@ import datetime
 from bs4 import BeautifulSoup
 from common.Logger import *
 from model.article import Article
+from common.timetransformer import TimeTransformer
+from utils.ormutils import create_table
 
 
 class IFDPWorkingPaperRunner(BaseRunner):
     def __init__(self):
         super(IFDPWorkingPaperRunner, self).__init__(
-            "IFDP working papers",
-            "https://www.federalreserve.gov/econres/ifdp/index.htm"
+            website="IFDP",
+            kind="working_paper",
+            home_url="https://www.federalreserve.gov/econres/ifdp/index.htm"
         )
 
     def get_page_num(self):
@@ -52,7 +55,6 @@ class IFDPWorkingPaperRunner(BaseRunner):
             urls.append(pre + href)
         logger.info(f"get urls from {guide_url} successfully, get {len(urls)} urls in all.")
 
-        print(urls)
         return urls
 
     def parse_page(self, url):
@@ -84,11 +86,14 @@ class IFDPWorkingPaperRunner(BaseRunner):
         authors = html_data_part[1].text.strip()
 
         # 日期的class标签都是pub-desc hide
-        publish_date = html_data_part[0].text.strip()
+        publish_date_list = html_data_part[0].text.strip().split("\n")
+        publish_date = publish_date_list[0].strip()
+        publish_date = TimeTransformer.strtimeformat(publish_date, "%B %Y")
 
         # 拿到keywords,该网站并没有
         keywords = None
 
+        attachment_url = None
         # 附件
         pre = "https://www.federalreserve.gov"
         for i in range(3, len(html_data_part)):
@@ -101,16 +106,44 @@ class IFDPWorkingPaperRunner(BaseRunner):
             attachment_url = pre + attachment_url.get("href")
 
         # 存储到结构体
-        saved_data = Article(publish_date, body, title, art_url, authors, keywords, attachment_url)
-        logger.info(saved_data.display())
-        # 中文文本
-        # ch_text = saved_data.get_ch_text
+        saved_data = Article.create(
+            website=self.website,
+            kind=self.kind,
+            publish_date=publish_date,
+            body=body,
+            title=title,
+            url=art_url,
+            author=authors,
+            keyword=keywords,
+            attachment=attachment_url
+        )
+        # logger.info(saved_data.display())
         logger.info("get temp article information successfully")
         return saved_data
 
-    def get_list(self, start_from=1971):
-        total_page_num = self.get_page_num()
+    def get_list(self, start_from=2000, end_at=None):
+        if end_at is None:
+            end_at = self.get_page_num() + start_from
         res = []
-        for i in range(start_from, start_from + total_page_num):
+        for i in range(start_from, end_at):
             res.extend(self.get_one_list(i))
         return res
+
+    def run(self, start_from=2000, end_at=None):
+        """
+        把上面两个函数跑通
+        :return:
+        """
+        create_table(Article)
+        logger.info("开始爬取 {}: {}", self.website + self.kind, self.home_url)
+
+        urls = self.get_list(start_from=start_from, end_at=end_at)
+        logger.info("获取列表 {}", len(urls))
+
+        n_articles = len(urls)
+        for i, url in enumerate(urls):
+            logger.info("({}/{}) 爬取文章: {}", i + 1, n_articles, url)
+            article = self.parse_page(url)
+            Article.save(article)
+
+
