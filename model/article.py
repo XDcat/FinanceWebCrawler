@@ -35,11 +35,11 @@ class Article(BaseModel):
         展示所有信息
         :return:
         """
-        name = ["body", 'publishdata', 'title', 'url', 'author', 'keyword', 'attachment']
-        inform = [self.body, self.publish_date, self.title, self.url, self.author, self.keyword, self.attachment]
+        name = ["aid", 'website', 'kind', 'publish_date', 'title', 'url', 'author', 'keyword', 'attachment', 'body']
+        inform = [self.aid, self.website, self.kind, self.publish_date, self.title, self.url, self.author, self.keyword,
+                  self.attachment, self.body]
         return dict(zip(name, inform))
 
     def __str__(self):
         res = str(self.display())
         return res
-
