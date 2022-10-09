@@ -1,7 +1,7 @@
 from crawler.base_runner import BaseRunner
 import datetime
 from bs4 import BeautifulSoup
-from loguru import logger
+from common.Logger import *
 from model.article import Article
 from common.timetransformer import TimeTransformer
 from utils.ormutils import create_table
