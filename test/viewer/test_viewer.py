@@ -1,6 +1,6 @@
 import unittest
 from view.viewer import *
-from controller.article_selector import ArticleSelector
+from controller.article_controller import ArticleController
 
 
 class MyTestCase(unittest.TestCase):
@@ -19,7 +19,7 @@ class MyTestCase(unittest.TestCase):
         document.save(r"E:\crawler\FinanceWebCrawler\results\test.docx")
 
     def test_viewer(self):
-        arts=ArticleSelector.select_arts_from_db("2022-09-01","2022-09-30")
+        arts=ArticleController.select_arts_from_db("2022-09-01", "2022-09-30")
         for art in arts:
             vw=ArticleViewer(art)
             vw.publish_en_report()

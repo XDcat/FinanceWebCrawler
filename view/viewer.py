@@ -5,7 +5,6 @@ from config import report_prefix_path
 from bs4 import BeautifulSoup
 
 
-
 def add_hyperlink(paragraph, url, text, color, underline):
     """
     A function that places a hyperlink within a paragraph object.
@@ -32,15 +31,15 @@ def add_hyperlink(paragraph, url, text, color, underline):
 
     # Add color if it is given
     if not color is None:
-      c = docx.oxml.shared.OxmlElement('w:color')
-      c.set(docx.oxml.shared.qn('w:val'), color)
-      rPr.append(c)
+        c = docx.oxml.shared.OxmlElement('w:color')
+        c.set(docx.oxml.shared.qn('w:val'), color)
+        rPr.append(c)
 
     # Remove underlining if it is requested
-    if not underline:
-      u = docx.oxml.shared.OxmlElement('w:u')
-      u.set(docx.oxml.shared.qn('w:val'), 'none')
-      rPr.append(u)
+    if underline:
+        u = docx.oxml.shared.OxmlElement('w:u')
+        u.set(docx.oxml.shared.qn('w:val'), 'single')
+        rPr.append(u)
 
     # Join all the xml elements together add add the required text to the w:r element
     new_run.append(rPr)
@@ -52,18 +51,16 @@ def add_hyperlink(paragraph, url, text, color, underline):
     return hyperlink
 
 
-
 class ArticleViewer:
 
-    def __init__(self,article):
+    def __init__(self, article):
         """
         需要article作为参数
         :param article: article数据结构
         """
-        self.article=article
+        self.article = article
 
-
-    def publish_en_report(self,result_path=None):
+    def publish_en_report(self, result_path=None):
         # 传值
         aid = self.article.aid
         website = self.article.website
@@ -76,22 +73,21 @@ class ArticleViewer:
         keyword = self.article.keyword
         attachment = self.article.attachment
 
-        special_char="\\ / : * ? \" \" \' \' < > |".split(" ")
+        special_char = "\\ / : * ? \" \" \' \' < > |".split(" ")
         # 去除title中的特殊字符
         for char in special_char:
             if char in title:
-                title=title.replace(char,"")
+                title = title.replace(char, "")
 
         if result_path is None:
-            result_path_pre= os.path.join(report_prefix_path,"{}-{}/".format(website,kind))
-            doc_name ="{}-{}.docx".format(publish_date.replace(" ",""),title)
+            result_path_pre = os.path.join(report_prefix_path, "{}/{}-{}/".format(publish_date[:7], website, kind))
+            doc_name = "{}-{}.docx".format(publish_date.replace(" ", ""), title)
             if not os.path.exists(result_path_pre):
                 os.makedirs(result_path_pre)
-            result_path=result_path_pre+doc_name
+            result_path = result_path_pre + doc_name
 
         # 新建文档对象按模板新建 word 文档文件，具有模板文件的所有格式
         doc = docx.Document()
-
 
         # 增加标题:add_heading(self, text="", level=1):
         doc.add_heading(text=title, level=0)
@@ -108,23 +104,21 @@ class ArticleViewer:
         else:
             doc.add_paragraph(f'Keyword:NA')
 
-        # 添加url
-        if url is not None:
-            p=doc.add_paragraph("Url:")
-            # 在段落中添加文字块，add_run(self, text=None, style=None):返回一个 run 对象
-            hyperlink = add_hyperlink(p, url,  'click here', 'FF8822', False)
-        else:
-            doc.add_paragraph("Url:NA")
-
         # 添加附件，如果有就写上
         if attachment is not None:
-            p=doc.add_paragraph("Attachment:")
+            p = doc.add_paragraph("Attachment:")
             # 在段落中添加文字块，add_run(self, text=None, style=None):返回一个 run 对象
-            hyperlink = add_hyperlink(p, attachment,  'click here', 'FF8822', False)
+            hyperlink = add_hyperlink(p,attachment ,"Link", '0000FF', underline=True)
         else:
             doc.add_paragraph("Attachment:NA")
 
-        doc.add_paragraph(f"From:{website}-{kind}")
+        # 添加url
+        if url is not None:
+            p = doc.add_paragraph(f"From:")
+            # 在段落中添加文字块，add_run(self, text=None, style=None):返回一个 run 对象
+            hyperlink = add_hyperlink(p, url, f"{website}-{kind}", '0000FF', underline=True)
+        else:
+            doc.add_paragraph(f"From:{website}-{kind} NA")
 
         # 处理源码字符串，转换为文本
         body = BeautifulSoup(body, "html.parser")
@@ -132,5 +126,3 @@ class ArticleViewer:
 
         # 保存文件
         doc.save(result_path)
-
-
