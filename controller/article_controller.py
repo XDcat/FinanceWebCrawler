@@ -5,10 +5,10 @@ import datetime
 from common.timetransformer import TimeTransformer
 
 
-class ArticleSelector:
+class ArticleController:
 
     @staticmethod
-    def select_arts_from_db(start_date=None, end_date=None, website=None, kind=None, ):
+    def select_arts_from_db(start_date=None, end_date=None, website=None, kind=None):
 
         condition_lst = []
         if start_date is not None:
@@ -42,13 +42,13 @@ class ArticleSelector:
             start_month -= 1
         start_timestamp = f"{start_year} {start_month} 1"
         start_timestamp = TimeTransformer.strtimeformat(start_timestamp, "%Y %m %d")
-        articles_tup = ArticleSelector.select_arts_from_db(start_timestamp, now)
+        articles_tup = ArticleController.select_arts_from_db(start_timestamp, now)
         return articles_tup
 
     @staticmethod
     def fetch_article(start_date, end_date):
 
-        articles_tup = ArticleSelector.select_arts_from_db(start_date, end_date)
+        articles_tup = ArticleController.select_arts_from_db(start_date, end_date)
         for article in articles_tup:
             ar = ArticleViewer(article)
             ar.publish_en_report()
