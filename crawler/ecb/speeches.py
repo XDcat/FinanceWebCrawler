@@ -1,7 +1,7 @@
 from crawler.base_runner import BaseRunner
 import datetime
 from bs4 import BeautifulSoup
-from common.Logger import *
+from loguru import logger
 from model.article import Article
 from common.timetransformer import TimeTransformer
 from utils.ormutils import create_table
@@ -79,7 +79,7 @@ class ECBSpeechesRunner(BaseRunner):
             pubdata = pubdata.text.split(",")
             publish_date = pubdata[-1].strip()
             # 拿到作者
-            authors = ",".join(pubdata[:-1]).strip()
+            # authors = ",".join(pubdata[:-1]).strip()
             publish_date = TimeTransformer.strtimeformat(publish_date, "%d %B %Y")
         else:
             # 另一种格式的
@@ -91,10 +91,21 @@ class ECBSpeechesRunner(BaseRunner):
                     publish_date = TimeTransformer.strtimeformat(publish_date, "%d %B %Y")
                 except ValueError as v:
                     publish_date = None
-                authors = pubdata[0].strip()
+                # authors = pubdata[0].strip()
             else:
                 publish_date = None
-                authors = None
+                # authors = None
+
+        # 拿到作者
+        author_html = data.select("h2")
+        if len(author_html) > 0:
+            author_string = author_html[0].text.strip().split(",")
+            if len(author_string) > 0:
+                authors = author_string[0].split("by")
+                if len(authors)>1:
+                    authors=authors[1].strip()
+                else:
+                    authors=authors[0].strip()
 
         # 拿到正文html源码
         body = data.select("main div[class=section]")
@@ -131,10 +142,9 @@ class ECBSpeechesRunner(BaseRunner):
             attachment=attachment_url
         )
 
-        logger.info(saved_data.display())
+        # logger.info(saved_data.display())
         logger.info("get temp article information successfully")
         return saved_data
-
 
     def run(self, start_from=1, end_at=None):
         """
