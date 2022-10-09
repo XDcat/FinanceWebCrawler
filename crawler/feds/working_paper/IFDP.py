@@ -68,7 +68,7 @@ class IFDPWorkingPaperRunner(BaseRunner):
         response.encoding = 'utf-8'
         data = BeautifulSoup(response.content, "html.parser")
         # 拿到标题
-        title = data.find("div", id="page-title")
+        title = data.find("title")
         if title is not None:
             title = title.text.strip()
         # 拿到正文html源码
