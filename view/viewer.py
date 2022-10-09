@@ -76,7 +76,7 @@ class ArticleViewer:
         keyword = self.article.keyword
         attachment = self.article.attachment
 
-        special_char=r"\ / : * ? " " < > |".split(" ")
+        special_char="\\ / : * ? \" \" \' \' < > |".split(" ")
         # 去除title中的特殊字符
         for char in special_char:
             if char in title:
@@ -132,10 +132,5 @@ class ArticleViewer:
 
         # 保存文件
         doc.save(result_path)
-
-
-
-
-
 
 
