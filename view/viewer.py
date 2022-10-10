@@ -127,8 +127,15 @@ class ArticleViewer:
 
         # 处理源码字符串，转换为文本
         body = BeautifulSoup(body, "html.parser")
-        para = doc.add_paragraph(text=body.text)
-        para.paragraph_format.first_line_indent = Pt(10)  # 首行缩进10磅
+        text_list = body.text.split("\n")
+
+        for text in text_list:
+            if not text.isspace():
+                para = doc.add_paragraph(text=text.strip())
+                para.paragraph_format.first_line_indent = Pt(10)  # 首行缩进10磅
+
+        # para = doc.add_paragraph(text=body.text)
+        # para.paragraph_format.first_line_indent = Pt(10)  # 首行缩进10磅
 
         # 保存文件
         doc.save(result_path)
@@ -200,8 +207,14 @@ class ArticleViewer:
             doc.add_paragraph(f"From:{website}-{kind} NA")
 
         # 处理源码字符串，转换为文本
-        para=doc.add_paragraph(text=self.article.ch_text, style=cn_style)
-        para.paragraph_format.first_line_indent = Pt(10)  # 首行缩进10磅
+        # text_list = self.article.ch_text
+
+        # para = doc.add_paragraph(text=self.article.ch_text, style=cn_style)
+        text_list = self.article.ch_text.split("\n")
+        for text in text_list:
+            if not text.isspace():
+                para = doc.add_paragraph(text=text, style=cn_style)
+                para.paragraph_format.first_line_indent = Pt(10)  # 首行缩进10磅
 
         # 保存文件
         doc.save(result_path)

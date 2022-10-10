@@ -5,7 +5,6 @@ from controller.article_controller import ArticleController
 
 class MyTestCase(unittest.TestCase):
 
-
     def test_href(self):
         document = docx.Document()
         p = document.add_paragraph()
@@ -19,17 +18,12 @@ class MyTestCase(unittest.TestCase):
         document.save(r"E:\crawler\FinanceWebCrawler\results\test.docx")
 
     def test_viewer(self):
-        arts=ArticleController.select_arts_from_db("2022-09-01", "2022-09-30")
+        arts = ArticleController.select_arts_from_db("2022-09-01", "2022-09-30")
         for art in arts:
-            vw=ArticleViewer(art)
+            vw = ArticleViewer(art)
             vw.publish_en_report()
             vw.publish_cn_report()
 
     def test_char(self):
-        special_char=r"\ / : * ? " " < > |".split(" ")
+        special_char = r"\ / : * ? " " < > |".split(" ")
         print(special_char)
-
-
-
-
-
