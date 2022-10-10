@@ -78,9 +78,9 @@ class FEDSWorkingPaperRunner(BaseRunner):
         # 拿到正文html源码
         html_data_part = data.select("div[class=row] div[class='col-lg-8 col-md-8 col-sm-12 col-xs-12'] p")
 
-        body = html_data_part[3]
+        body = data.select("div[class=row] div[class='col-lg-8 col-md-8 col-sm-12 col-xs-12']")[0]
         # 有文章没有Summary，直接空着了
-        if len(body.text) < 20:
+        if len(body.text) < 40:
             body = None
 
         # 拿到url
