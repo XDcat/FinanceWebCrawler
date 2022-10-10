@@ -52,3 +52,8 @@ class ArticleController:
         for article in articles_tup:
             ar = ArticleViewer(article)
             ar.publish_en_report()
+
+    @staticmethod
+    def update_db():
+        # todo 更新数据库
+        pass
