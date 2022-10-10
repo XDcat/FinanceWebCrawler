@@ -34,5 +34,10 @@ class Translator:
         response = session.post('https://fanyi-api.baidu.com/api/trans/vip/translate', data=data)
         response.encoding = 'utf-8'
         text = response.json()  # 返回的为json格式用json接收数据
+        if "error_code" in text.keys():
+            print(text)
+            raise Exception("翻译API出现问题")
         translated_text = '\n'.join([text['trans_result'][i]['dst'] for i in range(len(text['trans_result']))])
+
+
         return translated_text
