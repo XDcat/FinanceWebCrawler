@@ -23,6 +23,7 @@ class MyTestCase(unittest.TestCase):
         for art in arts:
             vw=ArticleViewer(art)
             vw.publish_en_report()
+            vw.publish_cn_report()
 
     def test_char(self):
         special_char=r"\ / : * ? " " < > |".split(" ")
