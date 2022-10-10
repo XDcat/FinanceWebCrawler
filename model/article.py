@@ -1,6 +1,7 @@
 from peewee import *
 from common.translate import Translator
 from .base_model import BaseModel
+from bs4 import BeautifulSoup
 
 
 class Article(BaseModel):
@@ -28,7 +29,8 @@ class Article(BaseModel):
         :param key: 翻译API密码
         :return: 中文文本
         """
-        return Translator.translate(self.body, appid='20220914001342952', key='Q_SNAXetAkmZq2yaV4o_')
+        body_html=BeautifulSoup(self.body, "html.parser")
+        return Translator.translate(body_html.text, appid='20220914001342952', key='Q_SNAXetAkmZq2yaV4o_')
 
     def display(self):
         """
