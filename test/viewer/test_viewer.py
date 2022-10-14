@@ -21,8 +21,9 @@ class MyTestCase(unittest.TestCase):
         arts = ArticleController.select_arts_from_db("2022-09-01", "2022-09-30")
         for art in arts:
             vw = ArticleViewer(art)
+
             vw.publish_en_report()
-            vw.publish_cn_report()
+            # vw.publish_cn_report()
 
     def test_char(self):
         special_char = r"\ / : * ? " " < > |".split(" ")
