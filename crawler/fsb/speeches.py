@@ -74,7 +74,7 @@ class FSBSpeechesRunner(BaseRunner):
             publish_date = art.find("span", class_="media-date pull-right").text
             publish_date = TimeTransformer.strtimeformat(publish_date, "%d %B %Y")
             # 拿到正文html源码
-            body = art.find("span", class_="media-excerpt").text.strip()
+            body = art.find("span", class_="media-excerpt")
 
             # 拿到url
             art_url = art.find("a").get("href")
