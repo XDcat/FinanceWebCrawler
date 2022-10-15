@@ -8,5 +8,9 @@ class TestWorkingPaper(TestCase):
         self.runner = ECBWorkingPaperRunner()
 
     def test_run(self):
-        res = self.runner.run()
+        res = self.runner.run(start_from=2022,end_at=2023)
         logger.info(res)
+
+    def test_parse(self):
+        url="https://www.ecb.europa.eu/pub/research/working-papers/html/papers-2022.include.en.html"
+        self.runner.parse_page(url)

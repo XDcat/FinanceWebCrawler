@@ -73,9 +73,13 @@ class ECBWorkingPaperRunner(BaseRunner):
             # 拿到附件
             attachment_url = "https://www.ecb.europa.eu/" + part2.select('div[class=title]')[0].find("a").get("href")
             # 拿到作者
-            authors = part2.find("div", class_="authors").text
+            authors = part2.find("div", class_="authors")
+            authors_list = authors.ul.find_all(recursive=False)
+            authors = ", ".join([tag.text.strip() for tag in authors_list])
+
             # 拿到正文html
             body = part2.find("div", class_="content-box")
+            body = "<div>" + "\n".join(list(map(str, body.dl.find_all(recursive=False)))[:-2]) + "</div>"
             # keywords网站中并没有，需要到attachment中的pdf查看
             keywords = None
             # url就是某年份的页面
