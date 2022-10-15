@@ -78,6 +78,15 @@ class IFDPWorkingPaperRunner(BaseRunner):
         # 有文章没有Summary，直接空着了
         if len(body.text) < 20:
             body = None
+        else:
+            tag_lst = body.find_all(recursive=False)[3:-3]
+            body = []
+            for tag in tag_lst:
+                # 丢弃div块
+                if not "div" in tag.name:
+                    body.append(str(tag))
+
+            body = "<div>" + "\n".join(body) + "</div>"
 
         # 拿到url
         art_url = url

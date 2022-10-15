@@ -40,9 +40,13 @@ class FEDSpeechesRunner(BaseRunner):
         logger.info(data[0])
         urls = []
         pre = "https://www.federalreserve.gov"
+        cnt = 100
         for info in data:
             if info.get("l") is not None:
                 urls.append(pre + info.get("l"))
+                cnt -= 1
+            if cnt == 0:
+                break
 
         return urls
 
@@ -64,7 +68,8 @@ class FEDSpeechesRunner(BaseRunner):
         body = data.select("div[id=article]>div[class='col-xs-12 col-sm-8 col-md-8']")
         # 有文章没有Summary，直接空着了
         if len(body) > 0:
-            body = body[0]
+            paras = body[0].find_all("p",recursive=False)
+            body = "<div>" + "\n".join(list(map(str, paras))) + "</div>"
         else:
             body = None
 
