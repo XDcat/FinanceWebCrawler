@@ -1,5 +1,7 @@
 import hashlib  # 用来计算MD5码
 import random
+from config import appid as aid, password
+from common.Logger import logger
 
 import requests
 
@@ -7,7 +9,7 @@ import requests
 class Translator:
 
     @staticmethod
-    def translate(input_text, appid, key):
+    def translate(input_text, appid=aid, key=password):
         """
         翻译模块，调用百度翻译
         :param input_text: 待翻译的文本
@@ -35,9 +37,8 @@ class Translator:
         response.encoding = 'utf-8'
         text = response.json()  # 返回的为json格式用json接收数据
         if "error_code" in text.keys():
-            print(text)
+            logger.info(text)
+            logger.info(input_text)
             raise Exception("翻译API出现问题")
         translated_text = '\n'.join([text['trans_result'][i]['dst'] for i in range(len(text['trans_result']))])
-
-
         return translated_text

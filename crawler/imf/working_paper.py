@@ -50,7 +50,7 @@ class IMFWorkingPaperRunner(BaseRunner):
         # 建立查询
         response = self.session.get(self.home_url)
         response.encoding = 'utf-8'
-        pagenums=self.get_page_num()
+        pagenums = self.get_page_num()
         logger.info(f"reading page{page_num} now,totally {pagenums} in all.")
         # 访问htm数据，这也是个html,采用post方法,将参数传给body
         htm_url = f"https://www.imf.org/en/publications/search?when=After&series=IMF%20Working%20Papers&page={page_num}"
@@ -87,7 +87,7 @@ class IMFWorkingPaperRunner(BaseRunner):
             if len(html_list[i].text) > max_len:
                 max_len = len(html_list[i].text)
                 index = i
-        body = html_list[index]
+        body = "<div>" + str(html_list[index]) + "</div>"
 
         # 拿到url
         art_url = data.find("meta", property="og:url")
@@ -134,7 +134,6 @@ class IMFWorkingPaperRunner(BaseRunner):
         )
         logger.info("get temp article information successfully")
         return saved_data
-
 
     def run(self, start_from=1, end_at=None):
         """
