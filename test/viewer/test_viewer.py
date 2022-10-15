@@ -18,18 +18,22 @@ class MyTestCase(unittest.TestCase):
         document.save(r"E:\crawler\FinanceWebCrawler\results\test.docx")
 
     def test_viewer(self):
-        arts = ArticleController.select_arts_from_db("2022-09-01", "2022-09-30")
+        arts = ArticleController.select_arts_from_db("2022-09-01", "2022-09-30","ECB")
         for art in arts:
             vw = ArticleViewer(art)
 
             vw.publish_en_report()
-            # vw.publish_cn_report()
 
     def test_cn_viewer(self):
-        arts = ArticleController.select_arts_from_db("2022-09-01", "2022-09-30","BIS","working_paper")
-        vw = ArticleViewer(arts[0])
-
-        vw.publish_cn_report()
+        arts = ArticleController.select_arts_from_db("2022-09-01", "2022-09-30")
+        dic=dict()
+        for art in arts:
+            name = art.website + art.kind
+            if dic.get(name,0)<1:
+                dic[name]=0
+                vw = ArticleViewer(art)
+                dic[name]+=1
+                vw.publish_cn_report()
 
     def test_char(self):
         special_char = r"\ / : * ? " " < > |".split(" ")

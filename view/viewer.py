@@ -100,7 +100,10 @@ class ArticleViewer:
         doc.add_heading(text=title, level=0).alignment = WD_PARAGRAPH_ALIGNMENT.CENTER
 
         # 添加作者
-        doc.add_paragraph(f'Author:{author}').alignment = WD_PARAGRAPH_ALIGNMENT.CENTER
+        p = doc.add_paragraph()
+        p.alignment = WD_PARAGRAPH_ALIGNMENT.CENTER
+        p.add_run("Author:").bold = True
+        p.add_run(author)
 
         # 处理源码字符串，转换为文本
         if body is not None:
@@ -109,10 +112,10 @@ class ArticleViewer:
             # 只查找下一级孩子，不需要递归
             if body.div is not None:
                 # 针对ecb working paper
-                if website == "ECB" and kind == "working_paper":
-                    tag_lst = body.div.dl.find_all(recursive=False)[:-2]
-                else:
-                    tag_lst = body.div.find_all(recursive=False)
+                # if website == "ECB" and kind == "working_paper":
+                #     tag_lst = body.div.dl.find_all(recursive=False)[:-2]
+                # else:
+                tag_lst = body.div.find_all(recursive=False)
 
             elif body.span is not None:
                 tag_lst = body.span.find_all(recursive=False)
@@ -141,7 +144,7 @@ class ArticleViewer:
                             if "table" in tag_class:
                                 continue
                         para = doc.add_paragraph(tag.text.strip())
-                        para.paragraph_format.first_line_indent = Pt(10)  # 首行缩进10磅
+                        para.paragraph_format.first_line_indent = Pt(12)  # 首行缩进12磅
 
                 para.alignment = WD_PARAGRAPH_ALIGNMENT.JUSTIFY
         # text_list = body.text.split("\n")
@@ -171,24 +174,24 @@ class ArticleViewer:
             p.add_run("NA")
             p.alignment = WD_PARAGRAPH_ALIGNMENT.LEFT
 
-        # 添加附件，如果有就写上
-        if attachment is not None:
-            p = doc.add_paragraph()
-            p.add_run("PDF:").bold = True
-            # 在段落中添加文字块，add_run(self, text=None, style=None):返回一个 run 对象
-            hyperlink = add_hyperlink(p, attachment, attachment, '0000FF', underline=True)
-            p.alignment = WD_PARAGRAPH_ALIGNMENT.LEFT
-        else:
-            p = doc.add_paragraph()
-            p.add_run("PDF:").bold = True
-            p.add_run("NA")
-            p.alignment = WD_PARAGRAPH_ALIGNMENT.LEFT
-
-        # 添加单位
-        p = doc.add_paragraph()
-        p.add_run(f"From:").bold = True
-        p.add_run(f"{website} - {kind}")
-        p.alignment = WD_PARAGRAPH_ALIGNMENT.LEFT
+        # # 添加附件，如果有就写上
+        # if attachment is not None:
+        #     p = doc.add_paragraph()
+        #     p.add_run("PDF:").bold = True
+        #     # 在段落中添加文字块，add_run(self, text=None, style=None):返回一个 run 对象
+        #     hyperlink = add_hyperlink(p, attachment, attachment, '0000FF', underline=True)
+        #     p.alignment = WD_PARAGRAPH_ALIGNMENT.LEFT
+        # else:
+        #     p = doc.add_paragraph()
+        #     p.add_run("PDF:").bold = True
+        #     p.add_run("NA")
+        #     p.alignment = WD_PARAGRAPH_ALIGNMENT.LEFT
+        #
+        # # 添加单位
+        # p = doc.add_paragraph()
+        # p.add_run(f"From:").bold = True
+        # p.add_run(f"{website} - {kind}")
+        # p.alignment = WD_PARAGRAPH_ALIGNMENT.LEFT
 
         # 保存文件
         doc.save(result_path)
@@ -227,6 +230,8 @@ class ArticleViewer:
         cn_style = doc.styles.add_style('cn', 1)
         # 设置中文字体
         cn_style.font.name = '微软雅黑'
+        # 5号字体
+        cn_style.font.size = Pt(10.5)
         cn_style._element.rPr.rFonts.set(qn('w:eastAsia'), '微软雅黑')
 
         # 增加标题:add_heading(self, text="", level=1):
@@ -241,11 +246,7 @@ class ArticleViewer:
 
             # 只查找下一级孩子，不需要递归
             if body.div is not None:
-                # 针对ecb working paper
-                if website == "ECB" and kind == "working_paper":
-                    tag_lst = body.div.dl.find_all(recursive=False)[:-2]
-                else:
-                    tag_lst = body.div.find_all(recursive=False)
+                tag_lst = body.div.find_all(recursive=False)
 
             elif body.span is not None:
                 tag_lst = body.span.find_all(recursive=False)
@@ -271,7 +272,7 @@ class ArticleViewer:
                         text = tag.text.strip()
                         if text != "":
                             para = doc.add_paragraph(Translator.translate(text), style=cn_style)
-                            para.paragraph_format.first_line_indent = Pt(20)  # 首行缩进20磅
+                            para.paragraph_format.first_line_indent = para.style.font.size * 2  # 首行缩进2字符
 
                 para.alignment = WD_PARAGRAPH_ALIGNMENT.LEFT
 
