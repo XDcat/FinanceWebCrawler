@@ -25,6 +25,12 @@ class MyTestCase(unittest.TestCase):
             vw.publish_en_report()
             # vw.publish_cn_report()
 
+    def test_cn_viewer(self):
+        arts = ArticleController.select_arts_from_db("2022-09-01", "2022-09-30","nebr")
+        vw = ArticleViewer(arts[0])
+
+        vw.publish_cn_report()
+
     def test_char(self):
         special_char = r"\ / : * ? " " < > |".split(" ")
         print(special_char)
