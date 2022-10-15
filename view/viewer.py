@@ -155,7 +155,7 @@ class ArticleViewer:
         # para = doc.add_paragraph(text=body.text)
         # para.paragraph_format.first_line_indent = Pt(10)  # 首行缩进10磅
 
-        for i in range(3):
+        for i in range(1):
             doc.add_paragraph()
 
         # 添加url
@@ -275,7 +275,7 @@ class ArticleViewer:
 
                 para.alignment = WD_PARAGRAPH_ALIGNMENT.LEFT
 
-        for i in range(3):
+        for i in range(1):
             doc.add_paragraph()
 
         # 添加url
