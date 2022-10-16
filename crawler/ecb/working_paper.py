@@ -78,8 +78,10 @@ class ECBWorkingPaperRunner(BaseRunner):
             authors = ", ".join([tag.text.strip() for tag in authors_list])
 
             # 拿到正文html
-            body = part2.find("div", class_="content-box")
-            body = "<div>" + "\n".join(list(map(str, body.dl.find_all(recursive=False)))[:-2]) + "</div>"
+            body_html = part2.find("div", class_="content-box")
+
+            body = str(body_html.dl.find_all(recursive=False)[1])
+            body = "<div>" + body + "</div>"
             # keywords网站中并没有，需要到attachment中的pdf查看
             keywords = None
             # url就是某年份的页面

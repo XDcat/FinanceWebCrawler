@@ -83,7 +83,7 @@ class FEDSWorkingPaperRunner(BaseRunner):
         if len(body.text) < 40:
             body = None
         else:
-            tag_lst = body.find_all(recursive=False)[3:-3]
+            tag_lst = body.find_all(recursive=False)[4:-2]
             body = []
             for tag in tag_lst:
                 # 丢弃div块
