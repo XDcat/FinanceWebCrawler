@@ -83,12 +83,26 @@ class FEDSWorkingPaperRunner(BaseRunner):
         if len(body.text) < 40:
             body = None
         else:
-            tag_lst = body.find_all(recursive=False)[4:-2]
+            tag_lst = body.find_all(recursive=False)[4:]
             body = []
+            special_word=("pdf","abstract","doi","related materials","keywords")
             for tag in tag_lst:
                 # 丢弃div块
                 if not "div" in tag.name:
-                    body.append(str(tag))
+                    if tag.strong is not None:
+                        # strong标签内的标题转换为小写
+                        temp=tag.strong.text.lower()
+                        flag=0
+                        for word in special_word:
+                            if word in temp:
+                                flag=1
+                                break
+                        if flag==0:
+                            body.append(str(tag))
+                    else:
+                        body.append(str(tag))
+
+                # 判断p标签内的strong标签内容，是否为pdf,abstract,doi,Related Materials,keywords
 
             body = "<div>" + "\n".join(body) + "</div>"
 
