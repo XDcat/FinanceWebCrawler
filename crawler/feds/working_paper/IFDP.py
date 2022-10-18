@@ -74,10 +74,14 @@ class IFDPWorkingPaperRunner(BaseRunner):
         # 拿到正文html源码
         html_data_part = data.select("div[class=row] div[class='col-lg-8 col-md-8 col-sm-12 col-xs-12'] p")
 
-        body = html_data_part
+        body = data.select("div[class=row] div[class='col-lg-8 col-md-8 col-sm-12 col-xs-12']")[0]
         # 有文章没有Summary，直接空着了
         if len(body.text) < 20:
             body = None
+        else:
+            body = str(body.find_all(recursive=False)[4])
+
+            body = "<div>" + body + "</div>"
 
         # 拿到url
         art_url = url

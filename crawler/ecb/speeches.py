@@ -102,15 +102,16 @@ class ECBSpeechesRunner(BaseRunner):
             author_string = author_html[0].text.strip().split(",")
             if len(author_string) > 0:
                 authors = author_string[0].split("by")
-                if len(authors)>1:
-                    authors=authors[1].strip()
+                if len(authors) > 1:
+                    authors = authors[1].strip()
                 else:
-                    authors=authors[0].strip()
+                    authors = authors[0].strip()
 
         # 拿到正文html源码
         body = data.select("main div[class=section]")
         if len(body) > 0:
             body = body[0]
+            body = "<div>" + "\n".join(list(map(str, body.find_all(recursive=False)))[2:]) + "</div>"
         else:
             body = None
 
@@ -157,8 +158,8 @@ class ECBSpeechesRunner(BaseRunner):
         urls = self.get_list(start_from=start_from, end_at=end_at)
         logger.info("获取列表 {}", len(urls))
 
-        n_articles = len(urls)
-        for i, url in enumerate(urls):
+        n_articles = len(urls[:30])
+        for i, url in enumerate(urls[:30]):
             logger.info("({}/{}) 爬取文章: {}", i + 1, n_articles, url)
             time.sleep(1)
             article = self.parse_page(url)

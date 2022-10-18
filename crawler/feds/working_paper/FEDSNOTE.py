@@ -89,6 +89,8 @@ class FEDSNOTESWorkingPaperRunner(BaseRunner):
                 return None
             else:
                 body = html_data_part[0]
+                paras = body.find_all("p", recursive=False)
+                body = "<div>" + "\n".join(list(map(str, paras))) + "</div>"
 
             # 拿到url
             art_url = url
@@ -112,7 +114,7 @@ class FEDSNOTESWorkingPaperRunner(BaseRunner):
             try:
                 publish_date = TimeTransformer.strtimeformat(publish_date, "%B %d, %Y")
             except:
-                publish_date=None
+                publish_date = None
 
             # 拿到keywords,该网站并没有
             keywords = None
@@ -161,6 +163,15 @@ class FEDSNOTESWorkingPaperRunner(BaseRunner):
             # 有文章没有Summary，直接空着了
             if len(body.text) < 20:
                 body = None
+            else:
+                tag_lst = body.find_all(recursive=False)[3:]
+                body = []
+                for tag in tag_lst:
+                    # 丢弃div块
+                    if not "div" in tag.name:
+                        body.append(str(tag))
+
+                body = "<div>" + "\n".join(body) + "</div>"
 
             # 拿到url
             art_url = url
@@ -211,7 +222,7 @@ class FEDSNOTESWorkingPaperRunner(BaseRunner):
         if end_at is None:
             end_at = self.get_page_num() + start_from
         res = []
-        for i in range(start_from,  end_at):
+        for i in range(start_from, end_at):
             res.extend(self.get_one_list(i))
         return res
 
@@ -231,5 +242,3 @@ class FEDSNOTESWorkingPaperRunner(BaseRunner):
             logger.info("({}/{}) 爬取文章: {}", i + 1, n_articles, url)
             article = self.parse_page(url)
             Article.save(article)
-
-

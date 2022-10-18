@@ -100,20 +100,22 @@ class ArticleViewer:
         doc.add_heading(text=title, level=0).alignment = WD_PARAGRAPH_ALIGNMENT.CENTER
 
         # 添加作者
-        doc.add_paragraph(f'Author:{author}').alignment = WD_PARAGRAPH_ALIGNMENT.CENTER
+        p = doc.add_paragraph()
+        p.alignment = WD_PARAGRAPH_ALIGNMENT.CENTER
+        p.add_run("Author:").bold = True
+        p.add_run(author)
 
         # 处理源码字符串，转换为文本
         if body is not None:
             body = BeautifulSoup(body, "html.parser")
 
-
             # 只查找下一级孩子，不需要递归
             if body.div is not None:
                 # 针对ecb working paper
-                if website=="ECB" and kind=="working_paper":
-                    tag_lst = body.div.dl.find_all(recursive=False)[:-2]
-                else:
-                    tag_lst = body.div.find_all(recursive=False)
+                # if website == "ECB" and kind == "working_paper":
+                #     tag_lst = body.div.dl.find_all(recursive=False)[:-2]
+                # else:
+                tag_lst = body.div.find_all(recursive=False)
 
             elif body.span is not None:
                 tag_lst = body.span.find_all(recursive=False)
@@ -122,7 +124,7 @@ class ArticleViewer:
             for tag in tag_lst:
                 if "h" in tag.name:
                     # 加粗
-                    para=doc.add_paragraph()
+                    para = doc.add_paragraph()
                     para.add_run(tag.text.strip()).bold = True
                 # 如果子标签也有div
                 # elif "div" in tag.name:
@@ -138,11 +140,11 @@ class ArticleViewer:
                     if "Figure" not in tag.text:
                         if tag.get('class') is not None:
 
-                            tag_class= tag.get('class')[0]
+                            tag_class = tag.get('class')[0]
                             if "table" in tag_class:
                                 continue
-                        para=doc.add_paragraph(tag.text.strip())
-                        para.paragraph_format.first_line_indent = Pt(10)  # 首行缩进10磅
+                        para = doc.add_paragraph(tag.text.strip())
+                        para.paragraph_format.first_line_indent = Pt(12)  # 首行缩进12磅
 
                 para.alignment = WD_PARAGRAPH_ALIGNMENT.JUSTIFY
         # text_list = body.text.split("\n")
@@ -156,42 +158,40 @@ class ArticleViewer:
         # para = doc.add_paragraph(text=body.text)
         # para.paragraph_format.first_line_indent = Pt(10)  # 首行缩进10磅
 
-        for i in range(3):
+        for i in range(1):
             doc.add_paragraph()
-
 
         # 添加url
         if url is not None:
             p = doc.add_paragraph()
-            p.add_run(f"Url:").bold=True
+            p.add_run(f"Url:\n").bold = True
             # 在段落中添加文字块，add_run(self, text=None, style=None):返回一个 run 对象
             hyperlink = add_hyperlink(p, url, url, '0000FF', underline=True)
             p.alignment = WD_PARAGRAPH_ALIGNMENT.LEFT
         else:
-            p=doc.add_paragraph()
-            p.add_run("Url:").bold=True
-            p.add_run("NA")
-            p.alignment = WD_PARAGRAPH_ALIGNMENT.LEFT
-
-        # 添加附件，如果有就写上
-        if attachment is not None:
             p = doc.add_paragraph()
-            p.add_run("PDF:").bold=True
-            # 在段落中添加文字块，add_run(self, text=None, style=None):返回一个 run 对象
-            hyperlink = add_hyperlink(p, attachment, attachment, '0000FF', underline=True)
-            p.alignment = WD_PARAGRAPH_ALIGNMENT.LEFT
-        else:
-            p=doc.add_paragraph()
-            p.add_run("PDF:").bold=True
+            p.add_run("Url:").bold = True
             p.add_run("NA")
             p.alignment = WD_PARAGRAPH_ALIGNMENT.LEFT
 
-
-        # 添加单位
-        p=doc.add_paragraph()
-        p.add_run(f"From:").bold=True
-        p.add_run(f"{website} - {kind}")
-        p.alignment = WD_PARAGRAPH_ALIGNMENT.LEFT
+        # # 添加附件，如果有就写上
+        # if attachment is not None:
+        #     p = doc.add_paragraph()
+        #     p.add_run("PDF:").bold = True
+        #     # 在段落中添加文字块，add_run(self, text=None, style=None):返回一个 run 对象
+        #     hyperlink = add_hyperlink(p, attachment, attachment, '0000FF', underline=True)
+        #     p.alignment = WD_PARAGRAPH_ALIGNMENT.LEFT
+        # else:
+        #     p = doc.add_paragraph()
+        #     p.add_run("PDF:").bold = True
+        #     p.add_run("NA")
+        #     p.alignment = WD_PARAGRAPH_ALIGNMENT.LEFT
+        #
+        # # 添加单位
+        # p = doc.add_paragraph()
+        # p.add_run(f"From:").bold = True
+        # p.add_run(f"{website} - {kind}")
+        # p.alignment = WD_PARAGRAPH_ALIGNMENT.LEFT
 
         # 保存文件
         doc.save(result_path)
@@ -216,7 +216,8 @@ class ArticleViewer:
                 title = title.replace(char, "")
 
         if result_path is None:
-            result_path_pre = os.path.join(report_prefix_path, "cn/{}/{}-{}/".format(publish_date[:7], website, kind))
+            result_path_pre = os.path.join(report_prefix_path,
+                                           "cn/{}/{}-{}/".format(publish_date[:7], website, kind))
             doc_name = "{}-{}.docx".format(publish_date.replace(" ", ""), title)
             if not os.path.exists(result_path_pre):
                 os.makedirs(result_path_pre)
@@ -229,51 +230,66 @@ class ArticleViewer:
         cn_style = doc.styles.add_style('cn', 1)
         # 设置中文字体
         cn_style.font.name = '微软雅黑'
+        # 5号字体
+        cn_style.font.size = Pt(10.5)
         cn_style._element.rPr.rFonts.set(qn('w:eastAsia'), '微软雅黑')
 
         # 增加标题:add_heading(self, text="", level=1):
-        title_ch = Translator.translate(title)
-        doc.add_heading(text=title_ch, level=1)
+        doc.add_heading(text=Translator.translate(title.strip()), level=0).alignment = WD_PARAGRAPH_ALIGNMENT.CENTER
 
         # 添加作者
-        doc.add_paragraph(f'Author:{author}')
+        doc.add_paragraph(f'作者:{author}', style=cn_style).alignment = WD_PARAGRAPH_ALIGNMENT.CENTER
 
-        # 添加日期
-        doc.add_paragraph(f'Date:{publish_date}')
+        # 处理源码字符串，转换为文本
+        if body is not None:
+            body = BeautifulSoup(body, "html.parser")
 
-        # 添加关键词
-        if keyword is not None:
-            doc.add_paragraph(f'Keyword:{keyword}')
-        else:
-            doc.add_paragraph(f'Keyword:NA')
+            # 只查找下一级孩子，不需要递归
+            if body.div is not None:
+                tag_lst = body.div.find_all(recursive=False)
 
-        # 添加附件，如果有就写上
-        if attachment is not None:
-            p = doc.add_paragraph("Attachment:")
-            # 在段落中添加文字块，add_run(self, text=None, style=None):返回一个 run 对象
-            hyperlink = add_hyperlink(p, attachment, "Link", '0000FF', underline=True)
-        else:
-            doc.add_paragraph("Attachment:NA")
+            elif body.span is not None:
+                tag_lst = body.span.find_all(recursive=False)
+            else:
+                raise AttributeError(f"{url} 网站html格式不正确")
 
+            for tag in tag_lst:
+                if "h" in tag.name:
+                    # 加粗
+                    # 保证输入不为空
+                    if tag.text != "":
+                        para = doc.add_paragraph(style=cn_style)
+                        para.add_run(Translator.translate(tag.text)).bold = True
+                else:
+                    # 删去figure,table的部分
+                    if "Figure" not in tag.text:
+                        if tag.get('class') is not None:
+                            tag_class = tag.get('class')[0]
+                            if "table" in tag_class:
+                                continue
 
+                        # 保证输入不为空
+                        text = tag.text.strip()
+                        if text != "":
+                            para = doc.add_paragraph(Translator.translate(text), style=cn_style)
+                            para.paragraph_format.first_line_indent = para.style.font.size * 2  # 首行缩进2字符
+
+                para.alignment = WD_PARAGRAPH_ALIGNMENT.LEFT
+
+        for i in range(1):
+            doc.add_paragraph()
 
         # 添加url
         if url is not None:
-            p = doc.add_paragraph(f"From:")
+            p = doc.add_paragraph(style=cn_style)
+            p.add_run(f"原文链接:\n").bold = True
             # 在段落中添加文字块，add_run(self, text=None, style=None):返回一个 run 对象
-            hyperlink = add_hyperlink(p, url, f"{website}-{kind}", '0000FF', underline=True)
+            hyperlink = add_hyperlink(p, url, url, '0000FF', underline=True)
+            p.alignment = WD_PARAGRAPH_ALIGNMENT.LEFT
         else:
-            doc.add_paragraph(f"From:{website}-{kind} NA")
-
-        # 处理源码字符串，转换为文本
-        # text_list = self.article.ch_text
-
-        # para = doc.add_paragraph(text=self.article.ch_text, style=cn_style)
-        text_list = self.article.ch_text.split("\n")
-        for text in text_list:
-            if not text.isspace():
-                para = doc.add_paragraph(text=text, style=cn_style)
-                para.paragraph_format.first_line_indent = Pt(10)  # 首行缩进10磅
-
+            p = doc.add_paragraph(style=cn_style)
+            p.add_run("原文链接:").bold = True
+            p.add_run("无")
+            p.alignment = WD_PARAGRAPH_ALIGNMENT.LEFT
         # 保存文件
         doc.save(result_path)

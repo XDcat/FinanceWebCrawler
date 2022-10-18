@@ -8,5 +8,5 @@ class TestWorkingPaper(TestCase):
         self.runner = IFDPWorkingPaperRunner()
 
     def test_run(self):
-        res = self.runner.run(start_from=2020,end_at=2022)
+        res = self.runner.run(start_from=2022,end_at=2023)
         logger.info(res)
