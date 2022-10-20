@@ -37,7 +37,6 @@ class FEDSpeechesRunner(BaseRunner):
         # 去除BOM
         decoded_data = response.text.encode().decode('utf-8-sig')
         data = json.loads(decoded_data)
-        logger.info(data[0])
         urls = []
         pre = "https://www.federalreserve.gov"
         cnt = 100
