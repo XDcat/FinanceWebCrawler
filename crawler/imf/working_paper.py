@@ -60,7 +60,7 @@ class IMFWorkingPaperRunner(BaseRunner):
         article_list = BeautifulSoup(response1.content, "html.parser")
         article_url_list = article_list.find_all("div", class_='result-row pub-row')
         urls = []
-        pre = "https://www.imf.org/"
+        pre = "https://www.imf.org"
         # 构建指向page的网址
         for html_label in article_url_list:
             href = html_label.find('a').get('href')
@@ -135,15 +135,40 @@ class IMFWorkingPaperRunner(BaseRunner):
         logger.info("get temp article information successfully")
         return saved_data
 
-    def run(self, start_from=1, end_at=None):
+    def run(self, after_date = "2022-09-01",start_from=1, end_at=None):
         """
-        把上面两个函数跑通
+        爬取文章导入数据库
+        :param after_date: 文章的最早日期
+        :param start_from: 开始爬取的页数
+        :param end_at: 结束页数
         :return:
         """
         create_table(Article)
         logger.info("开始爬取 {}: {}", self.website + self.kind, self.home_url)
 
+        # 如果start_From是年份
         urls = self.get_list(start_from=start_from, end_at=end_at)
+        # 删除数据库已经有的url
+        urls_in_db =(Article
+                    .select(Article.url)
+                    .where((Article.website ==self.website)&(Article.kind==self.kind))
+                    .order_by(Article.publish_date.desc())
+                    )
+        urls_in_db =[x.url for x in urls_in_db]
+        index=0
+        for index in range(len(urls)):
+            # 数据库中最新的文章url
+            if urls[index] in urls_in_db:
+                urls=urls[0:index]
+                break
+
+        if index==0:
+            logger.info("数据库文章已经最新，无需更新")
+            return
+        else:
+            logger.info(f"新的文章有{len(urls)}篇")
+
+
         logger.info("获取列表 {}", len(urls))
 
         n_articles = len(urls)
@@ -151,4 +176,9 @@ class IMFWorkingPaperRunner(BaseRunner):
             logger.info("({}/{}) 爬取文章: {}", i + 1, n_articles, url)
             time.sleep(0.1)
             article = self.parse_page(url)
-            Article.save(article)
+            # 文章晚于限定的日期，才保存
+            if article.publish_date>=after_date:
+                Article.save(article)
+            else:
+                logger.info(f"当前爬取的文章日期为{article.publish_date},早于限定日期{after_date},爬取结束")
+                break
