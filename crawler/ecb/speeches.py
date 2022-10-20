@@ -1,11 +1,12 @@
-from crawler.base_runner import BaseRunner
-import datetime
-from bs4 import BeautifulSoup
-from common.Logger import *
-from model.article import Article
-from common.timetransformer import TimeTransformer
-from utils.ormutils import create_table
 import time
+
+from bs4 import BeautifulSoup
+
+from common.Logger import *
+from common.timetransformer import TimeTransformer
+from crawler.base_runner import BaseRunner
+from model.article import Article
+from utils.ormutils import create_table
 
 
 class ECBSpeechesRunner(BaseRunner):
@@ -147,7 +148,7 @@ class ECBSpeechesRunner(BaseRunner):
         logger.info("get temp article information successfully")
         return saved_data
 
-    def run(self, start_from=1, end_at=None):
+    def run(self, after_date="2022-09-01", start_from=1, end_at=None):
         """
         把上面两个函数跑通
         :return:
@@ -156,11 +157,38 @@ class ECBSpeechesRunner(BaseRunner):
         logger.info("开始爬取 {}: {}", self.website + self.kind, self.home_url)
 
         urls = self.get_list(start_from=start_from, end_at=end_at)
+        # 删除数据库已经有的url
+        urls_in_db =(Article
+                    .select(Article.url)
+                    .where((Article.website ==self.website)&(Article.kind==self.kind))
+                    .order_by(Article.publish_date.desc())
+                    )
+        urls_in_db =[x.url for x in urls_in_db]
+        index=0
+        for index in range(len(urls)):
+            # 数据库中最新的文章url
+            if urls[index] in urls_in_db:
+                urls=urls[0:index]
+                break
+
+        if index==0:
+            logger.info("数据库文章已经最新，无需更新")
+            return
+        else:
+            logger.info(f"新的文章有{len(urls)}篇")
+
+
         logger.info("获取列表 {}", len(urls))
 
-        n_articles = len(urls[:30])
-        for i, url in enumerate(urls[:30]):
+        n_articles = len(urls)
+        for i, url in enumerate(urls):
             logger.info("({}/{}) 爬取文章: {}", i + 1, n_articles, url)
             time.sleep(1)
             article = self.parse_page(url)
-            Article.save(article)
+            # 文章晚于限定的日期，才保存
+            if article.publish_date>=after_date:
+                Article.save(article)
+            else:
+                logger.info(f"当前爬取的文章日期为{article.publish_date},早于限定日期{after_date},爬取结束")
+                break
+
