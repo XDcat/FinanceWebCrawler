@@ -8,5 +8,5 @@ class TestWorkingPaper(TestCase):
         self.runner = NEBRWorkingPaperRunner()
 
     def test_run(self):
-        res = self.runner.run()
+        res = self.runner.run(start_from=1,end_at=5)
         logger.info(res)

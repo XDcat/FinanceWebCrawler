@@ -8,5 +8,5 @@ class TestWorkingPaper(TestCase):
         self.runner = BISSpeechesRunner()
 
     def test_run(self):
-        res = self.runner.run()
+        res = self.runner.run(start_from=1,end_at=3)
         logger.info(res)
