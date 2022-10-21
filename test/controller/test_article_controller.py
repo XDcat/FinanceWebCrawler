@@ -11,3 +11,6 @@ class TestWorkingPaper(TestCase):
         for ar in arts:
             print(ar.publish_date, ar.website, ar.kind)
         # logger.info(arts)
+
+    def test_fetch_last_month(self):
+        ArticleController.update_db("2022-09-01")

@@ -110,7 +110,7 @@ class IFDPWorkingPaperRunner(BaseRunner):
             attachment_url = pre + attachment_url.get("href")
 
         # 存储到结构体
-        saved_data = Article.create(
+        saved_data = Article(
             website=self.website,
             kind=self.kind,
             publish_date=publish_date,
