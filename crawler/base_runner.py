@@ -1,3 +1,4 @@
+import time
 from abc import abstractmethod
 import requests
 
@@ -99,10 +100,11 @@ class BaseRunner:
         n_articles = len(urls)
         for i, url in enumerate(urls):
             logger.info("({}/{}) 爬取文章: {}", i + 1, n_articles, url)
+            time.sleep(0.5)
             article = self.parse_page(url)
             # 文章晚于限定的日期，才保存
             if article.publish_date>=after_date:
                 Article.save(article)
             else:
                 logger.info(f"当前爬取的文章日期为{article.publish_date},早于限定日期{after_date},爬取结束")
-                break
+                return
