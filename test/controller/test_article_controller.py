@@ -14,3 +14,6 @@ class TestWorkingPaper(TestCase):
 
     def test_fetch_last_month(self):
         ArticleController.update_db("2022-09-01")
+
+    def test_generate_last_month_articles(self):
+        ArticleController.generate_last_month_articles()
