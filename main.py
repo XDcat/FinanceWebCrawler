@@ -13,11 +13,11 @@ def get_last_month_articles():
 
 
 @app.command()
-def update_database(afterDate):
+def update_database(after_date):
     """
     更新afterDate日期以后的文章，导入数据，afterDate 按照"YY-MM-DD"格式输入
     """
-    ArticleController.update_db(after_date=afterDate)
+    ArticleController.update_db(after_date=after_date)
 
 
 @app.command()
