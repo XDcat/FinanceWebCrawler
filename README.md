@@ -1,20 +1,20 @@
-# Introduction 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
+# main函数指令使用
 
-# Getting Started
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
-1.	Installation process
-2.	Software dependencies
-3.	Latest releases
-4.	API references
+### def update_database(afterDate):
+这个方法用于更新数据库，允许用户指定某个日期after_date,向数据库更新这个日期
+以后至今天的所有文章。
 
-# Build and Test
-TODO: Describe and show how to build your code and run the tests. 
 
-# Contribute
-TODO: Explain how other users and developers can contribute to make your code better. 
+### def get_last_month_articles():
+这个方法自动获取上个月到现在的文章，并且写入word文档，不需要任何参数。
+这个方法包含了上面更新数据库的操作。
+比如update_database("2022-10-01")，就会查询所有网站该日期后发表的文章，
+导入数据库，并且通过viewer模块生成word。
 
-If you want to learn more about creating good readme files then refer the following [guidelines](https://docs.microsoft.com/en-us/azure/devops/repos/git/create-a-readme?view=azure-devops). You can also seek inspiration from the below readme files:
-- [ASP.NET Core](https://github.com/aspnet/Home)
-- [Visual Studio Code](https://github.com/Microsoft/vscode)
-- [Chakra Core](https://github.com/Microsoft/ChakraCore)
+### def get_articles(start_from, end_at):
+这个方法是上个方法的扩展，允许指定时间范围，获取对应文章的word文档。
+比如get_articles(”2022-01-01“, ”2022-09-30“)可以获取这两个时间段的所有网站文章的word文档。
+已经存在的word文档不会重写。
+
+
+
