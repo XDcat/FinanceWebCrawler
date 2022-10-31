@@ -185,8 +185,3 @@ class IMFWorkingPaperRunner(BaseRunner):
             else:
                 logger.info(f"当前爬取的文章日期为{article.publish_date},早于限定日期{after_date},爬取结束")
                 break
-
-
-im = IMFWorkingPaperRunner()
-# print(im.get_one_list(1))
-print(im.parse_page(' https://www.imf.org/en/Publications/WP/Issues/2022/10/28/Scarring-and-Corporate-Debt-525210'))
