@@ -109,17 +109,21 @@ class IMFWorkingPaperRunner(BaseRunner):
             keywords = keywords.get("content")
 
         # 拿到附件
-        attachment_url1 = data.select("section p[class=pub-desc] a")[0]
-        if attachment_url1 is None:
-            attachment_url2 = data.find("a", class_="piwik_download")
-            if attachment_url2 is None:
-                raise Exception("url not found")
-            else:
-                attachment_url = attachment_url2.get("href")
+        attachment_url1 = data.select("section p[class=pub-desc] a")
+        if len(attachment_url1) == 0:
+            attachment_url = None
         else:
-            attachment_url = attachment_url1.get("href")
-        # 合并
-        attachment_url = "https://www.imf.org" + attachment_url
+            attachment_url1 = attachment_url1[0]
+            if attachment_url1 is None:
+                attachment_url2 = data.find("a", class_="piwik_download")
+                if attachment_url2 is None:
+                    raise Exception("url not found")
+                else:
+                    attachment_url = attachment_url2.get("href")
+            else:
+                attachment_url = attachment_url1.get("href")
+            # 合并
+            attachment_url = "https://www.imf.org" + attachment_url
         # 存储到结构体
         saved_data = Article(
             website=self.website,
@@ -135,7 +139,7 @@ class IMFWorkingPaperRunner(BaseRunner):
         logger.info("get temp article information successfully")
         return saved_data
 
-    def run(self, after_date = "2022-09-01",start_from=1, end_at=None):
+    def run(self, after_date="2022-09-01", start_from=1, end_at=None):
         """
         爬取文章导入数据库
         :param after_date: 文章的最早日期
@@ -149,25 +153,24 @@ class IMFWorkingPaperRunner(BaseRunner):
         # 如果start_From是年份
         urls = self.get_list(start_from=start_from, end_at=end_at)
         # 删除数据库已经有的url
-        urls_in_db =(Article
-                    .select(Article.url)
-                    .where((Article.website ==self.website)&(Article.kind==self.kind))
-                    .order_by(Article.publish_date.desc())
-                    )
-        urls_in_db =[x.url for x in urls_in_db]
-        index=0
+        urls_in_db = (Article
+                      .select(Article.url)
+                      .where((Article.website == self.website) & (Article.kind == self.kind))
+                      .order_by(Article.publish_date.desc())
+                      )
+        urls_in_db = [x.url for x in urls_in_db]
+        index = 0
         for index in range(len(urls)):
             # 数据库中最新的文章url
             if urls[index] in urls_in_db:
-                urls=urls[0:index]
+                urls = urls[0:index]
                 break
 
-        if index==0:
+        if index == 0:
             logger.info("数据库文章已经最新，无需更新")
             return
         else:
             logger.info(f"新的文章有{len(urls)}篇")
-
 
         logger.info("获取列表 {}", len(urls))
 
@@ -177,8 +180,13 @@ class IMFWorkingPaperRunner(BaseRunner):
             time.sleep(0.1)
             article = self.parse_page(url)
             # 文章晚于限定的日期，才保存
-            if article.publish_date>=after_date:
+            if article.publish_date >= after_date:
                 Article.save(article)
             else:
                 logger.info(f"当前爬取的文章日期为{article.publish_date},早于限定日期{after_date},爬取结束")
                 break
+
+
+im = IMFWorkingPaperRunner()
+# print(im.get_one_list(1))
+print(im.parse_page(' https://www.imf.org/en/Publications/WP/Issues/2022/10/28/Scarring-and-Corporate-Debt-525210'))

@@ -23,7 +23,7 @@ def update_database(after_date):
 @app.command()
 def get_articles(start_from, end_at):
     """
-    按照指定日期区间展示文章
+    按照指定日期区间生成文章
     :param start_from: 开始时间
     :param end_at: 结束时间
     """
