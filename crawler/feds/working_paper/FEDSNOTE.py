@@ -190,7 +190,7 @@ class FEDSNOTESWorkingPaperRunner(BaseRunner):
             attachment_url = None
 
             # 存储到结构体
-            saved_data = Article.create(
+            saved_data = Article(
                 website=self.website,
                 kind=self.kind,
                 publish_date=publish_date,
@@ -217,28 +217,3 @@ class FEDSNOTESWorkingPaperRunner(BaseRunner):
             if to_save2 is None:
                 raise Exception
             return to_save2
-
-    def get_list(self, start_from=2013, end_at=None):
-        if end_at is None:
-            end_at = self.get_page_num() + start_from
-        res = []
-        for i in range(start_from, end_at):
-            res.extend(self.get_one_list(i))
-        return res
-
-    def run(self, start_from=2013, end_at=None):
-        """
-        把上面两个函数跑通
-        :return:
-        """
-        create_table(Article)
-        logger.info("开始爬取 {}: {}", self.website + self.kind, self.home_url)
-
-        urls = self.get_list(start_from=start_from, end_at=end_at)
-        logger.info("获取列表 {}", len(urls))
-
-        n_articles = len(urls)
-        for i, url in enumerate(urls):
-            logger.info("({}/{}) 爬取文章: {}", i + 1, n_articles, url)
-            article = self.parse_page(url)
-            Article.save(article)

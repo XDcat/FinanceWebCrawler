@@ -102,7 +102,7 @@ class NEBRWorkingPaperRunner(BaseRunner):
             attachment_url = attachment_url[0].get("content")
 
         # 存储到结构体
-        saved_data = Article.create(
+        saved_data = Article(
             website=self.website,
             kind=self.kind,
             publish_date=publish_date,

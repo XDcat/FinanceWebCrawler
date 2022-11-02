@@ -1,10 +1,12 @@
-from crawler.base_runner import BaseRunner
 import datetime
+
 from bs4 import BeautifulSoup
+
 from common.Logger import *
+from common.timetransformer import TimeTransformer
+from crawler.base_runner import BaseRunner
 from model.article import Article
 from utils.ormutils import create_table
-from common.timetransformer import TimeTransformer
 
 
 class ECBWorkingPaperRunner(BaseRunner):
@@ -42,7 +44,7 @@ class ECBWorkingPaperRunner(BaseRunner):
         # 构建指向page的网址
         return [htm_url]
 
-    def parse_page(self, url):
+    def parse_page(self, url, after_date):
         """
         提取文章信息
         :param url: 文章的网址
@@ -63,6 +65,15 @@ class ECBWorkingPaperRunner(BaseRunner):
         pagenums = (len(list(part1.next_siblings)) + 1) // 2
         logger.info(f"reading {url} now,get {pagenums} articles in all.")
         count = 1
+
+        # 数据库已经存在的文章
+        urls_in_db = (Article
+                      .select(Article.url)
+                      .where((Article.website == self.website) & (Article.kind == self.kind))
+                      .order_by(Article.publish_date.desc())
+                      )
+        urls_in_db = [x.url for x in urls_in_db]
+
         while count <= pagenums:
             logger.info(f"reading number {count} article now,have {pagenums} articles in all!")
             # 获取出版日期
@@ -86,8 +97,18 @@ class ECBWorkingPaperRunner(BaseRunner):
             keywords = None
             # url就是某年份的页面
             art_url = url
-            # 存储到结构体
-            saved_data = Article.create(
+
+            # 网址已经在数据库中
+            if art_url in urls_in_db:
+                logger.info("数据库已存在该文章，结束爬取")
+                return
+
+            if publish_date < after_date:
+                logger.info(f"当前爬取的文章日期为{publish_date},早于限定日期{after_date},爬取结束")
+                return
+
+                # 存储到结构体
+            saved_data = Article(
                 website=self.website,
                 kind=self.kind,
                 publish_date=publish_date,
@@ -98,6 +119,7 @@ class ECBWorkingPaperRunner(BaseRunner):
                 keyword=keywords,
                 attachment=attachment_url
             )
+
             saved_data.save()
             # logger.info(saved_data.display())
             # 更新part1,part2
@@ -110,15 +132,7 @@ class ECBWorkingPaperRunner(BaseRunner):
             count += 1
             logger.info("get  article information successfully")
 
-    def get_list(self, start_from=1999, end_at=None):
-        if end_at is None:
-            end_at = self.get_page_num() + start_from
-        res = []
-        for i in range(start_from, end_at):
-            res.extend(self.get_one_list(i))
-        return res
-
-    def run(self, start_from=1999, end_at=None):
+    def run(self, after_date="2022-09-01", start_from=2022, end_at=2021):
         """
         把上面两个函数跑通
         :return:
@@ -132,4 +146,4 @@ class ECBWorkingPaperRunner(BaseRunner):
         n_articles = len(urls)
         for i, url in enumerate(urls):
             logger.info("({}/{}) 爬取文章: {}", i + 1, n_articles, url)
-            self.parse_page(url)
+            self.parse_page(url, after_date)

@@ -7,6 +7,7 @@ from docx.shared import Pt
 from docx.oxml.ns import qn
 from common.translate import Translator
 from docx.enum.text import WD_PARAGRAPH_ALIGNMENT
+from common.Logger import logger
 
 
 def add_hyperlink(paragraph, url, text, color, underline):
@@ -90,6 +91,9 @@ class ArticleViewer:
                 os.makedirs(result_path_pre)
             result_path = result_path_pre + doc_name
 
+        if os.path.exists(result_path):
+            logger.info(f"{title} 已经存在，不再重写")
+            return
         # 新建文档对象按模板新建 word 文档文件，具有模板文件的所有格式
         doc = docx.Document()
 
@@ -174,25 +178,6 @@ class ArticleViewer:
             p.add_run("NA")
             p.alignment = WD_PARAGRAPH_ALIGNMENT.LEFT
 
-        # # 添加附件，如果有就写上
-        # if attachment is not None:
-        #     p = doc.add_paragraph()
-        #     p.add_run("PDF:").bold = True
-        #     # 在段落中添加文字块，add_run(self, text=None, style=None):返回一个 run 对象
-        #     hyperlink = add_hyperlink(p, attachment, attachment, '0000FF', underline=True)
-        #     p.alignment = WD_PARAGRAPH_ALIGNMENT.LEFT
-        # else:
-        #     p = doc.add_paragraph()
-        #     p.add_run("PDF:").bold = True
-        #     p.add_run("NA")
-        #     p.alignment = WD_PARAGRAPH_ALIGNMENT.LEFT
-        #
-        # # 添加单位
-        # p = doc.add_paragraph()
-        # p.add_run(f"From:").bold = True
-        # p.add_run(f"{website} - {kind}")
-        # p.alignment = WD_PARAGRAPH_ALIGNMENT.LEFT
-
         # 保存文件
         doc.save(result_path)
 
@@ -222,6 +207,10 @@ class ArticleViewer:
             if not os.path.exists(result_path_pre):
                 os.makedirs(result_path_pre)
             result_path = result_path_pre + doc_name
+
+        if os.path.exists(result_path):
+            logger.info(f"{title} 已经存在，不再重写")
+            return
 
         # 新建文档对象按模板新建 word 文档文件，具有模板文件的所有格式
         doc = docx.Document()

@@ -37,7 +37,6 @@ class FEDSpeechesRunner(BaseRunner):
         # 去除BOM
         decoded_data = response.text.encode().decode('utf-8-sig')
         data = json.loads(decoded_data)
-        logger.info(data[0])
         urls = []
         pre = "https://www.federalreserve.gov"
         cnt = 100
@@ -112,7 +111,7 @@ class FEDSpeechesRunner(BaseRunner):
             attachment_url = None
 
         # 存储到结构体
-        saved_data = Article.create(
+        saved_data = Article(
             website=self.website,
             kind=self.kind,
             publish_date=publish_date,

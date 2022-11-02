@@ -8,5 +8,5 @@ class TestWorkingPaper(TestCase):
         self.runner = IMFWorkingPaperRunner()
 
     def test_run(self):
-        res = self.runner.run(end_at=2)
+        res = self.runner.run(start_from=1,end_at=2)
         logger.info(res)
