@@ -1,4 +1,5 @@
 from controller.article_controller import ArticleController
+from controller.db_controller import DbController
 import typer
 
 app = typer.Typer()
@@ -17,7 +18,7 @@ def update_database(after_date):
     """
     更新afterDate日期以后的文章，导入数据，afterDate 按照"YY-MM-DD"格式输入
     """
-    ArticleController.update_db(after_date=after_date)
+    DbController.update_db(after_date=after_date)
 
 
 @app.command()
