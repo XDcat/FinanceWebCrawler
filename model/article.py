@@ -10,6 +10,8 @@ class Article(BaseModel):
     website = CharField(max_length=10)
     kind = CharField(max_length=20)
     body = CharField(null=True)
+    cn_body = CharField(null=True)
+    cn_title = CharField(null=True, max_length=100)
     publish_date = CharField(max_length=20, null=True)
     title = CharField(max_length=50)
     url = CharField(max_length=100)
@@ -38,9 +40,10 @@ class Article(BaseModel):
         展示所有信息
         :return:
         """
-        name = ["aid", 'website', 'kind', 'publish_date', 'title', 'url', 'author', 'keyword', 'attachment', 'body']
+        name = ["aid", 'website', 'kind', 'publish_date', 'title', 'url', 'author', 'keyword', 'attachment', 'body',
+                "cn_body", "cn_title"]
         inform = [self.aid, self.website, self.kind, self.publish_date, self.title, self.url, self.author, self.keyword,
-                  self.attachment, self.body]
+                  self.attachment, self.body, self.cn_body, self.cn_title]
         return dict(zip(name, inform))
 
     def __str__(self):
