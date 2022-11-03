@@ -1,13 +1,13 @@
-import docx
-from docx.shared import Inches
 import os
-from config import report_prefix_path
+
+import docx
 from bs4 import BeautifulSoup
-from docx.shared import Pt
-from docx.oxml.ns import qn
-from common.translate import Translator
 from docx.enum.text import WD_PARAGRAPH_ALIGNMENT
+from docx.oxml.ns import qn
+from docx.shared import Pt
+
 from common.Logger import logger
+from config import report_prefix_path
 
 
 def add_hyperlink(paragraph, url, text, color, underline):
@@ -151,16 +151,6 @@ class ArticleViewer:
                         para.paragraph_format.first_line_indent = Pt(12)  # 首行缩进12磅
 
                 para.alignment = WD_PARAGRAPH_ALIGNMENT.JUSTIFY
-        # text_list = body.text.split("\n")
-        #
-        # for text in text_list:
-        #     if not text.isspace():
-        #         para = doc.add_paragraph(text=text.strip())
-        #         para.paragraph_format.first_line_indent = Pt(10)  # 首行缩进10磅
-        #         para.alignment = WD_PARAGRAPH_ALIGNMENT.JUSTIFY
-
-        # para = doc.add_paragraph(text=body.text)
-        # para.paragraph_format.first_line_indent = Pt(10)  # 首行缩进10磅
 
         for i in range(1):
             doc.add_paragraph()
@@ -183,33 +173,26 @@ class ArticleViewer:
 
     def publish_cn_report(self, result_path=None):
         # 传值
-        aid = self.article.aid
         website = self.article.website
         kind = self.article.kind
-        body = self.article.body
+        cn_body = self.article.cn_body
         publish_date = self.article.publish_date
-        title = self.article.title
+        cn_title = self.article.cn_title
         url = self.article.url
         author = self.article.author
-        keyword = self.article.keyword
-        attachment = self.article.attachment
 
-        special_char = "\\ / : * ? \" \" \' \' < > |".split(" ")
-        # 去除title中的特殊字符
-        for char in special_char:
-            if char in title:
-                title = title.replace(char, "")
+        cn_body = "<div>" + cn_body + "</div>"
 
         if result_path is None:
             result_path_pre = os.path.join(report_prefix_path,
                                            "cn/{}/{}-{}/".format(publish_date[:7], website, kind))
-            doc_name = "{}-{}.docx".format(publish_date.replace(" ", ""), title)
+            doc_name = "{}-{}.docx".format(publish_date.replace(" ", ""), cn_title)
             if not os.path.exists(result_path_pre):
                 os.makedirs(result_path_pre)
             result_path = result_path_pre + doc_name
 
         if os.path.exists(result_path):
-            logger.info(f"{title} 已经存在，不再重写")
+            logger.info(f"{cn_title} 已经存在，不再重写")
             return
 
         # 新建文档对象按模板新建 word 文档文件，具有模板文件的所有格式
@@ -224,14 +207,14 @@ class ArticleViewer:
         cn_style._element.rPr.rFonts.set(qn('w:eastAsia'), '微软雅黑')
 
         # 增加标题:add_heading(self, text="", level=1):
-        doc.add_heading(text=Translator.translate(title.strip()), level=0).alignment = WD_PARAGRAPH_ALIGNMENT.CENTER
+        doc.add_heading(text=cn_title, level=0).alignment = WD_PARAGRAPH_ALIGNMENT.CENTER
 
         # 添加作者
         doc.add_paragraph(f'作者:{author}', style=cn_style).alignment = WD_PARAGRAPH_ALIGNMENT.CENTER
 
         # 处理源码字符串，转换为文本
-        if body is not None:
-            body = BeautifulSoup(body, "html.parser")
+        if cn_body is not None:
+            body = BeautifulSoup(cn_body, "html.parser")
 
             # 只查找下一级孩子，不需要递归
             if body.div is not None:
@@ -248,7 +231,7 @@ class ArticleViewer:
                     # 保证输入不为空
                     if tag.text != "":
                         para = doc.add_paragraph(style=cn_style)
-                        para.add_run(Translator.translate(tag.text)).bold = True
+                        para.add_run(tag.text).bold = True
                 else:
                     # 删去figure,table的部分
                     if "Figure" not in tag.text:
@@ -260,7 +243,7 @@ class ArticleViewer:
                         # 保证输入不为空
                         text = tag.text.strip()
                         if text != "":
-                            para = doc.add_paragraph(Translator.translate(text), style=cn_style)
+                            para = doc.add_paragraph(text, style=cn_style)
                             para.paragraph_format.first_line_indent = para.style.font.size * 2  # 首行缩进2字符
 
                 para.alignment = WD_PARAGRAPH_ALIGNMENT.LEFT
