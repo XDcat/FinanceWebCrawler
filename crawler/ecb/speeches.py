@@ -158,25 +158,24 @@ class ECBSpeechesRunner(BaseRunner):
 
         urls = self.get_list(start_from=start_from, end_at=end_at)
         # 删除数据库已经有的url
-        urls_in_db =(Article
-                    .select(Article.url)
-                    .where((Article.website ==self.website)&(Article.kind==self.kind))
-                    .order_by(Article.publish_date.desc())
-                    )
-        urls_in_db =[x.url for x in urls_in_db]
-        index=0
+        urls_in_db = (Article
+                      .select(Article.url)
+                      .where((Article.website == self.website) & (Article.kind == self.kind))
+                      .order_by(Article.publish_date.desc())
+                      )
+        urls_in_db = [x.url for x in urls_in_db]
+        index = 0
         for index in range(len(urls)):
             # 数据库中最新的文章url
             if urls[index] in urls_in_db:
-                urls=urls[0:index]
+                urls = urls[0:index]
                 break
 
-        if index==0:
+        if index == 0:
             logger.info("数据库文章已经最新，无需更新")
             return
         else:
             logger.info(f"新的文章有{len(urls)}篇")
-
 
         logger.info("获取列表 {}", len(urls))
 
@@ -186,9 +185,8 @@ class ECBSpeechesRunner(BaseRunner):
             time.sleep(1)
             article = self.parse_page(url)
             # 文章晚于限定的日期，才保存
-            if article.publish_date>=after_date:
+            if article.publish_date >= after_date:
                 Article.save(article)
             else:
                 logger.info(f"当前爬取的文章日期为{article.publish_date},早于限定日期{after_date},爬取结束")
                 break
-

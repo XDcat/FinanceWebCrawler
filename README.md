@@ -2,7 +2,7 @@
 
 ### 更新数据库  
 允许用户指定某个日期after_date,向数据库更新这个日期
-以后至今天的所有文章。
+以后至今天的所有文章,包括中文和英文。
 ```shell
 python main.py update-database 2022-10-01
 ```
